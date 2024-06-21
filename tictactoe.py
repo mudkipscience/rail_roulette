@@ -65,13 +65,13 @@ def endgame_reached(board): # Checks whether the board still contains any blank 
 
 def process_input(valid_inputs): # Takes a list of valid choices as arguments and only allows input of characters found in the array. Only works with integers
     choice = int(input('> '))
-    if choice in valid_inputs:
+    if choice in valid_inputs or len(valid_inputs) == 0:
         return choice
     else:
         print(str(choice) + ' is not a valid choice.')
         process_input(valid_inputs)
 
-def create_board(size): # Create a board (list of nested lists, all of the same length) taking an int as an argument which is used to generate a larger/smaller board
+def create_board(size = 3): # Create a board (list of nested lists, all of the same length) taking an int as an argument which is used to generate a larger/smaller board
     global board # So apparently I can't just change a variable declared outside of a function or it will create a NEW local variable that doesn't affect the global one. Unless I do this!
     board = [] # Clear the board so we don't get any funny behaviour when this function is repeatedly called
     for i in range(size):
@@ -103,6 +103,16 @@ def ops_menu():
     print(f'3) Change player 2 character ({plr2_char})')
     print()
     inp = process_input([1, 2, 3])
+    if inp == 1: # Change board size
+        print('Input a new board size below.')
+        print()
+        inp = process_input([])
+        create_board(inp)
+        main_menu()
+    elif inp == 2: # Change the character player 1 is represented as
+        ...
+    else: # Change the character player 2 is represented as
+        ...
 
 def main_menu():
     print('-+ Tic Tac Toe +-')
@@ -116,6 +126,6 @@ def main_menu():
     else:
         ops_menu()
 
-# -+ Actual game code begins here, the above was all just logic +-
-create_board(3)
+# -+ Actual stuff the user sees begins here, the above was all just logic +-
+create_board()
 main_menu()
