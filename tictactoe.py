@@ -26,13 +26,20 @@ def format_board(): # Draws the board by adding a key (numbers on the edge of th
 
     return(outp)
 
-def process_input(valid_inputs): # Takes a list of valid choices as arguments and only allows input of characters found in the array. Only works with integers
-    choice = int(input('> '))
-    if choice in valid_inputs or len(valid_inputs) == 0:
+def process_input(inp_type, valid_inputs = [], invalid_inputs = []): # Takes a list of valid choices as arguments and only allows input of characters found in the array.
+    choice = input('> ')
+
+    try:
+        choice = inp_type(choice)
+    except:
+        print('Invalid choice (invalid type).')
+        return process_input(inp_type, valid_inputs, invalid_inputs)
+
+    if (choice in valid_inputs or len(valid_inputs) == 0) and choice not in invalid_inputs:
         return choice
     else:
-        print(str(choice) + ' is not a valid choice.')
-        process_input(valid_inputs)
+        print('Invalid choice (invalid choice).')
+        return process_input(inp_type, valid_inputs, invalid_inputs)
 
 # -+ Win detection logic +-
 
@@ -100,30 +107,36 @@ def endgame_reached(board): # Checks whether the board still contains any blank 
 # -+ Menu stuff +-
 
 def ops_menu():
+    global plr1_char
+    global plr2_char
+
     print('-+ Options +-\n')
     print(f'1) Change board size ({len(board)}x{len(board)})')
     print(f'2) Change player 1 character ({plr1_char})')
     print(f'3) Change player 2 character ({plr2_char})\n')
 
-    inp = process_input([1, 2, 3])
+    inp = process_input(int, [1, 2, 3])
 
     if inp == 1: # Change board size
         print('Input a new board size below.\n')
-        inp = process_input([])
+        inp = process_input(int)
         create_board(inp)
     elif inp == 2: # Change the character player 1 is represented as
-        ...
+        print('Input a new character for player 1 below.\n')
+        inp = process_input(str, [], [' ', ''])
+        plr1_char = inp
     else: # Change the character player 2 is represented as
-        ...
-    
+        print('Input a new character for player 2 below.\n')
+        inp = process_input(str, [], [' ', ''])
+        plr2_char = inp
+
     main_menu()
 
 def main_menu():
     print('-+ Tic Tac Toe +-\n')
     print('1) Play')
     print('2) Options\n')
-
-    inp = process_input([1, 2])
+    inp = process_input(int, [1, 2])
     
     if inp == 1:
         print(format_board())
@@ -133,3 +146,4 @@ def main_menu():
 # -+ Actual stuff the user sees begins here, the above was all just logic +-
 create_board()
 main_menu()
+
