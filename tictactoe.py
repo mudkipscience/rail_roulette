@@ -146,4 +146,3 @@ def main_menu():
 # -+ Actual stuff the user sees begins here, the above was all just logic +-
 create_board()
 main_menu()
-
