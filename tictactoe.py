@@ -13,6 +13,7 @@ def create_board(size = set_board_size):
         row = []
         for i in range(size):
             row.append(' ')
+        # Copy the row instead of appending the row itself. In Python default behaviour is to create a reference to an existing variable instead of a separate one, so any changes made to row will propogate to ALL rows. If that makes sense.
         board.append(row.copy())
 
 # Draws the board by adding a key (numbers on the edge of the X and Y axis so players know what spaces are which) and then joining all lists together, returning a string
@@ -37,11 +38,15 @@ def format_board():
 # Takes a list of valid choices as arguments and only allows input of characters found in the array.
 def process_input(inp_type, valid_inputs = [], invalid_inputs = []):
     choice = input('> ')
-
+    
     try:
         choice = inp_type(choice)
     except:
         print('Invalid choice (invalid type).')
+        return process_input(inp_type, valid_inputs, invalid_inputs)
+
+    if inp_type == int and choice < 1:
+        print('Invalid choice (out of range).')
         return process_input(inp_type, valid_inputs, invalid_inputs)
 
     if (choice in valid_inputs or len(valid_inputs) == 0) and choice not in invalid_inputs:
@@ -73,9 +78,9 @@ def row_winner(board):
             # Check if we have reached the final item in the row, and if we've gotten this far someone has won!
             if (i + 1) == len(row):
 
-                return True
+                return row[0]
 
-    return False
+    return
 
 # Takes the board and recreates it ([['X', 'O], ['X', ' ']] becomes [['X', 'X'], ['O'], [' ']]) and then calls row_winner() to reuse some code I prepared earlier :3
 def column_winner(board):
@@ -113,7 +118,7 @@ def diagonal_winner(board):
     return row_winner([d_row1, d_row2])
 
 # Checks whether the board still contains any blank spaces, for detecting whether the game is unwinnable
-def endgame_reached():
+def draw():
     for row in board:
             if ' ' in row:
                 return False
@@ -122,16 +127,19 @@ def endgame_reached():
 
 # Ends the game if win/draw detected or continues if no win found and the board still has free space
 def check_winner():
-    if row_winner(board) or column_winner(board) or diagonal_winner(board):
-        print('\nThe game has ended, congratulations to the winner! Type 1 to return to the main menu or type 2 to exit.\n')
+    winner = row_winner(board) or column_winner(board) or diagonal_winner(board)
+    if winner != None:
+        print(format_board())
+        print(f'\n{winner} has won the game, congratulations! Type 1 to return to the main menu or type 2 to exit.\n')
         inp = process_input(int, [1, 2])
         if inp == 1:
             main_menu()
         else:
             exit()
     else:
-        if endgame_reached():
-            print('\n Game has finished in a draw. Type 1 to return to the main menu or type 2 to exit.\n')
+        if draw():
+            print(format_board())
+            print('\nIt\'s a draw!. Type 1 to return to the main menu or type 2 to exit.\n')
             inp = process_input(int, [1, 2])
             if inp == 1:
                 main_menu()
@@ -143,31 +151,35 @@ def check_winner():
 def play_move(char):
     global board
 
-    print(f'\n{char} to play: (horizontal)\n')
+    print(f'{char} to play: (horizontal)\n')
     move_x = process_input(int) - 1
 
-    print(f'\n{char} to play: (vertical)\n')
+    print(f'{char} to play: (vertical)\n')
     move_y = process_input(int) - 1
-
+    
+    # If move is out of range, reduce it to the length of the board (the max)
     if move_x < 0 or move_x >= (len(board)):
         move_x = len(board) - 1
 
     if move_y < 0 or move_y >= (len(board)):
         move_y = len(board) - 1
 
+    # Make sure the spot the player wants to fill is not taken
     if not board[move_y][move_x]  == ' ':
-        print('\nThe specified spot on the board has already been filled, please try again.\n')
+        print('The specified spot on the board has already been filled, please try again.\n')
         play_move(char)
         return
-
+    
+    # Replaces the blank spot on the board with the players character
     board[move_y][move_x] = char
 
+# Calls all the functions needed for the game to... function
 def play_game():
-    print(format_board())
+    print(format_board() + '\n')
     play_move(plr1_char)
     check_winner()
 
-    print(format_board())
+    print(format_board() + '\n')
     play_move(plr2_char)
     check_winner()
 
@@ -176,7 +188,7 @@ def play_game():
 # -+ Menu stuff +-
 
 def main_menu():
-    create_board()
+    create_board(set_board_size)
     print('-+ Tic Tac Toe +-\n')
     print('1) Play')
     print('2) Options\n')
@@ -193,7 +205,7 @@ def ops_menu():
     global set_board_size
 
     print('-+ Options +-\n')
-    print(f'1) Change board size ({len(board)}x{len(board)})')
+    print(f'1) Change board size ({set_board_size}x{len(set_board_size)})')
     print(f'2) Change player 1 character ({plr1_char})')
     print(f'3) Change player 2 character ({plr2_char})')
     print('4) Return to main menu\n')
@@ -203,7 +215,16 @@ def ops_menu():
     # Change board size
     if inp == 1:
         print('Input a new board size below.\n')
-        set_board_size = process_input(int)
+        new_size = process_input(int)
+        if new_size > 9:
+            print('Board sizes over 9 will cause bugs with how the game board is drawn. Do you wish to continue? (y/n)\n')
+            inp = process_input(str, ['y', 'n'])
+            if inp.lower() == 'y':
+                set_board_size = new_size
+            else:
+                main_menu()
+        set_board_size = new_size
+        
     # Change the character player 1 is represented as
     elif inp == 2:
         print('Input a new character for player 1 below.\n')
