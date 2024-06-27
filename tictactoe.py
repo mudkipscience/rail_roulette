@@ -1,3 +1,8 @@
+'''
+TODO:
+- Implement single player (computer controlled player) later on when I have the skills and knowledge to!
+'''
+
 import os
 
 board = []
