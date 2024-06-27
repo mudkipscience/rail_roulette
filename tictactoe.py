@@ -205,7 +205,7 @@ def ops_menu():
     global set_board_size
 
     print('-+ Options +-\n')
-    print(f'1) Change board size ({set_board_size}x{len(set_board_size)})')
+    print(f'1) Change board size ({set_board_size}x{set_board_size})')
     print(f'2) Change player 1 character ({plr1_char})')
     print(f'3) Change player 2 character ({plr2_char})')
     print('4) Return to main menu\n')
