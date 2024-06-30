@@ -41,11 +41,11 @@ def process_input(inp_type, valid_inputs = [], invalid_inputs = []):
     
     try:
         choice = inp_type(choice)
-    except:
+    except ValueError:
         print('Invalid choice (invalid type).')
         return process_input(inp_type, valid_inputs, invalid_inputs)
 
-    if inp_type == int and choice < 1:
+    if inp_type is int and choice < 1:
         print('Invalid choice (out of range).')
         return process_input(inp_type, valid_inputs, invalid_inputs)
 
@@ -68,7 +68,7 @@ def row_winner(board):
             if ' ' in row: 
                 break
             
-            if first_run == True:
+            if first_run:
                 previous = row[i]
                 first_run = False
             
@@ -128,7 +128,8 @@ def draw():
 # Ends the game if win/draw detected or continues if no win found and the board still has free space
 def check_winner():
     winner = row_winner(board) or column_winner(board) or diagonal_winner(board)
-    if winner != None:
+
+    if winner is not None:
         print(format_board())
         print(f'\n{winner} has won the game, congratulations! Type 1 to return to the main menu or type 2 to exit.\n')
         inp = process_input(int, [1, 2])
@@ -205,7 +206,7 @@ def ops_menu():
     global set_board_size
 
     print('-+ Options +-\n')
-    print(f'1) Change board size ({set_board_size}x{len(set_board_size)})')
+    print(f'1) Change board size ({set_board_size}x{set_board_size})')
     print(f'2) Change player 1 character ({plr1_char})')
     print(f'3) Change player 2 character ({plr2_char})')
     print('4) Return to main menu\n')
