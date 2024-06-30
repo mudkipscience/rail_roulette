@@ -1,8 +1,21 @@
+'''
+TODO:
+- Implement single player (computer controlled player) later on when I have the skills and knowledge to!
+'''
+
+import os
+
 board = []
 set_board_size = 3
 plr1_char = 'X'
 plr2_char = 'O'
 
+# Simple function that calls the OS native "clear screen" command
+def clear():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 # Create a board (list of nested lists, all of the same length) taking an int as an argument which is used to generate a larger/smaller board
 def create_board(size=set_board_size):
@@ -140,6 +153,7 @@ def check_winner():
     winner = row_winner(board) or column_winner(board) or diagonal_winner(board)
 
     if winner is not None:
+        clear()
         print(format_board())
         print(
             f'\n{winner} has won the game, congratulations! Type 1 to return to the main menu or type 2 to exit.\n'
@@ -151,6 +165,7 @@ def check_winner():
             exit()
     else:
         if draw():
+            clear()
             print(format_board())
             print(
                 "\nIt's a draw!. Type 1 to return to the main menu or type 2 to exit.\n"
@@ -195,10 +210,12 @@ def play_move(char):
 
 # Calls all the functions needed for the game to... function
 def play_game():
+    clear()
     print(format_board() + '\n')
     play_move(plr1_char)
     check_winner()
 
+    clear()
     print(format_board() + '\n')
     play_move(plr2_char)
     check_winner()
@@ -210,6 +227,7 @@ def play_game():
 
 
 def main_menu():
+    clear()
     create_board(set_board_size)
     print('-+ Tic Tac Toe +-\n')
     print('1) Play')
@@ -223,6 +241,7 @@ def main_menu():
 
 
 def ops_menu():
+    clear()
     global plr1_char
     global plr2_char
     global set_board_size
@@ -234,6 +253,8 @@ def ops_menu():
     print('4) Return to main menu\n')
 
     inp = process_input(int, [1, 2, 3, 4])
+
+    clear()
 
     # Change board size
     if inp == 1:
