@@ -1,7 +1,7 @@
-'''
+"""
 TODO:
 - Implement single player (computer controlled player) later on when I have the skills and knowledge to!
-'''
+"""
 
 import os
 
@@ -10,12 +10,14 @@ set_board_size = 3
 plr1_char = 'X'
 plr2_char = 'O'
 
+
 # Simple function that calls the OS native "clear screen" command
 def clear():
     if os.name == 'nt':
         os.system('cls')
     else:
         os.system('clear')
+
 
 # Create a board (list of nested lists, all of the same length) taking an int as an argument which is used to generate a larger/smaller board
 def create_board(size=set_board_size):
