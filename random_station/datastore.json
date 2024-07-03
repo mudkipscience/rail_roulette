@@ -1,26 +1,33 @@
 {
-    "unvisited_stations": {
+    "to_visit": {},
+
+    "visited": {},
+
+    "unvisited": {
         "Aircraft": {
-            "Line": "Werribee",
-            "Distance": 22.23
+            "line": "Werribee",
+            "distance": 22.23,
+            "time": 4
         },
         "Alamein": {
-            "Line": "Alamein",
-            "Distance": 16.12
+            "line": "Alamein",
+            "distance": 16.12,
+            "time": 2
         },
         "Albion": {
-            "Line": "Sunbury",
-            "Distance": 14.65
+            "line": "Sunbury",
+            "distance": 14.65,
+            "time": 4
         },
         "Alphington": {
-            "Line": "Hurstbridge",
-            "Distance": 10.46
+            "line": "Hurstbridge",
+            "distance": 10.46,
+            "time": 1
         },
         "Altona": {
-            "Line": "Altona",
-            "Distance": 17.15
+            "line": "Werribee",
+            "distance": 17.15,
+            "time": 2
         }
-    },
-    
-    "visited_stations": {}
+    }
 }
