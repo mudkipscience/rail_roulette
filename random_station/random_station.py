@@ -18,8 +18,6 @@ import json
 import os
 import random
 
-print(os.listdir())
-
 
 def clear():
     if os.name == 'nt':
@@ -106,8 +104,9 @@ def get_station(data):
                 print(
                     '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
                 )
-        
+
         break
+
 
 main(read())
 
