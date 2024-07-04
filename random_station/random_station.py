@@ -11,12 +11,22 @@ Plan:
 - Counter for how many stations visited/how many remaining, in total and by line (maybe a small hooray msg if a line is completed)
 - Maybe a "queue" that doesn't clear a station until I confirm I visited it?
 - Maybe a GUI eventually!
+- Option to manually mark a station as visited
+- Log date a station was visited (can take user input for this)
+- Look up info on stations (PT connections, nearby stations + other stuff already included in datastore)
 - More?
 """
 
 import json
 import os
 import random
+
+# Library to do fancy text formatting and stuff, including colours. I could just implement colours with ASCII escape characters buuut this is better.
+from rich.console import Console
+
+
+# Enhanced print() functionality provided by Rich
+console = Console(highlight=False)
 
 
 # Runs OS-specific shell command to clear console
@@ -102,18 +112,49 @@ def roll_station(data):
         10: '101 to 110',
     }
 
+    line_colours = {
+        'Alamein': 'white on #094c8d',
+        'Belgrave': 'white on #094c8d',
+        'Glen Waverley': 'white on #094c8d',
+        'Lilydale': 'white on #094c8d',
+        'Cranbourne': 'black on #16b4e8',
+        'Pakenham': 'black on #16b4e8',
+        'Hurstbridge': 'white on #b1211b',
+        'Mernda': 'white on #b1211b',
+        'Craigieburn': 'black on #ffb531',
+        'Sunbury': 'black on #ffb531',
+        'Upfield': 'black on #ffb531',
+        'Flemington Racecourse': 'white on #909295',
+        'Frankston': 'black on #159943',
+        'Stony Point': 'black on #159943',
+        'Werribee': 'black on #159943',
+        'Williamstown': 'black on #159943',
+        'Sandringham': 'black on #fc7fbb',
+    }
+
     while True:
         clear()
         # Pick a random station name from our list made above
         station = random.choice(stations)
         # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time...
         station_info = data['unvisited'][station]
+        lines = ''
+        for line in station_info['line']:
+            colour = line_colours[line]
+            lines += f'[{colour}] {line} [/{colour}]'
 
-        print(f"Looks like you're heading to... {station}!\n")
-        print(f'- {station} is located on the {station_info['line']} line.')
-        print(f'- {station} is {station_info['distance']}km from the CBD.')
-        print(
-            f'- Journeys to {station} take {time_conversion[station_info['time']]} minutes on average.\n'
+            if line != station_info['line'][-1]:
+                lines += ', '
+
+        console.print(f"Looks like you're heading to... [bold]{station}!\n")
+        console.print(
+            f'- [bold]{station}[/bold] is served by the {lines} line/s.'
+        )
+        console.print(
+            f'- [bold]{station}[/bold] is {station_info['distance']}km from the CBD.'
+        )
+        console.print(
+            f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info['time']]} minutes on average.\n'
         )
         print('1) Reroll')
         print('2) Accept\n')
@@ -159,7 +200,9 @@ def stats(data):
     clear()
 
     print('\n -+ Statistics +-\n')
-    print(f'- You have visited {len(data['visited'])} out of {len(data['visited']) + len(data['unvisited'])} stations.\n')
+    console.print(
+        f'- You have visited {len(data['visited'])} out of {len(data['visited']) + len(data['unvisited'])} stations.\n'
+    )
     print('1) Main menu')
     print('2) Exit\n')
 
@@ -174,19 +217,38 @@ def stats(data):
 
 # Main program
 def main(data):
+    unmodified_title = ' | |E|v|e|r|y| |M|e|t|r|o| |S|t|a|t|i|o|n| |'
+    modified_title = (
+        '[bright_black] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[bright_black]\n'
+    )
+    for i in range(44):
+        if unmodified_title[i] == '|':
+            modified_title += '[bright_black]|[/bright_black]'
+        elif i > 14 and i < 25:
+            modified_title += '[dodger_blue1]' + unmodified_title[i] + '[/dodger_blue1]'
+        else:
+            modified_title += '[default]' + unmodified_title[i] + '[/default]'
+    modified_title += (
+        '\n[bright_black] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[/bright_black]'
+    )
+
     clear()
-    print('\n-+ Random-Metro-Station-Choosinator 3000 +-\n')
-    print('1) Get next station')
-    print('2) View statistics')
-    print('3) Exit\n')
+
+    console.print(modified_title)
+    console.print('\n1) Get next station')
+    console.print('2) Mark station as visited')
+    console.print('3) Statistics')
+    console.print('4) Exit\n')
 
     choice = input('> ')
 
     if choice == '1':
         check_to_visit(data)
     elif choice == '2':
-        stats(data)
+        pass
     elif choice == '3':
+        stats(data)
+    elif choice == '4':
         exit()
     else:
         print(
@@ -197,7 +259,3 @@ def main(data):
 
 
 main(read())
-
-"""
-dict(sorted(data['unvisited_stations'].items()))
-"""

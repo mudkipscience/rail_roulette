@@ -5,64 +5,154 @@
 
     "unvisited": {
         "Aircraft": {
-            "line": "Werribee",
+            "line": ["Werribee"],
             "distance": 22.23,
             "time": 3
         },
         "Alamein": {
-            "line": "Alamein",
+            "line": ["Alamein"],
             "distance": 16.12,
             "time": 2
         },
         "Albion": {
-            "line": "Sunbury",
+            "line": ["Sunbury"],
             "distance": 14.65,
             "time": 1
         },
         "Alphington": {
-            "line": "Hurstbridge",
+            "line": ["Hurstbridge"],
             "distance": 10.46,
             "time": 1
         },
         "Altona": {
-            "line": "Werribee",
+            "line": ["Werribee"],
             "distance": 17.15,
             "time": 2
         },
         "Anstey": {
-            "line": "Upfield",
+            "line": ["Upfield"],
             "distance": 8.04,
             "time": 1
         },
         "Armadale": {
-            "line": "Frankston",
+            "line": ["Frankston"],
             "distance": 8.67,
             "time": 1
         },
         "Ascot Vale": {
-            "line": "Craigieburn",
+            "line": ["Craigieburn"],
             "distance": 5.81,
             "time": 0
         },
         "Ashburton": {
-            "line": "Alamein",
+            "line": ["Alamein"],
             "distance": 15.39,
             "time": 2
         },
         "Aspendale": {
-            "line": "Frankston",
+            "line": ["Frankston"],
             "distance": 30.31,
             "time": 4
         },
         "Auburn": {
-            "line": "Lilydale",
+            "line": ["Alamein", "Belgrave", "Lilydale"],
             "distance": 8.96,
             "time": 1
         },
         "Balaclava": {
-            "line": "Sandringham",
+            "line": ["Sandringham"],
             "distance": 9.08,
             "time": 1
+        },
+        "Batman": {
+            "line": ["Upfield"],
+            "distance": 11.23,
+            "time": 1
+        },
+        "Baxter": {
+            "line": ["Stony Point"],
+            "distance": 51.97,
+            "time": 7
+        },
+        "Bayswater": {
+            "line": ["Belgrave"],
+            "distance": 30.76,
+            "time": 4
+        },
+        "Beaconsfield": {
+            "line": ["Pakenham"],
+            "distance": 46.99,
+            "time": 6
+        },
+        "Belgrave": {
+            "line": ["Belgrave"],
+            "distance": 42.53,
+            "time": 8
+        },
+        "Bell": {
+            "line": ["Mernda"],
+            "distance": 11.70,
+            "time": 2
+        },
+        "Bentleigh": {
+            "line": ["Frankston"],
+            "distance": 16.47,
+            "time": 2
+        },
+        "Berwick": {
+            "line": ["Pakenham"],
+            "distance": 44.58,
+            "time": 6
+        },
+        "Bittern": {
+            "line": ["Stony Point"],
+            "distance": 68.67,
+            "time": 9
+        },
+        "Blackburn": {
+            "line": ["Belgrave", "Lilydale"],
+            "distance": 18.67,
+            "time": 3
+        },
+        "Bonbeach": {
+            "line": ["Frankston"],
+            "distance": 34.61,
+            "time": 5
+        },
+        "Boronia": {
+            "line": ["Belgrave"],
+            "distance": 33.38,
+            "time": 5
+        },
+        "Box Hill": {
+            "line": ["Belgrave", "Lilydale"],
+            "distance": 16.16,
+            "time": 2
+        },
+        "Brighton Beach": {
+            "line": ["Sandringham"],
+            "distance": 15.97,
+            "time": 2
+        },
+        "Broadmeadows": {
+            "line": ["Craigieburn"],
+            "distance": 16.85,
+            "time": 2
+        },
+        "Brunswick": {
+            "line": ["Upfield"],
+            "distance": 7.31,
+            "time": 1
+        },
+        "Burnley": {
+            "line": ["Alamein", "Belgrave", "Glen Waverley", "Lilydale"],
+            "distance": 5.33,
+            "time": 0
+        },
+        "Burwood": {
+            "line": ["Alamein"],
+            "distance": 14.17,
+            "time": 2
         }
     }
 }
