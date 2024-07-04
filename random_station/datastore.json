@@ -1,5 +1,5 @@
 {
-    "to_visit": {},
+    "to_visit": "",
 
     "visited": {},
 
@@ -7,7 +7,7 @@
         "Aircraft": {
             "line": "Werribee",
             "distance": 22.23,
-            "time": 4
+            "time": 3
         },
         "Alamein": {
             "line": "Alamein",
@@ -17,7 +17,7 @@
         "Albion": {
             "line": "Sunbury",
             "distance": 14.65,
-            "time": 4
+            "time": 1
         },
         "Alphington": {
             "line": "Hurstbridge",
@@ -28,6 +28,41 @@
             "line": "Werribee",
             "distance": 17.15,
             "time": 2
+        },
+        "Anstey": {
+            "line": "Upfield",
+            "distance": 8.04,
+            "time": 1
+        },
+        "Armadale": {
+            "line": "Frankston",
+            "distance": 8.67,
+            "time": 1
+        },
+        "Ascot Vale": {
+            "line": "Craigieburn",
+            "distance": 5.81,
+            "time": 0
+        },
+        "Ashburton": {
+            "line": "Alamein",
+            "distance": 15.39,
+            "time": 2
+        },
+        "Aspendale": {
+            "line": "Frankston",
+            "distance": 30.31,
+            "time": 4
+        },
+        "Auburn": {
+            "line": "Lilydale",
+            "distance": 8.96,
+            "time": 1
+        },
+        "Balaclava": {
+            "line": "Sandringham",
+            "distance": 9.08,
+            "time": 1
         }
     }
 }

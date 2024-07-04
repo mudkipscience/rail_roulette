@@ -37,7 +37,7 @@ def read():
 # Write modified .json to datastore.json
 def write(data):
     with open('datastore.json', 'w') as file:
-        json.dump(data, file, indent=4)
+        json.dump(data, file, indent = 4, sort_keys = True)
 
 
 # Check whether a station dict is present in the to_visit dict. If it is, prompt the user whether they want to mark it as visited & continue or return/exit
@@ -53,12 +53,15 @@ def check_to_visit(data):
         while True:
             choice = input('> ')
             if choice == '1':
-                # Remove the station object/dictionary from the to_visit section and return the value of the remove dict/object
-                visited_station = data['to_visit'].popitem()
-                # Add the dict we removed from the to_visit section to the visited section
-                data['visited'].update({visited_station[0]: visited_station[1]})
+                # Insert the dict associated with the randomly chosen station into visited after grabbing it from unvisited with get()
+                data['visited'].update({data['to_visit']: data['unvisited'].get(data['to_visit'])})
+                # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop()
+                data['unvisited'].pop(data['to_visit'])
+                # Reset to_visit to be an empty string again
+                data['to_visit'] = ''
                 # Write changes to datastore.json so the program remembers them when reopened
                 write(data)
+
                 roll_station(data)
                 break
             elif choice == '2':
@@ -104,9 +107,10 @@ def roll_station(data):
         # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time...
         station_info = data['unvisited'][station]
 
-        print(
-            f'Looks like you\'re heading to... {station}, located on the {station_info['line']} line! {station} is {station_info['distance']}km from the CBD. Journeys to {station} on average take {time_conversion[station_info['time']]} minutes.\n'
-        )
+        print(f'Looks like you\'re heading to... {station}!\n')
+        print(f'- {station} is located on the {station_info['line']} line.')
+        print(f'- {station} is {station_info['distance']}km from the CBD.')
+        print(f'- Journeys to {station} take {time_conversion[station_info['time']]} minutes on average.\n')
         print('1) Reroll')
         print('2) Accept\n')
 
@@ -116,9 +120,8 @@ def roll_station(data):
                 roll_station(data)
                 break
             elif choice == '2':
-                # Explained this in more detail above. pop() removes the station from 'unvisited', update() inserts it into the 'to_visit' section and write() writes our changes to datastore.json
-                to_visit = data['unvisited'].pop(station)
-                data['to_visit'].update({station: to_visit})
+                # Writes the key/station name to to_visit, a string value in datastore.json. This is so we can retrieve info on this station later. For now, we can leave it in unvisited.
+                data['to_visit'] = station
                 write(data)
                 break
             else:
