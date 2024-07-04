@@ -50,7 +50,7 @@ def main(data):
     choice = input('> ')
 
     if choice == '1':
-        get_station(data)
+        check_to_visit(data)
     elif choice == '2':
         pass
     elif choice == '3':
@@ -63,7 +63,36 @@ def main(data):
     main(data)
 
 
-def get_station(data):
+def check_to_visit(data):
+    clear()
+
+    if len(data['to_visit']) > 0:
+        print('Warning! There\'s a station queued up for you to visit already!\n')
+        print('1) Mark as visited and continue')
+        print('2) Return to main menu')
+        print('3) Exit')
+        
+        while True:
+            choice = input('> ')
+            if choice == '1':
+                visited_station = data['to_visit'].popitem()
+                data['visited'].update({visited_station[0]:  visited_station[1]})
+                write(data)
+                roll_station(data)
+                break
+            elif choice == '2':
+                break
+            elif choice == '3':
+                exit()
+            else:
+                print(
+                    '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+                )
+    else:
+        roll_station(data)
+
+
+def roll_station(data):
     stations = list(data['unvisited'].keys())
     time_conversion = {
         0: 'under 10',
@@ -93,7 +122,7 @@ def get_station(data):
         while True:
             choice = input('> ')
             if choice == '1':
-                get_station(data)
+                check_to_visit(data)
                 break
             elif choice == '2':
                 to_visit = data['unvisited'].pop(station)
@@ -111,25 +140,5 @@ def get_station(data):
 main(read())
 
 """
-Time:
-0 = under 10 min
-1 = 11-20 min
-2 = 21-30 min
-3 = 31-40 min
-4 = 41-50 min
-5 = 51-60 min
-6 = 61-70 min
-7 = 71-80 min
-8 = 81-90 min
-9 = 91-100 min
-10 = 101-110 min
-
-stored = data['stored']
-visited = data['visited']
-unvisited = data['unvisited']
-name = 'Aircraft'
-info = unvisited.pop(name)
-visited.update({name: info})
-print(json.dumps(data, indent = 4))
-#dict(sorted(data['unvisited_stations'].items()))
+dict(sorted(data['unvisited_stations'].items()))
 """
