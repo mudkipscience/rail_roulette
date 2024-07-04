@@ -18,6 +18,13 @@ import json
 import os
 import random
 
+# Library to do fancy text formatting and stuff, including colours. I could just implement colours with ASCII escape characters buuut this is better.
+from rich.console import Console
+
+
+# Enhanced print() functionality provided by Rich
+console = Console(highlight=False)
+
 
 # Runs OS-specific shell command to clear console
 def clear():
@@ -102,18 +109,38 @@ def roll_station(data):
         10: '101 to 110',
     }
 
+    line_colours = {
+        'Alamein': 'blue',
+        'Belgrave': 'blue',
+        'Glen Waverley': 'blue',
+        'Lilydale': 'blue',
+        'Cranbourne': 'black on light_blue',
+        'Pakenham': 'black on light_blue',
+        'Hurstbridge': 'white on red',
+        'Mernda': 'white on red',
+        'Craigieburn': 'black on yellow',
+        'Sunbury': 'black on yellow',
+        'Upfield': 'black on yellow',
+        'Flemington Racecourse': 'grey30',
+        'Frankston': 'white on green4',
+        "Werribee": 'white on green4',
+        'Williamstown': 'white on green4',
+        'Sandringham': 'black on pink1'
+    }
+
     while True:
         clear()
         # Pick a random station name from our list made above
         station = random.choice(stations)
         # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time...
         station_info = data['unvisited'][station]
+        colour = line_colours[data['unvisited'][station]['line']]
 
-        print(f"Looks like you're heading to... {station}!\n")
-        print(f'- {station} is located on the {station_info['line']} line.')
-        print(f'- {station} is {station_info['distance']}km from the CBD.')
-        print(
-            f'- Journeys to {station} take {time_conversion[station_info['time']]} minutes on average.\n'
+        console.print(f"Looks like you're heading to... [bold]{station}!\n")
+        console.print(f'- [bold]{station}[/bold] is located on the[{colour}] {station_info['line']}[/{colour}] line.')
+        console.print(f'- [bold]{station}[/bold] is {station_info['distance']}km from the CBD.')
+        console.print(
+            f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info['time']]} minutes on average.\n'
         )
         print('1) Reroll')
         print('2) Accept\n')
@@ -159,7 +186,9 @@ def stats(data):
     clear()
 
     print('\n -+ Statistics +-\n')
-    print(f'- You have visited {len(data['visited'])} out of {len(data['visited']) + len(data['unvisited'])} stations.\n')
+    console.print(
+        f'- You have visited {len(data['visited'])} out of {len(data['visited']) + len(data['unvisited'])} stations.\n'
+    )
     print('1) Main menu')
     print('2) Exit\n')
 
@@ -174,11 +203,29 @@ def stats(data):
 
 # Main program
 def main(data):
+    unmodified_title = ' | |E|v|e|r|y| |M|e|t|r|o| |S|t|a|t|i|o|n| |'
+    modified_title = (
+        '[bright_black] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[bright_black]\n'
+    )
+    for i in range(44):
+        if unmodified_title[i] == '|':
+            modified_title += '[bright_black]|[/bright_black]'
+        elif i > 14 and i < 25:
+            modified_title += (
+                '[dodger_blue1]' + unmodified_title[i] + '[/dodger_blue1]'
+            )
+        else:
+            modified_title += '[default]' + unmodified_title[i] + '[/default]'
+    modified_title += (
+        '\n[bright_black] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[/bright_black]'
+    )
+
     clear()
-    print('\n-+ Random-Metro-Station-Choosinator 3000 +-\n')
-    print('1) Get next station')
-    print('2) View statistics')
-    print('3) Exit\n')
+
+    console.print(modified_title)
+    console.print('\n1) Get next station')
+    console.print('2) View statistics')
+    console.print('3) Exit\n')
 
     choice = input('> ')
 
