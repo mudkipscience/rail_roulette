@@ -11,6 +11,9 @@ Plan:
 - Counter for how many stations visited/how many remaining, in total and by line (maybe a small hooray msg if a line is completed)
 - Maybe a "queue" that doesn't clear a station until I confirm I visited it?
 - Maybe a GUI eventually!
+- Option to manually mark a station as visited
+- Log date a station was visited (can take user input for this)
+- Look up info on stations (PT connections, nearby stations + other stuff already included in datastore)
 - More?
 """
 
@@ -224,16 +227,19 @@ def main(data):
 
     console.print(modified_title)
     console.print('\n1) Get next station')
-    console.print('2) View statistics')
-    console.print('3) Exit\n')
+    console.print('2) Mark station as visited')
+    console.print('3) Statistics')
+    console.print('4) Exit\n')
 
     choice = input('> ')
 
     if choice == '1':
         check_to_visit(data)
     elif choice == '2':
-        stats(data)
+        pass
     elif choice == '3':
+        stats(data)
+    elif choice == '4':
         exit()
     else:
         print(
