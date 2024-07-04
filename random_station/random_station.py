@@ -113,22 +113,23 @@ def roll_station(data):
     }
 
     line_colours = {
-        'Alamein': 'blue',
-        'Belgrave': 'blue',
-        'Glen Waverley': 'blue',
-        'Lilydale': 'blue',
-        'Cranbourne': 'black on light_blue',
-        'Pakenham': 'black on light_blue',
-        'Hurstbridge': 'white on red',
-        'Mernda': 'white on red',
-        'Craigieburn': 'black on yellow',
-        'Sunbury': 'black on yellow',
-        'Upfield': 'black on yellow',
-        'Flemington Racecourse': 'grey30',
-        'Frankston': 'white on green4',
-        "Werribee": 'white on green4',
-        'Williamstown': 'white on green4',
-        'Sandringham': 'black on pink1'
+        'Alamein': 'white on #094c8d',
+        'Belgrave': 'white on #094c8d',
+        'Glen Waverley': 'white on #094c8d',
+        'Lilydale': 'white on #094c8d',
+        'Cranbourne': 'black on #16b4e8',
+        'Pakenham': 'black on #16b4e8',
+        'Hurstbridge': 'white on #b1211b',
+        'Mernda': 'white on #b1211b',
+        'Craigieburn': 'black on #ffb531',
+        'Sunbury': 'black on #ffb531',
+        'Upfield': 'black on #ffb531',
+        'Flemington Racecourse': 'white on #909295',
+        'Frankston': 'black on #159943',
+        'Stony Point': 'black on #159943',
+        'Werribee': 'black on #159943',
+        'Williamstown': 'black on #159943',
+        'Sandringham': 'black on #fc7fbb',
     }
 
     while True:
@@ -137,11 +138,21 @@ def roll_station(data):
         station = random.choice(stations)
         # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time...
         station_info = data['unvisited'][station]
-        colour = line_colours[data['unvisited'][station]['line']]
+        lines = ''
+        for line in station_info['line']:
+            colour = line_colours[line]
+            lines += f'[{colour}] {line} [/{colour}]'
+
+            if line != station_info['line'][-1]:
+                lines += ', '
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
-        console.print(f'- [bold]{station}[/bold] is located on the[{colour}] {station_info['line']}[/{colour}] line.')
-        console.print(f'- [bold]{station}[/bold] is {station_info['distance']}km from the CBD.')
+        console.print(
+            f'- [bold]{station}[/bold] is served by the {lines} line/s.'
+        )
+        console.print(
+            f'- [bold]{station}[/bold] is {station_info['distance']}km from the CBD.'
+        )
         console.print(
             f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info['time']]} minutes on average.\n'
         )
@@ -214,9 +225,7 @@ def main(data):
         if unmodified_title[i] == '|':
             modified_title += '[bright_black]|[/bright_black]'
         elif i > 14 and i < 25:
-            modified_title += (
-                '[dodger_blue1]' + unmodified_title[i] + '[/dodger_blue1]'
-            )
+            modified_title += '[dodger_blue1]' + unmodified_title[i] + '[/dodger_blue1]'
         else:
             modified_title += '[default]' + unmodified_title[i] + '[/default]'
     modified_title += (
@@ -250,7 +259,3 @@ def main(data):
 
 
 main(read())
-
-"""
-dict(sorted(data['unvisited_stations'].items()))
-"""
