@@ -37,10 +37,10 @@ def read():
 # Write modified .json to datastore.json
 def write(data):
     with open('datastore.json', 'w') as file:
-        json.dump(data, file, indent = 4, sort_keys = True)
+        json.dump(data, file, indent=4, sort_keys=True)
 
 
-# Check whether a station dict is present in the to_visit dict. If it is, prompt the user whether they want to mark it as visited & continue or return/exit
+# Check whether a station name has been written to to_visit dict. If yes, prompt the user whether they want to mark it as visited & continue or return/exit
 def check_to_visit(data):
     clear()
 
@@ -54,7 +54,9 @@ def check_to_visit(data):
             choice = input('> ')
             if choice == '1':
                 # Insert the dict associated with the randomly chosen station into visited after grabbing it from unvisited with get()
-                data['visited'].update({data['to_visit']: data['unvisited'].get(data['to_visit'])})
+                data['visited'].update(
+                    {data['to_visit']: data['unvisited'].get(data['to_visit'])}
+                )
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop()
                 data['unvisited'].pop(data['to_visit'])
                 # Reset to_visit to be an empty string again
@@ -85,7 +87,7 @@ def roll_station(data):
 
     # Get the name's of all stations by converting the dictionary keys (the names) into a list
     stations = list(data['unvisited'].keys())
-    # I stored time's as an int like this in datastore.json to save myself retyping stuff. This dict just contains what each number correlates to.
+    # I stored times as an int like this in datastore.json to save myself retyping stuff. This dict just contains what each number correlates to.
     time_conversion = {
         0: 'under 10',
         1: '11 to 20',
@@ -107,10 +109,12 @@ def roll_station(data):
         # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time...
         station_info = data['unvisited'][station]
 
-        print(f'Looks like you\'re heading to... {station}!\n')
+        print(f"Looks like you're heading to... {station}!\n")
         print(f'- {station} is located on the {station_info['line']} line.')
         print(f'- {station} is {station_info['distance']}km from the CBD.')
-        print(f'- Journeys to {station} take {time_conversion[station_info['time']]} minutes on average.\n')
+        print(
+            f'- Journeys to {station} take {time_conversion[station_info['time']]} minutes on average.\n'
+        )
         print('1) Reroll')
         print('2) Accept\n')
 
@@ -151,6 +155,23 @@ def no_unvisited():
             exit()
 
 
+def stats(data):
+    clear()
+
+    print('\n -+ Statistics +-\n')
+    print(f'- You have visited {len(data['visited'])} out of {len(data['visited']) + len(data['unvisited'])} stations.\n')
+    print('1) Main menu')
+    print('2) Exit\n')
+
+    while True:
+        choice = input('> ')
+
+        if choice == '1':
+            break
+        elif choice == '2':
+            exit()
+
+
 # Main program
 def main(data):
     clear()
@@ -164,7 +185,7 @@ def main(data):
     if choice == '1':
         check_to_visit(data)
     elif choice == '2':
-        pass
+        stats(data)
     elif choice == '3':
         exit()
     else:
