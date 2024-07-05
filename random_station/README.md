@@ -4,12 +4,12 @@
 I have tasked myself with visiting every Melbourne train station served by Metro (I'm hoping to knock one off every couple of weeks or so) but how was I meant to choose which stations to visit? I don't have the braincells for that sort of decision-making, so instead I'm gonna make this program to do that for me and more! (o゜▽゜)o☆
 
 ### The Plan:
-- Simple terminal interface (maybe using colours?)
-- Import and modify a .json file for data storage
-- Options to reroll if I don't like the choice
-- Show what line the station is on and it's distance from the CBD/Southern Cross
+- ~~Simple terminal interface (maybe using colours?)~~ - **done!**
+- ~~Import and modify a .json file for data storage~~ - **done!**
+- ~~Options to reroll if I don't like the choice~~ - **done!**
+- ~~Show what line the station is on and it's distance from the CBD/Southern Cross~~ - **done!**
 - Counter for how many stations visited/how many remaining, in total and by line (maybe a small hooray msg if a line is completed)
-- Maybe a "queue" that doesn't clear a station until I confirm I visited it?
+- ~~Maybe a "queue" that doesn't clear a station until I confirm I visited it?~~ - **done!**
 - Maybe a GUI eventually!
 - Option to manually mark a station as visited
 - Log date a station was visited (can take user input for this)
