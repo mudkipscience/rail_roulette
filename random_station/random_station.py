@@ -37,6 +37,19 @@ def clear():
         os.system('clear')
 
 
+# Generates a string of options the user can select from. ops is an array of names we want to give to each option.
+def print_menu(ops):
+    index = 1
+    menu = ''
+
+    for entry in ops:
+        menu += f'{index}) {entry}\n'
+        index += 1
+    
+    return menu
+
+
+
 # Load saved, visited and unvisited stations from datastore.json, which should be in the same directory. Not bothering with error handling.
 def read():
     # I kind of understand how this works? Basically with is shorthand for a try/except/finally statement and I think there are some benefits beyond that too? I dunno. Either way I'm opening a file!
@@ -56,9 +69,7 @@ def check_to_visit(data):
 
     if len(data['to_visit']) > 0:
         print("Warning! There's a station queued up for you to visit already!\n")
-        print('1) Mark as visited and continue')
-        print('2) Return to main menu')
-        print('3) Exit')
+        print(print_menu(['Mark as visited & continue', 'Main menu', 'Exit']))
 
         while True:
             choice = input('> ')
@@ -147,17 +158,14 @@ def roll_station(data):
                 lines += ', '
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
+        console.print(f'- [bold]{station}[/bold] is served by the {lines} line/s.')
         console.print(
-            f'- [bold]{station}[/bold] is served by the {lines} line/s.'
+            f'- [bold]{station}[/bold] is {station_info["distance"]}km from the CBD.'
         )
         console.print(
-            f'- [bold]{station}[/bold] is {station_info['distance']}km from the CBD.'
+            f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info["time"]]} minutes on average.\n'
         )
-        console.print(
-            f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info['time']]} minutes on average.\n'
-        )
-        print('1) Reroll')
-        print('2) Accept\n')
+        print(print_menu(['Reroll', 'Accept']))
 
         while True:
             choice = input('> ')
@@ -184,8 +192,7 @@ def no_unvisited():
     print(
         "There aren't any more stations to visit - you've been to them all! Congratulations!\n"
     )
-    print('1) Main menu')
-    print('2) Exit\n')
+    print(print_menu(['Main menu', 'Exit']))
 
     while True:
         choice = input('> ')
@@ -201,10 +208,9 @@ def stats(data):
 
     print('\n -+ Statistics +-\n')
     console.print(
-        f'- You have visited {len(data['visited'])} out of {len(data['visited']) + len(data['unvisited'])} stations.\n'
+        f'- You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations.\n'
     )
-    print('1) Main menu')
-    print('2) Exit\n')
+    print(print_menu(['Main menu', 'Exit']))
 
     while True:
         choice = input('> ')
@@ -219,26 +225,23 @@ def stats(data):
 def main(data):
     unmodified_title = ' | |E|v|e|r|y| |M|e|t|r|o| |S|t|a|t|i|o|n| |'
     modified_title = (
-        '[bright_black] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[bright_black]\n'
+        '[grey69] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[grey69]\n'
     )
     for i in range(44):
         if unmodified_title[i] == '|':
-            modified_title += '[bright_black]|[/bright_black]'
+            modified_title += '[grey69]|[/grey69]'
         elif i > 14 and i < 25:
-            modified_title += '[dodger_blue1]' + unmodified_title[i] + '[/dodger_blue1]'
+            modified_title += '[#0073cf]' + unmodified_title[i] + '[/#0073cf]'
         else:
-            modified_title += '[default]' + unmodified_title[i] + '[/default]'
+            modified_title += '[light_sky_blue1]' + unmodified_title[i] + '[/light_sky_blue1]'
     modified_title += (
-        '\n[bright_black] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[/bright_black]'
+        '\n[grey69] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[/grey69]\n'
     )
 
     clear()
 
     console.print(modified_title)
-    console.print('\n1) Get next station')
-    console.print('2) Mark station as visited')
-    console.print('3) Statistics')
-    console.print('4) Exit\n')
+    print(print_menu(['Get next station', 'Mark station as visited', 'Statistics', 'Exit']))
 
     choice = input('> ')
 
