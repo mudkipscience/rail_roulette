@@ -57,7 +57,7 @@ def clear():
         os.system('clear')
 
 
-# Generates a string of options the user can select from. ops is an array of strings that are names we want to give to each option.
+# Generates a string of options the user can select from. ops is an array of names we want to give to each option.
 def print_menu(ops):
     index = 1
     menu = ''
@@ -65,8 +65,9 @@ def print_menu(ops):
     for entry in ops:
         menu += f'{index}) {entry}\n'
         index += 1
-
+    
     return menu
+
 
 
 # Load saved, visited and unvisited stations from datastore.json, which should be in the same directory. Not bothering with error handling.
@@ -88,9 +89,7 @@ def check_to_visit(data):
 
     if len(data['to_visit']) > 0:
         print("Warning! There's a station queued up for you to visit already!\n")
-        print('1) Mark as visited and continue')
-        print('2) Return to main menu')
-        print('3) Exit')
+        print(print_menu(['Mark as visited & continue', 'Main menu', 'Exit']))
 
         while True:
             choice = input('> ')
@@ -144,22 +143,49 @@ def roll_station(data):
         10: '101 to 110',
     }
 
+    line_colours = {
+        'Alamein': 'white on #094c8d',
+        'Belgrave': 'white on #094c8d',
+        'Glen Waverley': 'white on #094c8d',
+        'Lilydale': 'white on #094c8d',
+        'Cranbourne': 'black on #16b4e8',
+        'Pakenham': 'black on #16b4e8',
+        'Hurstbridge': 'white on #b1211b',
+        'Mernda': 'white on #b1211b',
+        'Craigieburn': 'black on #ffb531',
+        'Sunbury': 'black on #ffb531',
+        'Upfield': 'black on #ffb531',
+        'Flemington Racecourse': 'white on #909295',
+        'Frankston': 'black on #159943',
+        'Stony Point': 'black on #159943',
+        'Werribee': 'black on #159943',
+        'Williamstown': 'black on #159943',
+        'Sandringham': 'black on #fc7fbb',
+    }
+
     while True:
         clear()
         # Pick a random station name from our list made above
         station = random.choice(stations)
         # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time...
         station_info = data['unvisited'][station]
-        colour = line_colours[data['unvisited'][station]['line']]
+        lines = ''
+        for line in station_info['line']:
+            colour = line_colours[line]
+            lines += f'[{colour}] {line} [/{colour}]'
+
+            if line != station_info['line'][-1]:
+                lines += ', '
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
-        console.print(f'- [bold]{station}[/bold] is located on the[{colour}] {station_info["line"]}[/{colour}] line.')
-        console.print(f'- [bold]{station}[/bold] is {station_info["distance"]}km from the CBD.')
+        console.print(f'- [bold]{station}[/bold] is served by the {lines} line/s.')
+        console.print(
+            f'- [bold]{station}[/bold] is {station_info["distance"]}km from the CBD.'
+        )
         console.print(
             f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info["time"]]} minutes on average.\n'
         )
-        print('1) Reroll')
-        print('2) Accept\n')
+        print(print_menu(['Reroll', 'Accept']))
 
         while True:
             choice = input('> ')
@@ -186,8 +212,7 @@ def no_unvisited():
     print(
         "There aren't any more stations to visit - you've been to them all! Congratulations!\n"
     )
-    print('1) Main menu')
-    print('2) Exit\n')
+    print(print_menu(['Main menu', 'Exit']))
 
     while True:
         choice = input('> ')
@@ -236,8 +261,7 @@ def stats(data):
         f'    - {len(visited["Alamein"])} out of {len(visited["Alamein"]) + len(unvisited["Alamein"])} stations on the Alamein line.\n\n'
         f'- You\'ve visited {clifton["visited"]} out of {clifton["total"]} [{line_colours["Mernda"]}] Clifton Hill [/{line_colours["Mernda"]}] group stations.'
     )
-    print('1) Main menu')
-    print('2) Exit\n')
+    print(print_menu(['Main menu', 'Exit']))
 
     while True:
         choice = input('> ')
@@ -297,7 +321,3 @@ def main(data):
 
 
 main(read())
-
-"""
-dict(sorted(data['unvisited_stations'].items()))
-"""
