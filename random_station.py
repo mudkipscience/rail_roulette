@@ -25,8 +25,30 @@ import random
 from rich.console import Console
 
 
-# Enhanced print() functionality provided by Rich
+# Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
+
+
+# Line colours. I use them in a couple places so just easier to have as a global variable.
+line_colours = {
+    'Alamein': 'white on #094c8d',
+    'Belgrave': 'white on #094c8d',
+    'Glen Waverley': 'white on #094c8d',
+    'Lilydale': 'white on #094c8d',
+    'Cranbourne': 'black on #16b4e8',
+    'Pakenham': 'black on #16b4e8',
+    'Hurstbridge': 'white on #b1211b',
+    'Mernda': 'white on #b1211b',
+    'Craigieburn': 'black on #ffb531',
+    'Sunbury': 'black on #ffb531',
+    'Upfield': 'black on #ffb531',
+    'Flemington Racecourse': 'black on #909295',
+    'Frankston': 'black on #159943',
+    'Stony Point': 'black on #159943',
+    'Werribee': 'black on #159943',
+    'Williamstown': 'black on #159943',
+    'Sandringham': 'black on #fc7fbb',
+}
 
 
 # Runs OS-specific shell command to clear console
@@ -35,6 +57,18 @@ def clear():
         os.system('cls')
     else:
         os.system('clear')
+
+
+# Generates a string of options the user can select from. ops is an array of names we want to give to each option.
+def print_menu(ops):
+    index = 1
+    menu = ''
+
+    for entry in ops:
+        menu += f'{index}) {entry}\n'
+        index += 1
+    
+    return menu
 
 
 # Load saved, visited and unvisited stations from datastore.json, which should be in the same directory. Not bothering with error handling.
@@ -56,9 +90,7 @@ def check_to_visit(data):
 
     if len(data['to_visit']) > 0:
         print("Warning! There's a station queued up for you to visit already!\n")
-        print('1) Mark as visited and continue')
-        print('2) Return to main menu')
-        print('3) Exit')
+        print(print_menu(['Mark as visited & continue', 'Main menu', 'Exit']))
 
         while True:
             choice = input('> ')
@@ -112,26 +144,6 @@ def roll_station(data):
         10: '101 to 110',
     }
 
-    line_colours = {
-        'Alamein': 'white on #094c8d',
-        'Belgrave': 'white on #094c8d',
-        'Glen Waverley': 'white on #094c8d',
-        'Lilydale': 'white on #094c8d',
-        'Cranbourne': 'black on #16b4e8',
-        'Pakenham': 'black on #16b4e8',
-        'Hurstbridge': 'white on #b1211b',
-        'Mernda': 'white on #b1211b',
-        'Craigieburn': 'black on #ffb531',
-        'Sunbury': 'black on #ffb531',
-        'Upfield': 'black on #ffb531',
-        'Flemington Racecourse': 'white on #909295',
-        'Frankston': 'black on #159943',
-        'Stony Point': 'black on #159943',
-        'Werribee': 'black on #159943',
-        'Williamstown': 'black on #159943',
-        'Sandringham': 'black on #fc7fbb',
-    }
-
     while True:
         clear()
         # Pick a random station name from our list made above
@@ -147,17 +159,14 @@ def roll_station(data):
                 lines += ', '
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
+        console.print(f'- [bold]{station}[/bold] is served by the {lines} line/s.')
         console.print(
-            f'- [bold]{station}[/bold] is served by the {lines} line/s.'
+            f'- [bold]{station}[/bold] is {station_info["distance"]}km from the CBD.'
         )
         console.print(
-            f'- [bold]{station}[/bold] is {station_info['distance']}km from the CBD.'
+            f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info["time"]]} minutes on average.\n'
         )
-        console.print(
-            f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info['time']]} minutes on average.\n'
-        )
-        print('1) Reroll')
-        print('2) Accept\n')
+        print(print_menu(['Reroll', 'Accept']))
 
         while True:
             choice = input('> ')
@@ -184,8 +193,7 @@ def no_unvisited():
     print(
         "There aren't any more stations to visit - you've been to them all! Congratulations!\n"
     )
-    print('1) Main menu')
-    print('2) Exit\n')
+    print(print_menu(['Main menu', 'Exit']))
 
     while True:
         choice = input('> ')
@@ -199,12 +207,68 @@ def no_unvisited():
 def stats(data):
     clear()
 
+    visited = {}
+    unvisited = {}
+    for line in line_colours:
+        visited.update({line: []})
+        unvisited.update({line: []})
+
+    for v in data['visited']:
+        for line in data['visited'][v]['line']:
+            visited[line].append(v)
+
+    for unv in data['unvisited']:
+        for line in data['unvisited'][unv]['line']:
+            unvisited[line].append(unv)
+
+    burnley = {
+        'visited': len(visited["Alamein"]) + len(visited["Belgrave"]) + len(visited["Glen Waverley"]) + len(visited["Lilydale"]),
+        'total': (len(visited["Alamein"]) + len(visited["Belgrave"]) + len(visited["Glen Waverley"]) + len(visited["Lilydale"])) + (len(unvisited["Alamein"]) + len(unvisited["Belgrave"]) + len(unvisited["Glen Waverley"]) + len(unvisited["Lilydale"]))
+    }
+    caufield = {
+        'visited': len(visited["Cranbourne"]) + len(visited["Pakenham"]),
+        'total': len(visited["Cranbourne"]) + len(visited["Pakenham"]) + len(unvisited["Cranbourne"]) + len(unvisited["Pakenham"])
+    }
+    clifton = {
+        'visited': len(visited['Mernda']) + len(visited['Hurstbridge']),
+        'total': (len(visited['Mernda']) + len(visited['Hurstbridge'])) + (len(unvisited['Mernda']) + len(unvisited['Hurstbridge']))
+    }
+    northern = {
+        'visited': len(visited['Craigieburn']) + len(visited['Sunbury']) + len(visited['Upfield']),
+        'total': len(visited['Craigieburn']) + len(visited['Sunbury']) + len(visited['Upfield']) + len(unvisited['Craigieburn']) + len(unvisited['Sunbury']) + len(unvisited['Upfield'])
+    }
+    cross_city = {
+        'visited': len(visited['Frankston']) + len(visited['Werribee']) + len(visited['Williamstown']),
+        'total': len(visited['Frankston']) + len(visited['Werribee']) + len(visited['Williamstown']) + len(unvisited['Frankston']) + len(unvisited['Werribee']) + len(unvisited['Williamstown'])
+    }
+
     print('\n -+ Statistics +-\n')
     console.print(
-        f'- You have visited {len(data['visited'])} out of {len(data['visited']) + len(data['unvisited'])} stations.\n'
+        f'[bold]You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations. Breakdown:[/bold]\n\n'
+        f'- You\'ve visited {burnley["visited"]} out of {burnley["total"]} [{line_colours["Alamein"]}] Burnley [/{line_colours["Alamein"]}] group stations:\n'
+        f'  - {len(visited["Alamein"])} out of {len(visited["Alamein"]) + len(unvisited["Alamein"])} stations on the Alamein line.\n'
+        f'  - {len(visited["Belgrave"])} out of {len(visited["Belgrave"]) + len(unvisited["Belgrave"])} stations on the Belgrave line.\n'
+        f'  - {len(visited["Glen Waverley"])} out of {len(visited["Glen Waverley"]) + len(unvisited["Glen Waverley"])} stations on the Glen Waverley line.\n'
+        f'  - {len(visited["Lilydale"])} out of {len(visited["Lilydale"]) + len(unvisited["Lilydale"])} stations on the Lilydale line.\n\n'
+        f'- You\'ve visited {caufield["visited"]} out of {caufield["total"]} [{line_colours["Cranbourne"]}] Caufield [/{line_colours["Cranbourne"]}] group stations:\n'
+        f'  - {len(visited["Cranbourne"])} out of {len(visited["Cranbourne"]) + len(unvisited["Cranbourne"])} stations on the Cranbourne line.\n'
+        f'  - {len(visited["Pakenham"])} out of {len(visited["Pakenham"]) + len(unvisited["Pakenham"])} stations on the Pakenham line.\n\n'
+        f'- You\'ve visited {clifton["visited"]} out of {clifton["total"]} [{line_colours["Mernda"]}] Clifton Hill [/{line_colours["Mernda"]}] group stations.\n'
+        f'  - {len(visited["Hurstbridge"])} out of {len(visited["Hurstbridge"]) + len(unvisited["Hurstbridge"])} stations on the Hurstbridge line.\n'
+        f'  - {len(visited["Mernda"])} out of {len(visited["Mernda"]) + len(unvisited["Mernda"])} stations on the Mernda line.\n\n'
+        f'- You\'ve visited {northern["visited"]} out of {northern["total"]} [{line_colours["Sunbury"]}] Northern [/{line_colours["Sunbury"]}] group stations:\n'
+        f'  - {len(visited["Craigieburn"])} out of {len(visited["Craigieburn"]) + len(unvisited["Craigieburn"])} stations on the Craigieburn line.\n'
+        f'  - {len(visited["Sunbury"])} out of {len(visited["Sunbury"]) + len(unvisited["Sunbury"])} stations on the Sunbury line.\n',
+        f'  - {len(visited["Upfield"])} out of {len(visited["Upfield"]) + len(unvisited["Upfield"])} stations on the Upfield line.\n\n'
+        f'- You\'ve visited {cross_city["visited"]} out of {cross_city["total"]} [{line_colours["Frankston"]}] Cross-City [/{line_colours["Frankston"]}] group stations:\n'
+        f'  - {len(visited["Frankston"])} out of {len(visited["Frankston"]) + len(unvisited["Frankston"])} stations on the Frankston line.\n'
+        f'  - {len(visited["Werribee"])} out of {len(visited["Werribee"]) + len(unvisited["Werribee"])} stations on the Werribee line.\n'
+        f'  - {len(visited["Williamstown"])} out of {len(visited["Williamstown"]) + len(unvisited["Williamstown"])} stations on the Williamstown line.\n\n'
+        f'- You\'ve visited {len(visited["Flemington Racecourse"])} out of {len(visited["Flemington Racecourse"]) + len(unvisited["Flemington Racecourse"])} stations on the [{line_colours["Flemington Racecourse"]}] Flemington Racecourse [/{line_colours["Flemington Racecourse"]}] line.\n\n'
+        f'- You\'ve visited {len(visited["Stony Point"])} out of {len(visited["Stony Point"]) + len(unvisited["Stony Point"])} stations on the [{line_colours["Stony Point"]}] Stony Point [/{line_colours["Stony Point"]}] line.\n\n'
+        f'- You\'ve visited {len(visited["Sandringham"])} out of {len(visited["Sandringham"]) + len(unvisited["Sandringham"])} stations on the [{line_colours["Sandringham"]}] Sandringham [/{line_colours["Sandringham"]}] line.\n\n'
     )
-    print('1) Main menu')
-    print('2) Exit\n')
+    print(print_menu(['Main menu', 'Exit']))
 
     while True:
         choice = input('> ')
@@ -217,45 +281,50 @@ def stats(data):
 
 # Main program
 def main(data):
-    unmodified_title = ' | |E|v|e|r|y| |M|e|t|r|o| |S|t|a|t|i|o|n| |'
-    modified_title = (
-        '[bright_black] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[bright_black]\n'
-    )
-    for i in range(44):
-        if unmodified_title[i] == '|':
-            modified_title += '[bright_black]|[/bright_black]'
-        elif i > 14 and i < 25:
-            modified_title += '[dodger_blue1]' + unmodified_title[i] + '[/dodger_blue1]'
-        else:
-            modified_title += '[default]' + unmodified_title[i] + '[/default]'
-    modified_title += (
-        '\n[bright_black] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[/bright_black]'
-    )
-
-    clear()
-
-    console.print(modified_title)
-    console.print('\n1) Get next station')
-    console.print('2) Mark station as visited')
-    console.print('3) Statistics')
-    console.print('4) Exit\n')
-
-    choice = input('> ')
-
-    if choice == '1':
-        check_to_visit(data)
-    elif choice == '2':
-        pass
-    elif choice == '3':
-        stats(data)
-    elif choice == '4':
-        exit()
-    else:
-        print(
-            '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+    while True:
+        unmodified_title = ' | |E|v|e|r|y| |M|e|t|r|o| |S|t|a|t|i|o|n| |'
+        modified_title = (
+            '[grey69] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[grey69]\n'
         )
 
-    main(data)
+        for i in range(44):
+            if unmodified_title[i] == '|':
+                modified_title += '[grey69]|[/grey69]'
+            # Colour the word "Metro" in the blue they use in their branding
+            elif i > 14 and i < 25:
+                modified_title += '[#0073cf]' + unmodified_title[i] + '[/#0073cf]'
+            else:
+                modified_title += (
+                    '[light_sky_blue1]' + unmodified_title[i] + '[/light_sky_blue1]'
+                )
+
+        modified_title += (
+            '\n[grey69] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[/grey69]\n'
+        )
+
+        clear()
+
+        console.print(modified_title)
+        print(
+            print_menu(
+                ['Get next station', 'Mark station as visited', 'Statistics', 'Exit']
+            )
+        )
+
+        choice = input('> ')
+
+        if choice == '1':
+            check_to_visit(data)
+        elif choice == '2':
+            pass
+        elif choice == '3':
+            stats(data)
+        elif choice == '4':
+            exit()
+        else:
+            print(
+                '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+            )
 
 
 main(read())
