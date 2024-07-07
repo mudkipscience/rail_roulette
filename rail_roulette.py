@@ -67,7 +67,7 @@ def print_menu(ops):
     for entry in ops:
         menu += f'{index}) {entry}\n'
         index += 1
-    
+
     return menu
 
 
@@ -222,24 +222,56 @@ def stats(data):
             unvisited[line].append(unv)
 
     burnley = {
-        'visited': len(visited["Alamein"]) + len(visited["Belgrave"]) + len(visited["Glen Waverley"]) + len(visited["Lilydale"]),
-        'total': (len(visited["Alamein"]) + len(visited["Belgrave"]) + len(visited["Glen Waverley"]) + len(visited["Lilydale"])) + (len(unvisited["Alamein"]) + len(unvisited["Belgrave"]) + len(unvisited["Glen Waverley"]) + len(unvisited["Lilydale"]))
+        'visited': len(visited['Alamein'])
+        + len(visited['Belgrave'])
+        + len(visited['Glen Waverley'])
+        + len(visited['Lilydale']),
+        'total': (
+            len(visited['Alamein'])
+            + len(visited['Belgrave'])
+            + len(visited['Glen Waverley'])
+            + len(visited['Lilydale'])
+        )
+        + (
+            len(unvisited['Alamein'])
+            + len(unvisited['Belgrave'])
+            + len(unvisited['Glen Waverley'])
+            + len(unvisited['Lilydale'])
+        ),
     }
     caufield = {
-        'visited': len(visited["Cranbourne"]) + len(visited["Pakenham"]),
-        'total': len(visited["Cranbourne"]) + len(visited["Pakenham"]) + len(unvisited["Cranbourne"]) + len(unvisited["Pakenham"])
+        'visited': len(visited['Cranbourne']) + len(visited['Pakenham']),
+        'total': len(visited['Cranbourne'])
+        + len(visited['Pakenham'])
+        + len(unvisited['Cranbourne'])
+        + len(unvisited['Pakenham']),
     }
     clifton = {
         'visited': len(visited['Mernda']) + len(visited['Hurstbridge']),
-        'total': (len(visited['Mernda']) + len(visited['Hurstbridge'])) + (len(unvisited['Mernda']) + len(unvisited['Hurstbridge']))
+        'total': (len(visited['Mernda']) + len(visited['Hurstbridge']))
+        + (len(unvisited['Mernda']) + len(unvisited['Hurstbridge'])),
     }
     northern = {
-        'visited': len(visited['Craigieburn']) + len(visited['Sunbury']) + len(visited['Upfield']),
-        'total': len(visited['Craigieburn']) + len(visited['Sunbury']) + len(visited['Upfield']) + len(unvisited['Craigieburn']) + len(unvisited['Sunbury']) + len(unvisited['Upfield'])
+        'visited': len(visited['Craigieburn'])
+        + len(visited['Sunbury'])
+        + len(visited['Upfield']),
+        'total': len(visited['Craigieburn'])
+        + len(visited['Sunbury'])
+        + len(visited['Upfield'])
+        + len(unvisited['Craigieburn'])
+        + len(unvisited['Sunbury'])
+        + len(unvisited['Upfield']),
     }
     cross_city = {
-        'visited': len(visited['Frankston']) + len(visited['Werribee']) + len(visited['Williamstown']),
-        'total': len(visited['Frankston']) + len(visited['Werribee']) + len(visited['Williamstown']) + len(unvisited['Frankston']) + len(unvisited['Werribee']) + len(unvisited['Williamstown'])
+        'visited': len(visited['Frankston'])
+        + len(visited['Werribee'])
+        + len(visited['Williamstown']),
+        'total': len(visited['Frankston'])
+        + len(visited['Werribee'])
+        + len(visited['Williamstown'])
+        + len(unvisited['Frankston'])
+        + len(unvisited['Werribee'])
+        + len(unvisited['Williamstown']),
     }
 
     print('\n -+ Statistics +-\n')
@@ -266,7 +298,7 @@ def stats(data):
         f'  - {len(visited["Williamstown"])} out of {len(visited["Williamstown"]) + len(unvisited["Williamstown"])} stations on the Williamstown line.\n\n'
         f'- You\'ve visited {len(visited["Flemington Racecourse"])} out of {len(visited["Flemington Racecourse"]) + len(unvisited["Flemington Racecourse"])} stations on the [{line_colours["Flemington Racecourse"]}] Flemington Racecourse [/{line_colours["Flemington Racecourse"]}] line.\n\n'
         f'- You\'ve visited {len(visited["Stony Point"])} out of {len(visited["Stony Point"]) + len(unvisited["Stony Point"])} stations on the [{line_colours["Stony Point"]}] Stony Point [/{line_colours["Stony Point"]}] line.\n\n'
-        f'- You\'ve visited {len(visited["Sandringham"])} out of {len(visited["Sandringham"]) + len(unvisited["Sandringham"])} stations on the [{line_colours["Sandringham"]}] Sandringham [/{line_colours["Sandringham"]}] line.\n\n'
+        f'- You\'ve visited {len(visited["Sandringham"])} out of {len(visited["Sandringham"]) + len(unvisited["Sandringham"])} stations on the [{line_colours["Sandringham"]}] Sandringham [/{line_colours["Sandringham"]}] line.\n\n',
     )
     print(print_menu(['Main menu', 'Exit']))
 
