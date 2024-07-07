@@ -27,6 +27,8 @@ from rich.console import Console
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
+
+
 # Line colours. I use them in a couple places so just easier to have as a global variable.
 line_colours = {
     'Alamein': 'white on #094c8d',
@@ -40,7 +42,7 @@ line_colours = {
     'Craigieburn': 'black on #ffb531',
     'Sunbury': 'black on #ffb531',
     'Upfield': 'black on #ffb531',
-    'Flemington Racecourse': 'white on #909295',
+    'Flemington Racecourse': 'black on #909295',
     'Frankston': 'black on #159943',
     'Stony Point': 'black on #159943',
     'Werribee': 'black on #159943',
@@ -67,7 +69,6 @@ def print_menu(ops):
         index += 1
     
     return menu
-
 
 
 # Load saved, visited and unvisited stations from datastore.json, which should be in the same directory. Not bothering with error handling.
@@ -141,26 +142,6 @@ def roll_station(data):
         8: '81 to 90',
         9: '91 to 100',
         10: '101 to 110',
-    }
-
-    line_colours = {
-        'Alamein': 'white on #094c8d',
-        'Belgrave': 'white on #094c8d',
-        'Glen Waverley': 'white on #094c8d',
-        'Lilydale': 'white on #094c8d',
-        'Cranbourne': 'black on #16b4e8',
-        'Pakenham': 'black on #16b4e8',
-        'Hurstbridge': 'white on #b1211b',
-        'Mernda': 'white on #b1211b',
-        'Craigieburn': 'black on #ffb531',
-        'Sunbury': 'black on #ffb531',
-        'Upfield': 'black on #ffb531',
-        'Flemington Racecourse': 'white on #909295',
-        'Frankston': 'black on #159943',
-        'Stony Point': 'black on #159943',
-        'Werribee': 'black on #159943',
-        'Williamstown': 'black on #159943',
-        'Sandringham': 'black on #fc7fbb',
     }
 
     while True:
@@ -244,22 +225,48 @@ def stats(data):
         'visited': len(visited["Alamein"]) + len(visited["Belgrave"]) + len(visited["Glen Waverley"]) + len(visited["Lilydale"]),
         'total': (len(visited["Alamein"]) + len(visited["Belgrave"]) + len(visited["Glen Waverley"]) + len(visited["Lilydale"])) + (len(unvisited["Alamein"]) + len(unvisited["Belgrave"]) + len(unvisited["Glen Waverley"]) + len(unvisited["Lilydale"]))
     }
-    caufield = {}
+    caufield = {
+        'visited': len(visited["Cranbourne"]) + len(visited["Pakenham"]),
+        'total': len(visited["Cranbourne"]) + len(visited["Pakenham"]) + len(unvisited["Cranbourne"]) + len(unvisited["Pakenham"])
+    }
     clifton = {
         'visited': len(visited['Mernda']) + len(visited['Hurstbridge']),
         'total': (len(visited['Mernda']) + len(visited['Hurstbridge'])) + (len(unvisited['Mernda']) + len(unvisited['Hurstbridge']))
     }
-    northern = {}
-    cross_city = {}
-
-    console.print(visited, highlight=True)
+    northern = {
+        'visited': len(visited['Craigieburn']) + len(visited['Sunbury']) + len(visited['Upfield']),
+        'total': len(visited['Craigieburn']) + len(visited['Sunbury']) + len(visited['Upfield']) + len(unvisited['Craigieburn']) + len(unvisited['Sunbury']) + len(unvisited['Upfield'])
+    }
+    cross_city = {
+        'visited': len(visited['Frankston']) + len(visited['Werribee']) + len(visited['Williamstown']),
+        'total': len(visited['Frankston']) + len(visited['Werribee']) + len(visited['Williamstown']) + len(unvisited['Frankston']) + len(unvisited['Werribee']) + len(unvisited['Williamstown'])
+    }
 
     print('\n -+ Statistics +-\n')
     console.print(
         f'[bold]You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations. Breakdown:[/bold]\n\n'
         f'- You\'ve visited {burnley["visited"]} out of {burnley["total"]} [{line_colours["Alamein"]}] Burnley [/{line_colours["Alamein"]}] group stations:\n'
-        f'    - {len(visited["Alamein"])} out of {len(visited["Alamein"]) + len(unvisited["Alamein"])} stations on the Alamein line.\n\n'
-        f'- You\'ve visited {clifton["visited"]} out of {clifton["total"]} [{line_colours["Mernda"]}] Clifton Hill [/{line_colours["Mernda"]}] group stations.'
+        f'  - {len(visited["Alamein"])} out of {len(visited["Alamein"]) + len(unvisited["Alamein"])} stations on the Alamein line.\n'
+        f'  - {len(visited["Belgrave"])} out of {len(visited["Belgrave"]) + len(unvisited["Belgrave"])} stations on the Belgrave line.\n'
+        f'  - {len(visited["Glen Waverley"])} out of {len(visited["Glen Waverley"]) + len(unvisited["Glen Waverley"])} stations on the Glen Waverley line.\n'
+        f'  - {len(visited["Lilydale"])} out of {len(visited["Lilydale"]) + len(unvisited["Lilydale"])} stations on the Lilydale line.\n\n'
+        f'- You\'ve visited {caufield["visited"]} out of {caufield["total"]} [{line_colours["Cranbourne"]}] Caufield [/{line_colours["Cranbourne"]}] group stations:\n'
+        f'  - {len(visited["Cranbourne"])} out of {len(visited["Cranbourne"]) + len(unvisited["Cranbourne"])} stations on the Cranbourne line.\n'
+        f'  - {len(visited["Pakenham"])} out of {len(visited["Pakenham"]) + len(unvisited["Pakenham"])} stations on the Pakenham line.\n\n'
+        f'- You\'ve visited {clifton["visited"]} out of {clifton["total"]} [{line_colours["Mernda"]}] Clifton Hill [/{line_colours["Mernda"]}] group stations.\n'
+        f'  - {len(visited["Hurstbridge"])} out of {len(visited["Hurstbridge"]) + len(unvisited["Hurstbridge"])} stations on the Hurstbridge line.\n'
+        f'  - {len(visited["Mernda"])} out of {len(visited["Mernda"]) + len(unvisited["Mernda"])} stations on the Mernda line.\n\n'
+        f'- You\'ve visited {northern["visited"]} out of {northern["total"]} [{line_colours["Sunbury"]}] Northern [/{line_colours["Sunbury"]}] group stations:\n'
+        f'  - {len(visited["Craigieburn"])} out of {len(visited["Craigieburn"]) + len(unvisited["Craigieburn"])} stations on the Craigieburn line.\n'
+        f'  - {len(visited["Sunbury"])} out of {len(visited["Sunbury"]) + len(unvisited["Sunbury"])} stations on the Sunbury line.\n',
+        f'  - {len(visited["Upfield"])} out of {len(visited["Upfield"]) + len(unvisited["Upfield"])} stations on the Upfield line.\n\n'
+        f'- You\'ve visited {cross_city["visited"]} out of {cross_city["total"]} [{line_colours["Frankston"]}] Cross-City [/{line_colours["Frankston"]}] group stations:\n'
+        f'  - {len(visited["Frankston"])} out of {len(visited["Frankston"]) + len(unvisited["Frankston"])} stations on the Frankston line.\n'
+        f'  - {len(visited["Werribee"])} out of {len(visited["Werribee"]) + len(unvisited["Werribee"])} stations on the Werribee line.\n'
+        f'  - {len(visited["Williamstown"])} out of {len(visited["Williamstown"]) + len(unvisited["Williamstown"])} stations on the Williamstown line.\n\n'
+        f'- You\'ve visited {len(visited["Flemington Racecourse"])} out of {len(visited["Flemington Racecourse"]) + len(unvisited["Flemington Racecourse"])} stations on the [{line_colours["Flemington Racecourse"]}] Flemington Racecourse [/{line_colours["Flemington Racecourse"]}] line.\n\n'
+        f'- You\'ve visited {len(visited["Stony Point"])} out of {len(visited["Stony Point"]) + len(unvisited["Stony Point"])} stations on the [{line_colours["Stony Point"]}] Stony Point [/{line_colours["Stony Point"]}] line.\n\n'
+        f'- You\'ve visited {len(visited["Sandringham"])} out of {len(visited["Sandringham"]) + len(unvisited["Sandringham"])} stations on the [{line_colours["Sandringham"]}] Sandringham [/{line_colours["Sandringham"]}] line.\n\n'
     )
     print(print_menu(['Main menu', 'Exit']))
 
