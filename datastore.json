@@ -153,6 +153,621 @@
             "line": ["Alamein"],
             "distance": 14.17,
             "time": 2
+        },
+        "Camberwell": {
+            "line": ["Alamein", "Belgrave", "Lilydale"],
+            "distance": 10.21,
+            "time": 1
+        },
+        "Canterbury": {
+            "line": ["Belgrave", "Lilydale"],
+            "distance": 12.19,
+            "time": 1
+        },
+        "Cardinia Road": {
+            "line": ["Pakenham"],
+            "distance": 53.8,
+            "time": 7
+        },
+        "Carnegie": {
+            "line": ["Cranbourne", "Pakenham"],
+            "distance": 13.54,
+            "time": 2
+        },
+        "Carrum": {
+            "line": ["Frankston"],
+            "distance": 36.1,
+            "time": 5
+        },
+        "Caufield": {
+            "line": ["Cranbourne", "Frankston", "Pakenham"],
+            "distance": 11.79,
+            "time": 1
+        },
+        "Chatham": {
+            "line": ["Belgrave", "Lilydale"],
+            "distance": 12.95,
+            "time": 2
+        },
+        "Chelsea": {
+            "line": ["Frankston"],
+            "distance": 33.37,
+            "time": 4
+        },
+        "Cheltenham": {
+            "line": ["Cranbourne", "Pakenham"],
+            "distance": 20.51,
+            "time": 3
+        },
+        "Clifton Hill": {
+            "line": ["Hurstbridge", "Mernda"],
+            "distance": 6.6,
+            "time": 1
+        },
+        "Coburg": {
+            "line": ["Upfield"],
+            "distance": 10.12,
+            "time": 1
+        },
+        "Collingwood": {
+            "line": ["Hurstbridge", "Mernda"],
+            "distance": 4.83,
+            "time": 0
+        },
+        "Coolaroo": {
+            "line": ["Craigieburn"],
+            "distance": 19.31,
+            "time": 2
+        },
+        "Craigieburn": {
+            "line": ["Craigieburn"],
+            "distance": 26.1,
+            "time": 3
+        },
+        "Cranbourne": {
+            "line": ["Cranbourne"],
+            "distance": 45.12,
+            "time": 6
+        },
+        "Crib Point": {
+            "line": ["Stony Point"],
+            "distance": 72.83,
+            "time": 10
+        },
+        "Croxton": {
+            "line": ["Mernda"],
+            "distance": 9.61,
+            "time": 1
+        },
+        "Croydon": {
+            "line": ["Lilydale"],
+            "distance": 31.03,
+            "time": 4
+        },
+        "Dandenong": {
+            "line": ["Cranbourne", "Pakenham"],
+            "distance": 31.19,
+            "time": 5
+        },
+        "Darebin": {
+            "line": ["Hurstbridge"],
+            "distance": 11.22,
+            "time": 1
+        },
+        "Darling": {
+            "line": ["Glen Waverley"],
+            "distance": 12.68,
+            "time": 3
+        },
+        "Dennis": {
+            "line": ["Hurstbridge"],
+            "distance": 8.4,
+            "time": 1
+        },
+        "Diamond Creek": {
+            "line": ["Hurstbridge"],
+            "distance": 32.63,
+            "time": 5
+        },
+        "Diggers Rest": {
+            "line": ["Sunbury"],
+            "distance": 32.69,
+            "time": 3
+        },
+        "Eaglemont": {
+            "line": ["Hurstbridge"],
+            "distance": 13.09,
+            "time": 2
+        },
+        "East Camberwell": {
+            "line": ["Belgrave", "Lilydale"],
+            "distance": 11.08,
+            "time": 1
+        },
+        "East Malvern": {
+            "line": ["Glen Waverley"],
+            "distance": 13.75,
+            "time": 3
+        },
+        "East Richmond": {
+            "line": ["Alamein", "Belgrave", "Glen Waverley", "Lilydale"],
+            "distance": 4.37,
+            "time": 0
+        },
+        "East Pakenham": {
+            "line": ["Pakenham"],
+            "distance": 60.04,
+            "time": 8
+        },
+        "Edithvale": {
+            "line": ["Frankston"],
+            "distance": 31.67,
+            "time": 4
+        },
+        "Elsternwick": {
+            "line": ["Sandringham"],
+            "distance": 10.95,
+            "time": 1
+        },
+        "Eltham": {
+            "line": ["Hurstbridge"],
+            "distance": 27.39,
+            "time": 4
+        },
+        "Epping": {
+            "line": ["Mernda"],
+            "distance": 22.82,
+            "time": 3
+        },
+        "Essendon": {
+            "line": ["Craigieburn"],
+            "distance": 8.01,
+            "time": 1
+        },
+        "Fairfield": {
+            "line": ["Hurstbridge"],
+            "distance": 9.15,
+            "time": 1
+        },
+        "Fawkner": {
+            "line": ["Upfield"],
+            "distance": 13.23,
+            "time": 2
+        },
+        "Ferntree Gully": {
+            "line": ["Belgrave"],
+            "distance": 35.89,
+            "time": 5
+        },
+        "Flagstaff": {
+            "line": ["Alamein", "Belgrave", "Craigieburn", "Cranbourne", "Glen Waverley", "Hurstbridge", "Lilydale", "Mernda", "Pakenham", "Sunbury", "Upfield"],
+            "distance": 1.24,
+            "time": 0
+        },
+        "Flemington Bridge": {
+            "line": ["Upfield"],
+            "distance": 4.06,
+            "time": 0
+        },
+        "Flemington Racecourse": {
+            "line": ["Flemington Racecourse"],
+            "distance": 6.59,
+            "time": 1
+        },
+        "Flinders Street": {
+            "line": ["Alamein", "Belgrave", "Craigieburn", "Cranbourne", "Flemington Racecourse", "Frankston", "Glen Waverley", "Hurstbridge", "Lilydale", "Mernda", "Pakenham", "Sandringham", "Sunbury", "Upfield", "Werribee", "Williamstown"],
+            "distance": 1.23,
+            "time": 0
+        },
+        "Footscray": {
+            "line": ["Sunbury", "Werribee", "Williamstown"],
+            "distance": 5.62,
+            "time": 0
+        },
+        "Frankston": {
+            "line": ["Frankston", "Stony Point"],
+            "distance": 43.92,
+            "time": 6
+        },
+        "Gardenvale": {
+            "line": ["Sandringham"],
+            "distance": 12.35,
+            "time": 1
+        },
+        "Gardiner": {
+            "line": ["Glen Waverley"],
+            "distance": 10.61,
+            "time": 1
+        },
+        "Ginifer": {
+            "line": ["Sunbury"],
+            "distance": 15.97,
+            "time": 2
+        },
+        "Glen Huntly": {
+            "line": ["Frankston"],
+            "distance": 13.46,
+            "time": 2
+        },
+        "Glen Iris": {
+            "line": ["Glen Waverley"],
+            "distance": 11.52,
+            "time": 1
+        },
+        "Glen Waverley": {
+            "line": ["Glen Waverley"],
+            "distance": 22.23,
+            "time": 3
+        },
+        "Glenbervie": {
+            "line": ["Craigieburn"],
+            "distance": 9.13,
+            "time": 1
+        },
+        "Glenferrie": {
+            "line": ["Alamein", "Belgrave", "Lilydale"],
+            "distance": 8.12,
+            "time": 1
+        },
+        "Glenroy": {
+            "line": ["Craigieburn"],
+            "distance": 14.4,
+            "time": 2
+        },
+        "Gowrie": {
+            "line": ["Upfield"],
+            "distance": 14.73,
+            "time": 2
+        },
+        "Greensborough": {
+            "line": ["Hurstbridge"],
+            "distance": 23.07,
+            "time": 3
+        },
+        "Hallam": {
+            "line": ["Pakenham"],
+            "distance": 37.45,
+            "time": 5
+        },
+        "Hampton": {
+            "line": ["Sandringham"],
+            "distance": 17.7,
+            "time": 2
+        },
+        "Hartwell": {
+            "line": ["Alamein"],
+            "distance": 13.30,
+            "time": 2
+        },
+        "Hastings": {
+            "line": ["Stony Point"],
+            "distance": 64.99,
+            "time": 9
+        },
+        "Hawksburn": {
+            "line": ["Frankston"],
+            "distance": 6.63,
+            "time": 0
+        },
+        "Hawkstowe": {
+            "line": ["Mernda"],
+            "distance": 30.73,
+            "time": 4
+        },
+        "Hawthorn": {
+            "line": ["Alamein", "Belgrave", "Lilydale"],
+            "distance": 6.89,
+            "time": 0
+        },
+        "Heatherdale": {
+            "line": ["Belgrave", "Lilydale"],
+            "distance": 24.42,
+            "time": 3
+        },
+        "Heathmont": {
+            "line": ["Belgrave"],
+            "distance": 28.82,
+            "time": 4
+        },
+        "Heidelberg": {
+            "line": ["Hurstbridge"],
+            "distance": 14.04,
+            "time": 2
+        },
+        "Heyington": {
+            "line": ["Glen Waverley"],
+            "distance": 7.12,
+            "time": 0
+        },
+        "Highett": {
+            "line": ["Frankston"],
+            "distance": 20.06,
+            "time": 3
+        },
+        "Holmesglen": {
+            "line": ["Glen Waverley"],
+            "distance": 15.64,
+            "time": 2
+        },
+        "Hoppers Crossing": {
+            "line": ["Werribee"],
+            "distance": 27.67,
+            "time": 3
+        },
+        "Hughesdale": {
+            "line": ["Cranbourne", "Pakenham"],
+            "distance": 15.27,
+            "time": 3
+        },
+        "Huntingdale": {
+            "line": ["Cranbourne", "Pakenham"],
+            "distance": 18.26,
+            "time": 3
+        },
+        "Hurstbridge": {
+            "line": ["Hurstbridge"],
+            "distance": 38.02,
+            "time": 6
+        },
+        "Ivanhoe": {
+            "line": ["Hurstbridge"],
+            "distance": 12.14,
+            "time": 2
+        },
+        "Jacana": {
+            "line": ["Craigieburn"],
+            "distance": 15.43,
+            "time": 2
+        },
+        "Jewell": {
+            "line": ["Upfield"],
+            "distance": 6.5,
+            "time": 1
+        },
+        "Jolimont": {
+            "line": ["Hurstbridge", "Mernda"],
+            "distance": 2.91,
+            "time": 0
+        },
+        "Jordanville": {
+            "line": ["Glen Waverley"],
+            "distance": 17.64,
+            "time": 2
+        },
+        "Kananook": {
+            "line": ["Frankston"],
+            "distance": 41.44,
+            "time": 6
+        },
+        "Keilor Plains": {
+            "line": ["Sunbury"],
+            "distance": 19.62,
+            "time": 2
+        },
+        "Kensington": {
+            "line": ["Craigieburn"],
+            "distance": 3.58,
+            "time": 0
+        },
+        "Keon Park": {
+            "line": ["Mernda"],
+            "distance": 17.54,
+            "time": 2
+        },
+        "Kooyong": {
+            "line": ["Glen Waverley"],
+            "distance": 8.28,
+            "time": 1
+        },
+        "Laburnum": {
+            "line": ["Belgrave", "Lilydale"],
+            "distance": 17.82,
+            "time": 2
+        },
+        "Lalor": {
+            "line": ["Mernda"],
+            "distance": 20.81,
+            "time": 3
+        },
+        "Laverton": {
+            "line": ["Werribee"],
+            "distance": 21.01,
+            "time": 2
+        },
+        "Leawarra": {
+            "line": ["Stony Point"],
+            "distance": 45.77,
+            "time": 7
+        },
+        "Lilydale": {
+            "line": ["Lilydale"],
+            "distance": 38.86,
+            "time": 5
+        },
+        "Lynbrook": {
+            "line": ["Cranbourne"],
+            "distance": 39.59,
+            "time": 5
+        },
+        "Macaulay": {
+            "line": ["Upfield"],
+            "distance": 3.25,
+            "time": 0
+        },
+        "Macleod": {
+            "line": ["Hurstbridge"],
+            "distance": 17.71,
+            "time": 2
+        },
+        "Malvern": {
+            "line": ["Cranbourne", "Frankston", "Pakenham"],
+            "distance": 10.11,
+            "time": 1
+        },
+        "McKinnon": {
+            "line": ["Frankston"],
+            "distance": 15.84,
+            "time": 2
+        },
+        "Melbourne Central": {
+            "line": ["Alamein", "Belgrave", "Craigieburn", "Cranbourne", "Glen Waverley", "Hurstbridge", "Lilydale", "Mernda", "Pakenham","Sunbury", "Upfield"],
+            "distance": 1.85,
+            "time": 0
+        },
+        "Mentone": {
+            "line": ["Frankston"],
+            "distance": 24.48,
+            "time": 3
+        },
+        "Merinda Park": {
+            "line": ["Cranbourne"],
+            "distance": 42.35,
+            "time": 6
+        },
+        "Merlynston": {
+            "line": ["Upfield"],
+            "distance": 12.49,
+            "time": 1
+        },
+        "Mernda": {
+            "line": ["Mernda"],
+            "distance": 33.07,
+            "time": 5
+        },
+        "Merri": {
+            "line": ["Mernda"],
+            "distance": 8.04,
+            "time": 1
+        },
+        "Middle Brighton": {
+            "line": ["Sandringham"],
+            "distance": 14.52,
+            "time": 2
+        },
+        "Middle Footscray": {
+            "line": ["Sunbury"],
+            "distance": 6.61,
+            "time": 0
+        },
+        "Middle Gorge": {
+            "line": ["Mernda"],
+            "distance": 28.34,
+            "time": 4
+        },
+        "Mitcham": {
+            "line": ["Belgrave","Lilydale"],
+            "distance": 22.47,
+            "time": 3
+        },
+        "Montmorency": {
+            "line": ["Hurstbridge"],
+            "distance": 24.69,
+            "time": 3
+        },
+        "Moonee Ponds": {
+            "line": ["Craigieburn"],
+            "distance": 6.89,
+            "time": 1
+        },
+        "Moorabbin": {
+            "line": ["Frankston"],
+            "distance": 18.45,
+            "time": 2
+        },
+        "Mooroolbark": {
+            "line": ["Lilydale"],
+            "distance": 34.48,
+            "time": 5
+        },
+        "Mordialloc": {
+            "line": ["Frankston"],
+            "distance": 27.69,
+            "time": 4
+        },
+        "Moreland": {
+            "line": ["Upfield"],
+            "distance": 8.78,
+            "time": 1
+        },
+        "Morradoo": {
+            "line": ["Stony Point"],
+            "distance": 70.96,
+            "time": 9
+        },
+        "Mount Waverley": {
+            "line": ["Glen Waverley"],
+            "distance": 19,
+            "time": 2
+        },
+        "Murrambeena": {
+            "line": ["Cranbourne", "Pakenham"],
+            "distance": 14.43,
+            "time": 2
+        },
+        "Narre Warren": {
+            "line": ["Pakenham"],
+            "distance": 40.8,
+            "time": 5
+        },
+        "Newmarket": {
+            "line": ["Craigieburn"],
+            "distance": 4.3,
+            "time": 0
+        },
+        "Newport": {
+            "line": ["Werribee", "Williamstown"],
+            "distance": 10.56,
+            "time": 1
+        },
+        "Noble Park": {
+            "line": ["Cranbourne", "Pakenham"],
+            "distance": 27.23,
+            "time": 4
+        },
+        "North Brighton": {
+            "line": ["Sandringham"],
+            "distance": 13.24,
+            "time": 2
+        },
+        "North Melbourne": {
+            "line": ["Craigieburn", "Flemington Racecourse", "Sunbury", "Upfield", "Werribee", "Williamstown"],
+            "distance": 1.72,
+            "time": 0
+        },
+        "North Richmond": {
+            "line": ["Hurstbridge", "Mernda"],
+            "distance": 4.16,
+            "time": 0
+        },
+        "Northcote": {
+            "line": ["Mernda"],
+            "distance": 8.97,
+            "time": 1
+        },
+        "Nunawading": {
+            "line": ["Belgrave", "Lilydale"],
+            "distance": 20.77,
+            "time": 3
+        },
+        "Oak Park": {
+            "line": ["Craigieburn"],
+            "distance": 12.88,
+            "time": 2
+        },
+        "Oakleigh": {
+            "line": ["Cranbourne", "Pakenham"],
+            "distance": 16.59,
+            "time": 3
+        },
+        "Officer": {
+            "line": ["Pakenham"],
+            "distance": 51.45,
+            "time": 7
+        },
+        "Ormond": {
+            "line": ["Frankston"],
+            "distance": 15.02,
+            "time": 2
         }
     }
 }
