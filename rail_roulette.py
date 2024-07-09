@@ -1,6 +1,7 @@
 import json
 import os
 import random
+import copy
 
 # Library to do fancy text formatting and stuff, including colours. I could just implement colours with ASCII escape characters buuut this is better.
 from rich.console import Console
@@ -163,20 +164,115 @@ def roll_station(data):
         clear()
         # Pick a random station name from our list made above
         station = random.choice(stations)
-        # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time...
-        station_info = data['unvisited'][station]
-        lines = ''
+        # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time (and maybe more.)
+        # As we are going to be modifying this dict and because it contains nested lists, we use deepcopy() to make a copy of this info. deepcopy()
+        # creates unlinked variables for both top level and nested structures. copy() only copies the top level stuff, and nested items will still  be
+        # linked to the original variable, and we don't want temporary changes being written to disk.
+        station_info = copy.deepcopy(data)['unvisited'][station]
+        station_groups_list = []
+        station_lines = ''
+
+        # The 5 if statements below check if a station is served by every line in a group, and if so removes those lines from data['unvisited'][station]
+        # and instead adds the group name to station_groups_list. This reduces visual clutter for large stations like Flinders Street.
+        if (
+            'Alamein' in station_info['line']
+            and 'Belgrave' in station_info['line']
+            and 'Glen Waverley' in station_info['line']
+            and 'Lilydale' in station_info['line']
+        ):
+            for stn in ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale']:
+                station_info['line'].remove(stn)
+
+            station_groups_list.append(
+                f'[{line_colours["Alamein"]}] Burnley [/{line_colours["Alamein"]}]'
+            )
+
+        if 'Cranbourne' in station_info['line'] and 'Pakenham' in station_info['line']:
+            for stn in ['Cranbourne', 'Pakenham']:
+                station_info['line'].remove(stn)
+
+            station_groups_list.append(
+                f'[{line_colours["Cranbourne"]}] Caufield [/{line_colours["Cranbourne"]}]'
+            )
+
+        if 'Hurstbridge' in station_info['line'] and 'Mernda' in station_info['line']:
+            for stn in ['Hurstbridge', 'Mernda']:
+                station_info['line'].remove(stn)
+
+            station_groups_list.append(
+                f'[{line_colours["Hurstbridge"]}] Clifton Hill [/{line_colours["Hurstbridge"]}]'
+            )
+
+        if (
+            'Craigieburn' in station_info['line']
+            and 'Sunbury' in station_info['line']
+            and 'Upfield' in station_info['line']
+        ):
+            for stn in ['Craigieburn', 'Sunbury', 'Upfield']:
+                station_info['line'].remove(stn)
+
+            station_groups_list.append(
+                f'[{line_colours["Craigieburn"]}] Northern [/{line_colours["Craigieburn"]}]'
+            )
+
+        if (
+            'Frankston' in station_info['line']
+            and 'Werribee' in station_info['line']
+            and 'Williamstown' in station_info['line']
+        ):
+            for stn in ['Frankston', 'Werribee', 'Williamstown']:
+                station_info['line'].remove(stn)
+
+            station_groups_list.append(
+                f'[{line_colours["Frankston"]}] Cross City [/{line_colours["Frankston"]}]'
+            )
+
+        # Adds all the lines that were not removed above to station_lines to be displayed to the user
         for line in station_info['line']:
             colour = line_colours[line]
-            lines += f'[{colour}] {line} [/{colour}]'
+            station_lines += f'[{colour}] {line} [/{colour}]'
 
-            if line != station_info['line'][-1]:
-                lines += ', '
+            # Adds a ',' separator between lines, except for between the second last and last item, in which case 'and' will be added.
+            if len(station_info['line']) > 1 and line == station_info['line'][-2]:
+                station_lines += ' and '
+            elif line != station_info['line'][-1]:
+                station_lines += ', '
+
+        station_groups = ''
+        # Add each group to station_groups to be displayed to the user, adding ',' and 'and' when applicable to make it easy to read.
+        for grp in station_groups_list:
+            station_groups += grp
+            if len(station_groups_list) > 1 and grp == station_groups_list[-2]:
+                station_groups += ' and '
+            elif grp != station_groups_list[-1]:
+                station_groups += ', '
+
+        # Adds group/groups line/lines depending on whether we have singular groups/lines serving the station or multiple. If both a group
+        # and an individual line serves this station, adds ', and by the ' between the list of groups and lines.
+        if len(station_groups_list) > 0:
+            if len(station_groups_list) == 1:
+                station_groups += ' group'
+            else:
+                station_groups += ' groups'
+
+            if len(station_info['line']) > 0:
+                if len(station_info['line']) == 1:
+                    station_lines += ' line'
+                else:
+                    station_lines += ' lines'
+                station_groups += ', and by the '
+        elif len(station_info['line']) > 0:
+            if len(station_info['line']) == 1:
+                station_lines += ' line'
+            else:
+                station_lines += ' lines'
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
-        console.print(f'- [bold]{station}[/bold] is served by the {lines} line/s.')
         console.print(
-            f'- [bold]{station}[/bold] is {station_info["distance"]}km from the CBD.'
+            f'- [bold]{station}[/bold] is served by the {station_groups}{station_lines}.'
+        )
+        console.print(
+            f'- [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
         )
         console.print(
             f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info["time"]]} minutes on average.\n'
