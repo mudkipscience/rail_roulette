@@ -1,22 +1,3 @@
-"""
-Little program I've made to help me on my quest to visit every Metro station in Melbourne. This program will select a random station name from an imported .json file and
-give me the option to select it (which removes it from the selection next time) or roll for another one. I might add more features too, but I thought this would be a fun
-project now I've finished up with my tic tac toe program :3
-
-Plan:
-- Simple terminal interface (maybe using colours?)
-- Import and modify a .json file for data storage
-- Options to reroll if I don't like the choice
-- Show what line the station is on and it's distance from the CBD/Southern Cross
-- Counter for how many stations visited/how many remaining, in total and by line (maybe a small hooray msg if a line is completed)
-- Maybe a "queue" that doesn't clear a station until I confirm I visited it?
-- Maybe a GUI eventually!
-- Option to manually mark a station as visited
-- Log date a station was visited (can take user input for this)
-- Look up info on stations (PT connections, nearby stations + other stuff already included in datastore)
-- More?
-"""
-
 import json
 import os
 import random
@@ -59,6 +40,19 @@ def clear():
         os.system('clear')
 
 
+# Load saved, visited and unvisited stations from datastore.json, which should be in the same directory. Not bothering with error handling.
+def read():
+    # I kind of understand how this works? Basically with is shorthand for a try/except/finally statement and I think there are some benefits beyond that too? I dunno. Either way I'm opening a file!
+    with open('datastore.json', 'r') as file:
+        return json.load(file)
+
+
+# Write modified .json to datastore.json
+def write(data):
+    with open('datastore.json', 'w') as file:
+        json.dump(data, file, indent=4, sort_keys=True)
+
+
 # Generates a string of options the user can select from. ops is an array of names we want to give to each option.
 def print_menu(ops):
     index = 1
@@ -71,17 +65,38 @@ def print_menu(ops):
     return menu
 
 
-# Load saved, visited and unvisited stations from datastore.json, which should be in the same directory. Not bothering with error handling.
-def read():
-    # I kind of understand how this works? Basically with is shorthand for a try/except/finally statement and I think there are some benefits beyond that too? I dunno. Either way I'm opening a file!
-    with open('datastore.json', 'r') as file:
-        return json.load(file)
+# Prints a rail-styled title like seen in the main menu. args: txt (title text: str) txr_clr (colour to print txt as) rail_clr (colour to print the "rails" as)
+def print_title(txt, txt_clr='default', rail_clr='grey69'):
+    title_txt = list(txt)
+
+    for i in range(len(title_txt)):
+        if title_txt[i] != ' ':
+            title_txt[i] = f'[{txt_clr}]{title_txt[i]}[/{txt_clr}]'
+
+    title_rails = f'[{rail_clr}] {"+-" * (len(title_txt) + 2)}+'
+    title_txt = (
+        f'[{rail_clr}] | |{"[" + rail_clr + "]" + "|".join(title_txt)}[{rail_clr}]| |'
+    )
+
+    return f'{title_rails}\n{title_txt}\n{title_rails}\n'
 
 
-# Write modified .json to datastore.json
-def write(data):
-    with open('datastore.json', 'w') as file:
-        json.dump(data, file, indent=4, sort_keys=True)
+# We call this when data['unvisited'] has a length of 0 (meaning it contains nothing)
+def no_unvisited():
+    clear()
+
+    print(
+        "There aren't any more stations to visit - you've been to them all! Congratulations!\n"
+    )
+    print(print_menu(['Main menu', 'Exit']))
+
+    while True:
+        choice = input('> ')
+
+        if choice == '1':
+            break
+        elif choice == '2':
+            exit()
 
 
 # Check whether a station name has been written to to_visit dict. If yes, prompt the user whether they want to mark it as visited & continue or return/exit
@@ -186,24 +201,7 @@ def roll_station(data):
         break
 
 
-# We call this when data['unvisited'] has a length of 0 (meaning it contains nothing)
-def no_unvisited():
-    clear()
-
-    print(
-        "There aren't any more stations to visit - you've been to them all! Congratulations!\n"
-    )
-    print(print_menu(['Main menu', 'Exit']))
-
-    while True:
-        choice = input('> ')
-
-        if choice == '1':
-            break
-        elif choice == '2':
-            exit()
-
-
+# Statistics page. Currently contains info on how many stations have been visited in total and for each group/line.
 def stats(data):
     clear()
 
@@ -314,29 +312,10 @@ def stats(data):
 # Main program
 def main(data):
     while True:
-        unmodified_title = ' | |E|v|e|r|y| |M|e|t|r|o| |S|t|a|t|i|o|n| |'
-        modified_title = (
-            '[grey69] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[grey69]\n'
-        )
-
-        for i in range(44):
-            if unmodified_title[i] == '|':
-                modified_title += '[grey69]|[/grey69]'
-            # Colour the word "Metro" in the blue they use in their branding
-            elif i > 14 and i < 25:
-                modified_title += '[#0073cf]' + unmodified_title[i] + '[/#0073cf]'
-            else:
-                modified_title += (
-                    '[light_sky_blue1]' + unmodified_title[i] + '[/light_sky_blue1]'
-                )
-
-        modified_title += (
-            '\n[grey69] +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+[/grey69]\n'
-        )
-
         clear()
 
-        console.print(modified_title)
+        console.print(print_title('Railway Roulette', 'blue'))
+
         print(
             print_menu(
                 ['Get next station', 'Mark station as visited', 'Statistics', 'Exit']
