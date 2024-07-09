@@ -8,12 +8,13 @@ I have tasked myself with visiting every Melbourne train station served by Metro
 - ~~Import and modify a .json file for data storage~~ - **done!**
 - ~~Options to reroll if I don't like the choice~~ - **done!**
 - ~~Show what line the station is on and it's distance from the CBD/Southern Cross~~ - **done!**
-- Counter for how many stations visited/how many remaining, in total and by line (maybe a small hooray msg if a line is completed)
+- ~~Counter for how many stations visited/how many remaining, in total and by line (maybe a small hooray msg if a line is completed)~~ **done!**
 - ~~Maybe a "queue" that doesn't clear a station until I confirm I visited it?~~ - **done!**
 - Maybe a GUI eventually!
 - Option to manually mark a station as visited
 - Log date a station was visited (can take user input for this)
 - Look up info on stations (PT connections, nearby stations + other stuff already included in datastore)
+- If a station is served by all lines in a group, display the group name rather than the line names individually to avoid clutter
 - More?
 
 Please keep in the mind I will most likely forget to keep the above up-to-date. Check the code yourself if it's been a few commits since I messed with this README. If anyone except me is even reading this. I wanna be thrown into a wall by chimera Falin ouuuhghbbghghhh
