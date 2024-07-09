@@ -299,8 +299,10 @@ def roll_station(data):
 
 def mark_visited(data):
     clear()
-    
-    print('To mark a station as visited, type in it\'s full name below. Type nothing to return to the main menu.\n')
+
+    print(
+        "To mark a station as visited, type in it's full name below. Type nothing to return to the main menu.\n"
+    )
 
     station = None
     visited = False
@@ -320,45 +322,48 @@ def mark_visited(data):
                     visited = True
                 else:
                     print('\nStation not found, recheck spelling.\n')
-        
+
         if station:
             if visited is True:
-                print('\nThis station is already marked as visited. Do you wish to set it back to being unvisited? (y/n)\n')
+                print(
+                    '\nThis station is already marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
+                )
                 while True:
                     user_input = input('> ')
                     user_input = user_input.lower()
 
                     if user_input == 'n':
-                        print('\nOperation aborted. Press enter to return to the main menu.')
+                        print(
+                            '\nOperation aborted. Press enter to return to the main menu.'
+                        )
                         input()
                         return
                     if user_input == 'y':
                         break
-            
+
             if visited is False:
                 # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
-                data['visited'].update(
-                    {stn_name: station}
-                )
+                data['visited'].update({stn_name: station})
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
                 data['unvisited'].pop(stn_name)
             else:
-                data['unvisited'].update(
-                    {stn_name: station}
-                )
+                data['unvisited'].update({stn_name: station})
                 data['visited'].pop(stn_name)
 
             # If the station provided by the user was queued in to_visit, clear to_visit
             if data['to_visit'] == stn_name:
                 data['to_visit'] = ''
-            
+
             # Write changes to datastore.json so the program remembers them when reopened
             write(data)
 
-            print('\nOperation completed successfully. Press enter to return to the main menu.')
+            print(
+                '\nOperation completed successfully. Press enter to return to the main menu.'
+            )
             input()
-            
+
             break
+
 
 # Statistics page. Currently contains info on how many stations have been visited in total and for each group/line.
 def stats(data):
@@ -431,32 +436,39 @@ def stats(data):
         + len(unvisited['Williamstown']),
     }
 
-    print('\n -+ Statistics +-\n')
-    console.print(
-        f'[bold]You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations. Breakdown:[/bold]\n\n'
-        f'- You\'ve visited {burnley["visited"]} out of {burnley["total"]} [{line_colours["Alamein"]}] Burnley [/{line_colours["Alamein"]}] group stations:\n'
-        f'  - {len(visited["Alamein"])} out of {len(visited["Alamein"]) + len(unvisited["Alamein"])} stations on the Alamein line.\n'
-        f'  - {len(visited["Belgrave"])} out of {len(visited["Belgrave"]) + len(unvisited["Belgrave"])} stations on the Belgrave line.\n'
-        f'  - {len(visited["Glen Waverley"])} out of {len(visited["Glen Waverley"]) + len(unvisited["Glen Waverley"])} stations on the Glen Waverley line.\n'
-        f'  - {len(visited["Lilydale"])} out of {len(visited["Lilydale"]) + len(unvisited["Lilydale"])} stations on the Lilydale line.\n\n'
-        f'- You\'ve visited {caufield["visited"]} out of {caufield["total"]} [{line_colours["Cranbourne"]}] Caufield [/{line_colours["Cranbourne"]}] group stations:\n'
-        f'  - {len(visited["Cranbourne"])} out of {len(visited["Cranbourne"]) + len(unvisited["Cranbourne"])} stations on the Cranbourne line.\n'
-        f'  - {len(visited["Pakenham"])} out of {len(visited["Pakenham"]) + len(unvisited["Pakenham"])} stations on the Pakenham line.\n\n'
-        f'- You\'ve visited {clifton["visited"]} out of {clifton["total"]} [{line_colours["Mernda"]}] Clifton Hill [/{line_colours["Mernda"]}] group stations.\n'
-        f'  - {len(visited["Hurstbridge"])} out of {len(visited["Hurstbridge"]) + len(unvisited["Hurstbridge"])} stations on the Hurstbridge line.\n'
-        f'  - {len(visited["Mernda"])} out of {len(visited["Mernda"]) + len(unvisited["Mernda"])} stations on the Mernda line.\n\n'
-        f'- You\'ve visited {northern["visited"]} out of {northern["total"]} [{line_colours["Sunbury"]}] Northern [/{line_colours["Sunbury"]}] group stations:\n'
-        f'  - {len(visited["Craigieburn"])} out of {len(visited["Craigieburn"]) + len(unvisited["Craigieburn"])} stations on the Craigieburn line.\n'
-        f'  - {len(visited["Sunbury"])} out of {len(visited["Sunbury"]) + len(unvisited["Sunbury"])} stations on the Sunbury line.\n',
-        f'  - {len(visited["Upfield"])} out of {len(visited["Upfield"]) + len(unvisited["Upfield"])} stations on the Upfield line.\n\n'
-        f'- You\'ve visited {cross_city["visited"]} out of {cross_city["total"]} [{line_colours["Frankston"]}] Cross-City [/{line_colours["Frankston"]}] group stations:\n'
-        f'  - {len(visited["Frankston"])} out of {len(visited["Frankston"]) + len(unvisited["Frankston"])} stations on the Frankston line.\n'
-        f'  - {len(visited["Werribee"])} out of {len(visited["Werribee"]) + len(unvisited["Werribee"])} stations on the Werribee line.\n'
-        f'  - {len(visited["Williamstown"])} out of {len(visited["Williamstown"]) + len(unvisited["Williamstown"])} stations on the Williamstown line.\n\n'
-        f'- You\'ve visited {len(visited["Flemington Racecourse"])} out of {len(visited["Flemington Racecourse"]) + len(unvisited["Flemington Racecourse"])} stations on the [{line_colours["Flemington Racecourse"]}] Flemington Racecourse [/{line_colours["Flemington Racecourse"]}] line.\n\n'
-        f'- You\'ve visited {len(visited["Stony Point"])} out of {len(visited["Stony Point"]) + len(unvisited["Stony Point"])} stations on the [{line_colours["Stony Point"]}] Stony Point [/{line_colours["Stony Point"]}] line.\n\n'
-        f'- You\'ve visited {len(visited["Sandringham"])} out of {len(visited["Sandringham"]) + len(unvisited["Sandringham"])} stations on the [{line_colours["Sandringham"]}] Sandringham [/{line_colours["Sandringham"]}] line.\n\n',
-    )
+    console.print(f"""
+    -+ Statistics +-
+
+    [bold]You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations. Breakdown:[/bold]
+
+    - You\'ve visited {burnley["visited"]} out of {burnley["total"]} [{line_colours["Alamein"]}] Burnley [/{line_colours["Alamein"]}] group stations:
+      - {len(visited["Alamein"])} out of {len(visited["Alamein"]) + len(unvisited["Alamein"])} stations on the Alamein line.
+      - {len(visited["Belgrave"])} out of {len(visited["Belgrave"]) + len(unvisited["Belgrave"])} stations on the Belgrave line.
+      - {len(visited["Glen Waverley"])} out of {len(visited["Glen Waverley"]) + len(unvisited["Glen Waverley"])} stations on the Glen Waverley line.
+      - {len(visited["Lilydale"])} out of {len(visited["Lilydale"]) + len(unvisited["Lilydale"])} stations on the Lilydale line.
+
+    - You\'ve visited {caufield["visited"]} out of {caufield["total"]} [{line_colours["Cranbourne"]}] Caufield [/{line_colours["Cranbourne"]}] group stations:
+      - {len(visited["Cranbourne"])} out of {len(visited["Cranbourne"]) + len(unvisited["Cranbourne"])} stations on the Cranbourne line.
+      - {len(visited["Pakenham"])} out of {len(visited["Pakenham"]) + len(unvisited["Pakenham"])} stations on the Pakenham line.
+
+    - You\'ve visited {clifton["visited"]} out of {clifton["total"]} [{line_colours["Mernda"]}] Clifton Hill [/{line_colours["Mernda"]}] group stations.
+      - {len(visited["Hurstbridge"])} out of {len(visited["Hurstbridge"]) + len(unvisited["Hurstbridge"])} stations on the Hurstbridge line.
+      - {len(visited["Mernda"])} out of {len(visited["Mernda"]) + len(unvisited["Mernda"])} stations on the Mernda line.
+
+    - You\'ve visited {northern["visited"]} out of {northern["total"]} [{line_colours["Sunbury"]}] Northern [/{line_colours["Sunbury"]}] group stations:
+      - {len(visited["Craigieburn"])} out of {len(visited["Craigieburn"]) + len(unvisited["Craigieburn"])} stations on the Craigieburn line.
+      - {len(visited["Sunbury"])} out of {len(visited["Sunbury"]) + len(unvisited["Sunbury"])} stations on the Sunbury line.
+      - {len(visited["Upfield"])} out of {len(visited["Upfield"]) + len(unvisited["Upfield"])} stations on the Upfield line.
+
+    - You\'ve visited {cross_city["visited"]} out of {cross_city["total"]} [{line_colours["Frankston"]}] Cross-City [/{line_colours["Frankston"]}] group stations:
+      - {len(visited["Frankston"])} out of {len(visited["Frankston"]) + len(unvisited["Frankston"])} stations on the Frankston line.
+      - {len(visited["Werribee"])} out of {len(visited["Werribee"]) + len(unvisited["Werribee"])} stations on the Werribee line.
+      - {len(visited["Williamstown"])} out of {len(visited["Williamstown"]) + len(unvisited["Williamstown"])} stations on the Williamstown line.
+
+    - You\'ve visited {len(visited["Flemington Racecourse"])} out of {len(visited["Flemington Racecourse"]) + len(unvisited["Flemington Racecourse"])} stations on the [{line_colours["Flemington Racecourse"]}] Flemington Racecourse [/{line_colours["Flemington Racecourse"]}] line.
+    - You\'ve visited {len(visited["Stony Point"])} out of {len(visited["Stony Point"]) + len(unvisited["Stony Point"])} stations on the [{line_colours["Stony Point"]}] Stony Point [/{line_colours["Stony Point"]}] line.
+    - You\'ve visited {len(visited["Sandringham"])} out of {len(visited["Sandringham"]) + len(unvisited["Sandringham"])} stations on the [{line_colours["Sandringham"]}] Sandringham [/{line_colours["Sandringham"]}] line.
+    """)
     print(print_menu(['Main menu', 'Exit']))
 
     while True:
@@ -475,11 +487,7 @@ def main(data):
 
         console.print(print_title('Rail Roulette', 'blue'))
 
-        print(
-            print_menu(
-                ['Get next station', 'Statistics', 'Manual edit', 'Exit']
-            )
-        )
+        print(print_menu(['Get next station', 'Statistics', 'Manual edit', 'Exit']))
 
         choice = input('> ')
 
