@@ -297,6 +297,69 @@ def roll_station(data):
         break
 
 
+def mark_visited(data):
+    clear()
+    
+    print('To mark a station as visited, type in it\'s full name below. Type nothing to return to the main menu.\n')
+
+    station = None
+    visited = False
+
+    while True:
+        user_input = input('> ')
+        stn_name = user_input.title()
+        if len(user_input) == 0:
+            break
+        else:
+            station = data['unvisited'].get(stn_name)
+
+            if not station:
+                station = data['visited'].get(stn_name)
+
+                if station:
+                    visited = True
+                else:
+                    print('\nStation not found, recheck spelling.\n')
+        
+        if station:
+            if visited is True:
+                print('\nThis station is already marked as visited. Do you wish to set it back to being unvisited? (y/n)\n')
+                while True:
+                    user_input = input('> ')
+                    user_input = user_input.lower()
+
+                    if user_input == 'n':
+                        print('\nOperation aborted. Press enter to return to the main menu.')
+                        input()
+                        return
+                    if user_input == 'y':
+                        break
+            
+            if visited is False:
+                # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
+                data['visited'].update(
+                    {stn_name: station}
+                )
+                # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
+                data['unvisited'].pop(stn_name)
+            else:
+                data['unvisited'].update(
+                    {stn_name: station}
+                )
+                data['visited'].pop(stn_name)
+
+            # If the station provided by the user was queued in to_visit, clear to_visit
+            if data['to_visit'] == stn_name:
+                data['to_visit'] = ''
+            
+            # Write changes to datastore.json so the program remembers them when reopened
+            write(data)
+
+            print('\nOperation completed successfully. Press enter to return to the main menu.')
+            input()
+            
+            break
+
 # Statistics page. Currently contains info on how many stations have been visited in total and for each group/line.
 def stats(data):
     clear()
@@ -410,11 +473,11 @@ def main(data):
     while True:
         clear()
 
-        console.print(print_title('Railway Roulette', 'blue'))
+        console.print(print_title('Rail Roulette', 'blue'))
 
         print(
             print_menu(
-                ['Get next station', 'Mark station as visited', 'Statistics', 'Exit']
+                ['Get next station', 'Statistics', 'Manual edit', 'Exit']
             )
         )
 
@@ -423,9 +486,9 @@ def main(data):
         if choice == '1':
             check_to_visit(data)
         elif choice == '2':
-            pass
-        elif choice == '3':
             stats(data)
+        elif choice == '3':
+            mark_visited(data)
         elif choice == '4':
             exit()
         else:
