@@ -2,6 +2,7 @@ import json
 import os
 import random
 import copy
+import re
 
 # Library to do fancy text formatting and stuff, including colours. I could just implement colours with ASCII escape characters buuut this is better.
 from rich.console import Console
@@ -66,7 +67,8 @@ def clear():
 
 # Load saved, visited and unvisited stations from datastore.json, which should be in the same directory. Not bothering with error handling.
 def read():
-    # I kind of understand how this works? Basically with is shorthand for a try/except/finally statement and I think there are some benefits beyond that too? I dunno. Either way I'm opening a file!
+    # I kind of understand how this works? Basically with is shorthand for a try/except/finally statement and I think there are some benefits beyond that too? I dunno.
+    #  Either way I'm opening a file! - Update 10/07/2024: Apparently what I said is NOT how it works. Guess I'll have to look into it further...
     with open('datastore.json', 'r') as file:
         return json.load(file)
 
@@ -142,6 +144,8 @@ def check_to_visit(data):
                 data['visited'].update(
                     {data['to_visit']: data['unvisited'].get(data['to_visit'])}
                 )
+                # Add on the date the station was visited to the station dict
+                data['visited'][data['to_visit']].update({'date_visited': assign_date(data, data['to_visit'])})
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop()
                 data['unvisited'].pop(data['to_visit'])
                 # Reset to_visit to be an empty string again
@@ -161,6 +165,33 @@ def check_to_visit(data):
                 )
     else:
         roll_station(data)
+
+
+# Asks for a date from the user, checks to make sure it is valid and formatted as DD/MM/YYYY then returns it
+def assign_date(data, stn_name) -> str:
+    # Regular expression that checks for a valid DD/MM/YYYY format (I don't think I need to worry about MM/DD/YYYY freaks given this is a Melbourne-specific program)
+    regex = '(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0,1,2])\\/(20)\\d{2}'
+
+    print('\nType in the date you visited this station in the format of DD/MM/YYYY below.\n')
+
+    while True:
+        raw_date = input('> ')
+
+        # Check to make sure the length is valid before running regex checks
+        if len(raw_date) != 10:
+            print(
+                '\nInvalid date. Please enter a date in the format of DD/MM/YYYY.\n'
+            )
+        else:
+            # Use regex to validate the user input
+            date = re.search(regex, raw_date)
+
+            if date:
+                return raw_date
+            else:
+                print(
+                    '\nInvalid date. Please enter a date in the format of DD/MM/YYYY. Year must be between 2000 and 2099.\n'
+                )
 
 
 # Selects a random station from the data['unvisited'] dictionary/object by doing (sparkles) magic (sparkles)
@@ -519,10 +550,14 @@ def mark_visited(data):
             if visited is False:
                 # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
                 data['visited'].update({stn_name: station})
+                # Add on the date the station was visited to the station dict
+                data['visited'][stn_name].update({'date_visited': assign_date(data, stn_name)})
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
                 data['unvisited'].pop(stn_name)
             else:
                 data['unvisited'].update({stn_name: station})
+                # Remove the date_visited key from the station dict
+                data['unvisited'][stn_name].pop('date_visited')
                 data['visited'].pop(stn_name)
 
             # If the station provided by the user was queued in to_visit, clear to_visit
