@@ -9,28 +9,51 @@ from rich.console import Console
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
-
-
-# Line colours. I use them in a couple places so just easier to have as a global variable.
-line_colours = {
-    'Alamein': 'white on #094c8d',
-    'Belgrave': 'white on #094c8d',
-    'Glen Waverley': 'white on #094c8d',
-    'Lilydale': 'white on #094c8d',
-    'Cranbourne': 'black on #16b4e8',
-    'Pakenham': 'black on #16b4e8',
-    'Hurstbridge': 'white on #b1211b',
-    'Mernda': 'white on #b1211b',
-    'Craigieburn': 'black on #ffb531',
-    'Sunbury': 'black on #ffb531',
-    'Upfield': 'black on #ffb531',
-    'Flemington Racecourse': 'black on #909295',
-    'Frankston': 'black on #159943',
-    'Stony Point': 'black on #159943',
-    'Werribee': 'black on #159943',
-    'Williamstown': 'black on #159943',
-    'Sandringham': 'black on #fc7fbb',
+# Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
+colour_store = {
+    'enhanced': {
+        # Line colours
+        'Alamein': 'white on #094c8d',
+        'Belgrave': 'white on #094c8d',
+        'Glen Waverley': 'white on #094c8d',
+        'Lilydale': 'white on #094c8d',
+        'Cranbourne': 'black on #16b4e8',
+        'Pakenham': 'black on #16b4e8',
+        'Hurstbridge': 'white on #b1211b',
+        'Mernda': 'white on #b1211b',
+        'Craigieburn': 'black on #ffb531',
+        'Sunbury': 'black on #ffb531',
+        'Upfield': 'black on #ffb531',
+        'Flemington Racecourse': 'black on #909295',
+        'Frankston': 'black on #159943',
+        'Stony Point': 'black on #159943',
+        'Werribee': 'black on #159943',
+        'Williamstown': 'black on #159943',
+        'Sandringham': 'black on #fc7fbb',
+    },
+    'native': {
+        # Line colours
+        'Alamein': 'white on bright_blue',
+        'Belgrave': 'white on bright_blue',
+        'Glen Waverley': 'white on bright_blue',
+        'Lilydale': 'white on bright_blue',
+        'Cranbourne': 'black on bright_cyan',
+        'Pakenham': 'black on bright_cyan',
+        'Hurstbridge': 'white on bright_red',
+        'Mernda': 'white on bright_red',
+        'Craigieburn': 'black on bright_yellow',
+        'Sunbury': 'black on bright_yellow',
+        'Upfield': 'black on bright_yellow',
+        'Flemington Racecourse': 'black on bright_black',
+        'Frankston': 'black on green',
+        'Stony Point': 'black on green',
+        'Werribee': 'black on green',
+        'Williamstown': 'black on green',
+        'Sandringham': 'black on bright_magenta',
+    },
 }
+# What the program actually reads. Just an un-nested version of whatever is set in datastore.json config
+colours = colour_store['enhanced']
 
 
 # Runs OS-specific shell command to clear console
@@ -67,7 +90,7 @@ def print_menu(ops):
 
 
 # Prints a rail-styled title like seen in the main menu. args: txt (title text: str) txr_clr (colour to print txt as) rail_clr (colour to print the "rails" as)
-def print_title(txt, txt_clr='default', rail_clr='grey69'):
+def print_title(txt, txt_clr='default', rail_clr='bright_black'):
     title_txt = list(txt)
 
     for i in range(len(title_txt)):
@@ -98,6 +121,10 @@ def no_unvisited():
             break
         elif choice == '2':
             exit()
+        else:
+            print(
+                '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+            )
 
 
 # Check whether a station name has been written to to_visit dict. If yes, prompt the user whether they want to mark it as visited & continue or return/exit
@@ -184,7 +211,7 @@ def roll_station(data):
                 station_info['line'].remove(stn)
 
             station_groups_list.append(
-                f'[{line_colours["Alamein"]}] Burnley [/{line_colours["Alamein"]}]'
+                f'[{colours["Alamein"]}] Burnley [/{colours["Alamein"]}]'
             )
 
         if 'Cranbourne' in station_info['line'] and 'Pakenham' in station_info['line']:
@@ -192,7 +219,7 @@ def roll_station(data):
                 station_info['line'].remove(stn)
 
             station_groups_list.append(
-                f'[{line_colours["Cranbourne"]}] Caufield [/{line_colours["Cranbourne"]}]'
+                f'[{colours["Cranbourne"]}] Caufield [/{colours["Cranbourne"]}]'
             )
 
         if 'Hurstbridge' in station_info['line'] and 'Mernda' in station_info['line']:
@@ -200,7 +227,7 @@ def roll_station(data):
                 station_info['line'].remove(stn)
 
             station_groups_list.append(
-                f'[{line_colours["Hurstbridge"]}] Clifton Hill [/{line_colours["Hurstbridge"]}]'
+                f'[{colours["Hurstbridge"]}] Clifton Hill [/{colours["Hurstbridge"]}]'
             )
 
         if (
@@ -212,7 +239,7 @@ def roll_station(data):
                 station_info['line'].remove(stn)
 
             station_groups_list.append(
-                f'[{line_colours["Craigieburn"]}] Northern [/{line_colours["Craigieburn"]}]'
+                f'[{colours["Craigieburn"]}] Northern [/{colours["Craigieburn"]}]'
             )
 
         if (
@@ -224,12 +251,12 @@ def roll_station(data):
                 station_info['line'].remove(stn)
 
             station_groups_list.append(
-                f'[{line_colours["Frankston"]}] Cross City [/{line_colours["Frankston"]}]'
+                f'[{colours["Frankston"]}] Cross City [/{colours["Frankston"]}]'
             )
 
         # Adds all the lines that were not removed above to station_lines to be displayed to the user
         for line in station_info['line']:
-            colour = line_colours[line]
+            colour = colours[line]
             station_lines += f'[{colour}] {line} [/{colour}]'
 
             # Adds a ',' separator between lines, except for between the second last and last item, in which case 'and' will be added.
@@ -297,81 +324,13 @@ def roll_station(data):
         break
 
 
-def mark_visited(data):
-    clear()
-
-    print(
-        "To mark a station as visited, type in it's full name below. Type nothing to return to the main menu.\n"
-    )
-
-    station = None
-    visited = False
-
-    while True:
-        user_input = input('> ')
-        stn_name = user_input.title()
-        if len(user_input) == 0:
-            break
-        else:
-            station = data['unvisited'].get(stn_name)
-
-            if not station:
-                station = data['visited'].get(stn_name)
-
-                if station:
-                    visited = True
-                else:
-                    print('\nStation not found, recheck spelling.\n')
-
-        if station:
-            if visited is True:
-                print(
-                    '\nThis station is already marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
-                )
-                while True:
-                    user_input = input('> ')
-                    user_input = user_input.lower()
-
-                    if user_input == 'n':
-                        print(
-                            '\nOperation aborted. Press enter to return to the main menu.'
-                        )
-                        input()
-                        return
-                    if user_input == 'y':
-                        break
-
-            if visited is False:
-                # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
-                data['visited'].update({stn_name: station})
-                # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
-                data['unvisited'].pop(stn_name)
-            else:
-                data['unvisited'].update({stn_name: station})
-                data['visited'].pop(stn_name)
-
-            # If the station provided by the user was queued in to_visit, clear to_visit
-            if data['to_visit'] == stn_name:
-                data['to_visit'] = ''
-
-            # Write changes to datastore.json so the program remembers them when reopened
-            write(data)
-
-            print(
-                '\nOperation completed successfully. Press enter to return to the main menu.'
-            )
-            input()
-
-            break
-
-
 # Statistics page. Currently contains info on how many stations have been visited in total and for each group/line.
 def stats(data):
     clear()
 
     visited = {}
     unvisited = {}
-    for line in line_colours:
+    for line in colours:
         visited.update({line: []})
         unvisited.update({line: []})
 
@@ -441,33 +400,33 @@ def stats(data):
 
     [bold]You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations. Breakdown:[/bold]
 
-    - You\'ve visited {burnley["visited"]} out of {burnley["total"]} [{line_colours["Alamein"]}] Burnley [/{line_colours["Alamein"]}] group stations:
+    - You\'ve visited {burnley["visited"]} out of {burnley["total"]} [{colours["Alamein"]}] Burnley [/{colours["Alamein"]}] group stations:
       - {len(visited["Alamein"])} out of {len(visited["Alamein"]) + len(unvisited["Alamein"])} stations on the Alamein line.
       - {len(visited["Belgrave"])} out of {len(visited["Belgrave"]) + len(unvisited["Belgrave"])} stations on the Belgrave line.
       - {len(visited["Glen Waverley"])} out of {len(visited["Glen Waverley"]) + len(unvisited["Glen Waverley"])} stations on the Glen Waverley line.
       - {len(visited["Lilydale"])} out of {len(visited["Lilydale"]) + len(unvisited["Lilydale"])} stations on the Lilydale line.
 
-    - You\'ve visited {caufield["visited"]} out of {caufield["total"]} [{line_colours["Cranbourne"]}] Caufield [/{line_colours["Cranbourne"]}] group stations:
+    - You\'ve visited {caufield["visited"]} out of {caufield["total"]} [{colours["Cranbourne"]}] Caufield [/{colours["Cranbourne"]}] group stations:
       - {len(visited["Cranbourne"])} out of {len(visited["Cranbourne"]) + len(unvisited["Cranbourne"])} stations on the Cranbourne line.
       - {len(visited["Pakenham"])} out of {len(visited["Pakenham"]) + len(unvisited["Pakenham"])} stations on the Pakenham line.
 
-    - You\'ve visited {clifton["visited"]} out of {clifton["total"]} [{line_colours["Mernda"]}] Clifton Hill [/{line_colours["Mernda"]}] group stations.
+    - You\'ve visited {clifton["visited"]} out of {clifton["total"]} [{colours["Mernda"]}] Clifton Hill [/{colours["Mernda"]}] group stations.
       - {len(visited["Hurstbridge"])} out of {len(visited["Hurstbridge"]) + len(unvisited["Hurstbridge"])} stations on the Hurstbridge line.
       - {len(visited["Mernda"])} out of {len(visited["Mernda"]) + len(unvisited["Mernda"])} stations on the Mernda line.
 
-    - You\'ve visited {northern["visited"]} out of {northern["total"]} [{line_colours["Sunbury"]}] Northern [/{line_colours["Sunbury"]}] group stations:
+    - You\'ve visited {northern["visited"]} out of {northern["total"]} [{colours["Sunbury"]}] Northern [/{colours["Sunbury"]}] group stations:
       - {len(visited["Craigieburn"])} out of {len(visited["Craigieburn"]) + len(unvisited["Craigieburn"])} stations on the Craigieburn line.
       - {len(visited["Sunbury"])} out of {len(visited["Sunbury"]) + len(unvisited["Sunbury"])} stations on the Sunbury line.
       - {len(visited["Upfield"])} out of {len(visited["Upfield"]) + len(unvisited["Upfield"])} stations on the Upfield line.
 
-    - You\'ve visited {cross_city["visited"]} out of {cross_city["total"]} [{line_colours["Frankston"]}] Cross-City [/{line_colours["Frankston"]}] group stations:
+    - You\'ve visited {cross_city["visited"]} out of {cross_city["total"]} [{colours["Frankston"]}] Cross-City [/{colours["Frankston"]}] group stations:
       - {len(visited["Frankston"])} out of {len(visited["Frankston"]) + len(unvisited["Frankston"])} stations on the Frankston line.
       - {len(visited["Werribee"])} out of {len(visited["Werribee"]) + len(unvisited["Werribee"])} stations on the Werribee line.
       - {len(visited["Williamstown"])} out of {len(visited["Williamstown"]) + len(unvisited["Williamstown"])} stations on the Williamstown line.
 
-    - You\'ve visited {len(visited["Flemington Racecourse"])} out of {len(visited["Flemington Racecourse"]) + len(unvisited["Flemington Racecourse"])} stations on the [{line_colours["Flemington Racecourse"]}] Flemington Racecourse [/{line_colours["Flemington Racecourse"]}] line.
-    - You\'ve visited {len(visited["Stony Point"])} out of {len(visited["Stony Point"]) + len(unvisited["Stony Point"])} stations on the [{line_colours["Stony Point"]}] Stony Point [/{line_colours["Stony Point"]}] line.
-    - You\'ve visited {len(visited["Sandringham"])} out of {len(visited["Sandringham"]) + len(unvisited["Sandringham"])} stations on the [{line_colours["Sandringham"]}] Sandringham [/{line_colours["Sandringham"]}] line.
+    - You\'ve visited {len(visited["Flemington Racecourse"])} out of {len(visited["Flemington Racecourse"]) + len(unvisited["Flemington Racecourse"])} stations on the [{colours["Flemington Racecourse"]}] Flemington Racecourse [/{colours["Flemington Racecourse"]}] line.
+    - You\'ve visited {len(visited["Stony Point"])} out of {len(visited["Stony Point"]) + len(unvisited["Stony Point"])} stations on the [{colours["Stony Point"]}] Stony Point [/{colours["Stony Point"]}] line.
+    - You\'ve visited {len(visited["Sandringham"])} out of {len(visited["Sandringham"]) + len(unvisited["Sandringham"])} stations on the [{colours["Sandringham"]}] Sandringham [/{colours["Sandringham"]}] line.
     """)
     print(print_menu(['Main menu', 'Exit']))
 
@@ -478,16 +437,165 @@ def stats(data):
             break
         elif choice == '2':
             exit()
+        else:
+            print(
+                '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+            )
+
+
+def ops_menu(data):
+    clear()
+
+    print('\n -+ Options +-\n')
+    print(print_menu(['Station status edit', 'Colour mode', 'Main menu']))
+
+    while True:
+        choice = input('> ')
+
+        if choice == '1':
+            mark_visited(data)
+            break
+        elif choice == '2':
+            colour_mode(data)
+            break
+        elif choice == '3':
+            break
+        else:
+            print(
+                '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+            )
+
+
+def mark_visited(data):
+    clear()
+
+    print(
+        "To mark a station as visited, type in it's full name below. Type nothing to return to the main menu.\n"
+    )
+
+    station = None
+    visited = False
+
+    while True:
+        user_input = input('> ')
+        stn_name = user_input.title()
+        if len(user_input) == 0:
+            break
+        else:
+            station = data['unvisited'].get(stn_name)
+
+            if not station:
+                station = data['visited'].get(stn_name)
+
+                if station:
+                    visited = True
+                else:
+                    print('\nStation not found, recheck spelling.\n')
+
+        if station:
+            if visited is True:
+                print(
+                    '\nThis station is already marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
+                )
+                while True:
+                    user_input = input('> ')
+                    user_input = user_input.lower()
+
+                    if user_input == 'n':
+                        print(
+                            '\nOperation aborted. Press enter to return to the main menu.'
+                        )
+                        input()
+                        return
+
+                    elif user_input == 'y':
+                        break
+
+                    else:
+                        print(
+                            '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+                        )
+
+            if visited is False:
+                # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
+                data['visited'].update({stn_name: station})
+                # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
+                data['unvisited'].pop(stn_name)
+            else:
+                data['unvisited'].update({stn_name: station})
+                data['visited'].pop(stn_name)
+
+            # If the station provided by the user was queued in to_visit, clear to_visit
+            if data['to_visit'] == stn_name:
+                data['to_visit'] = ''
+
+            # Write changes to datastore.json so the program remembers them when reopened
+            write(data)
+
+            print(
+                '\nOperation completed successfully. Press enter to return to the main menu.'
+            )
+            input()
+
+            break
+
+
+def colour_mode(data):
+    global colours
+    current_mode = 'Enhanced'
+
+    if data['config']['use_enhanced_colours'] is False:
+        current_mode = 'Native'
+
+    clear()
+
+    print(
+        'Configure how line colours are displayed by selecting one of the two modes. Accurate will use colours similar to the actual line colours; Native will use the colours defined by your terminal emulator.\n'
+    )
+
+    print(f'Current mode: {current_mode}\n')
+
+    print(print_menu(['Use accurate colours', 'Use native colours', 'Main menu']))
+
+    while True:
+        choice = input('> ')
+        if choice == '1':
+            colours = colour_store['enhanced']
+
+            data['config']['use_enhanced_colours'] = True
+            write(data)
+
+            break
+        elif choice == '2':
+            colours = colour_store['native']
+
+            data['config']['use_enhanced_colours'] = False
+            write(data)
+
+            break
+        elif choice == '3':
+            break
+        else:
+            print(
+                '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+            )
 
 
 # Main program
-def main(data):
+def main():
+    data = read()
+    use_enhanced_colours = data['config']['use_enhanced_colours']
+
+    if use_enhanced_colours is False:
+        global colours
+        colours = colour_store['native']
+
     while True:
         clear()
 
-        console.print(print_title('Rail Roulette', 'blue'))
+        console.print(print_title('Rail Roulette', 'bright_blue'))
 
-        print(print_menu(['Get next station', 'Statistics', 'Manual edit', 'Exit']))
+        print(print_menu(['Get next station', 'Statistics', 'Options', 'Exit']))
 
         choice = input('> ')
 
@@ -496,7 +604,7 @@ def main(data):
         elif choice == '2':
             stats(data)
         elif choice == '3':
-            mark_visited(data)
+            ops_menu(data)
         elif choice == '4':
             exit()
         else:
@@ -505,4 +613,4 @@ def main(data):
             )
 
 
-main(read())
+main()
