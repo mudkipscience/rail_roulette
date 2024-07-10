@@ -26,5 +26,6 @@ This program is now functional, but I plan on sprucing it up a lot and there may
 Please keep in the mind I will most likely forget to keep the above up-to-date. Check the code yourself if it's been a few commits since I messed with this README. If anyone except me is even reading this. I wanna be thrown into a wall by chimera Falin ouuuhghbbghghhh
 
 ### Screenshots:
-![demo](https://github.com/mudkipscience/snek/assets/37792540/b792ca3b-2f0d-4eef-b23f-4188416d3c05)
-![demo-1](https://github.com/mudkipscience/snek/assets/37792540/e33927d2-c251-42bc-b3dc-26e4efef8642)
+![Screenshot 2024-07-10 231922](https://github.com/mudkipscience/rail_roulette/assets/37792540/c0c40bf5-82f0-4137-8cc8-a5a8bd59072e)
+![Screenshot 2024-07-10 233152](https://github.com/mudkipscience/rail_roulette/assets/37792540/e66cde8e-f9c4-43da-bf62-10a956ee0d6f)
+![Screenshot 2024-07-10 233359](https://github.com/mudkipscience/rail_roulette/assets/37792540/19030bc9-dd1c-4a3c-b9b9-56865bbb5bcb)
