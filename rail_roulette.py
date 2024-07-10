@@ -14,38 +14,38 @@ console = Console(highlight=False)
 colour_store = {
     'enhanced': {
         # Line colours
-        'Alamein': 'white on #094c8d',
-        'Belgrave': 'white on #094c8d',
-        'Glen Waverley': 'white on #094c8d',
-        'Lilydale': 'white on #094c8d',
-        'Cranbourne': 'black on #16b4e8',
-        'Pakenham': 'black on #16b4e8',
-        'Hurstbridge': 'white on #b1211b',
-        'Mernda': 'white on #b1211b',
+        'Alamein': '#F2F2F2 on #094c8d',
+        'Belgrave': '#F2F2F2 on #094c8d',
+        'Glen Waverley': '#F2F2F2 on #094c8d',
+        'Lilydale': '#F2F2F2 on #094c8d',
+        'Cranbourne': '#0C0C0C on #16b4e8',
+        'Pakenham': '#0C0C0C on #16b4e8',
+        'Hurstbridge': '#F2F2F2 on #b1211b',
+        'Mernda': '#F2F2F2 on #b1211b',
         'Craigieburn': 'black on #ffb531',
-        'Sunbury': 'black on #ffb531',
-        'Upfield': 'black on #ffb531',
-        'Flemington Racecourse': 'black on #909295',
-        'Frankston': 'black on #159943',
-        'Stony Point': 'black on #159943',
-        'Werribee': 'black on #159943',
-        'Williamstown': 'black on #159943',
-        'Sandringham': 'black on #fc7fbb',
+        'Sunbury': '#0C0C0C on #ffb531',
+        'Upfield': '#0C0C0C on #ffb531',
+        'Flemington Racecourse': '#0C0C0C on #909295',
+        'Frankston': '#F2F2F2 on #159943',
+        'Stony Point': '#F2F2F2 on #159943',
+        'Werribee': '#F2F2F2 on #159943',
+        'Williamstown': '#F2F2F2 on #159943',
+        'Sandringham': '#0C0C0C on #fc7fbb',
     },
     'native': {
         # Line colours
-        'Alamein': 'white on bright_blue',
-        'Belgrave': 'white on bright_blue',
-        'Glen Waverley': 'white on bright_blue',
-        'Lilydale': 'white on bright_blue',
+        'Alamein': 'black on bright_blue',
+        'Belgrave': 'black on bright_blue',
+        'Glen Waverley': 'black on bright_blue',
+        'Lilydale': 'black on bright_blue',
         'Cranbourne': 'black on bright_cyan',
         'Pakenham': 'black on bright_cyan',
-        'Hurstbridge': 'white on bright_red',
-        'Mernda': 'white on bright_red',
+        'Hurstbridge': 'black on bright_red',
+        'Mernda': 'black on bright_red',
         'Craigieburn': 'black on bright_yellow',
         'Sunbury': 'black on bright_yellow',
         'Upfield': 'black on bright_yellow',
-        'Flemington Racecourse': 'black on bright_black',
+        'Flemington Racecourse': 'black on white',
         'Frankston': 'black on green',
         'Stony Point': 'black on green',
         'Werribee': 'black on green',
@@ -145,7 +145,9 @@ def check_to_visit(data):
                     {data['to_visit']: data['unvisited'].get(data['to_visit'])}
                 )
                 # Add on the date the station was visited to the station dict
-                data['visited'][data['to_visit']].update({'date_visited': assign_date(data, data['to_visit'])})
+                data['visited'][data['to_visit']].update(
+                    {'date_visited': assign_date(data, data['to_visit'])}
+                )
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop()
                 data['unvisited'].pop(data['to_visit'])
                 # Reset to_visit to be an empty string again
@@ -172,16 +174,16 @@ def assign_date(data, stn_name) -> str:
     # Regular expression that checks for a valid DD/MM/YYYY format (I don't think I need to worry about MM/DD/YYYY freaks given this is a Melbourne-specific program)
     regex = '(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0,1,2])\\/(20)\\d{2}'
 
-    print('\nType in the date you visited this station in the format of DD/MM/YYYY below.\n')
+    print(
+        '\nType in the date you visited this station in the format of DD/MM/YYYY below.\n'
+    )
 
     while True:
         raw_date = input('> ')
 
         # Check to make sure the length is valid before running regex checks
         if len(raw_date) != 10:
-            print(
-                '\nInvalid date. Please enter a date in the format of DD/MM/YYYY.\n'
-            )
+            print('\nInvalid date. Please enter a date in the format of DD/MM/YYYY.\n')
         else:
             # Use regex to validate the user input
             date = re.search(regex, raw_date)
@@ -450,7 +452,7 @@ def stats(data):
       - {len(visited["Sunbury"])} out of {len(visited["Sunbury"]) + len(unvisited["Sunbury"])} stations on the Sunbury line.
       - {len(visited["Upfield"])} out of {len(visited["Upfield"]) + len(unvisited["Upfield"])} stations on the Upfield line.
 
-    - You\'ve visited {cross_city["visited"]} out of {cross_city["total"]} [{colours["Frankston"]}] Cross-City [/{colours["Frankston"]}] group stations:
+    - You\'ve visited {cross_city["visited"]} out of {cross_city["total"]} [{colours["Frankston"]}] Cross City [/{colours["Frankston"]}] group stations:
       - {len(visited["Frankston"])} out of {len(visited["Frankston"]) + len(unvisited["Frankston"])} stations on the Frankston line.
       - {len(visited["Werribee"])} out of {len(visited["Werribee"]) + len(unvisited["Werribee"])} stations on the Werribee line.
       - {len(visited["Williamstown"])} out of {len(visited["Williamstown"]) + len(unvisited["Williamstown"])} stations on the Williamstown line.
@@ -551,7 +553,9 @@ def mark_visited(data):
                 # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
                 data['visited'].update({stn_name: station})
                 # Add on the date the station was visited to the station dict
-                data['visited'][stn_name].update({'date_visited': assign_date(data, stn_name)})
+                data['visited'][stn_name].update(
+                    {'date_visited': assign_date(data, stn_name)}
+                )
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
                 data['unvisited'].pop(stn_name)
             else:

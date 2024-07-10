@@ -15,11 +15,12 @@ This program is now functional, but I plan on sprucing it up a lot and there may
 - ~~Option to manually mark a station as visited~~ **done!**
 - ~~If a station is served by all lines in a group, display the group name rather than the line names individually to avoid clutter~~ **done!**
 - ~~Option to change between accurate and default terminal colours~~ **done!**
-- Log date a station was visited (can take user input for this)
+- ~~Log date a station was visited (can take user input for this)~~ **done!**
 - Add more info to stations (PT connections, nearby stations, whether station is connected to loop and what direction travel is in, average peak/off-peak frequency, opening date, misc info and other fun facts, whether its a junction, etc.)
 - Look up info on stations
 - Option to reset all data to stock settings
-- Maybe a GUI eventually!
+- fancy TUI using Rich
+- Maybe a GUI eventually?
 - More?
 
 Please keep in the mind I will most likely forget to keep the above up-to-date. Check the code yourself if it's been a few commits since I messed with this README. If anyone except me is even reading this. I wanna be thrown into a wall by chimera Falin ouuuhghbbghghhh
