@@ -10,6 +10,14 @@ from rich.console import Console
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
+# dictionary of arrays that lists what group a line is apart of
+line_groups = {
+    'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
+    'Caufield': ['Cranbourne', 'Pakenham'],
+    'Clifton Hill': ['Hurstbridge', 'Mernda'],
+    'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
+    'Cross City': ['Frankston', 'Werribee', 'Williamstown']
+}
 # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
 # check out roll_station() in rail_roulette.py to see this in action.
 int_to_timerange = {
@@ -241,6 +249,14 @@ def roll_station(data):
         station_info = copy.deepcopy(data)['unvisited'][station]
         station_groups_list = []
         station_lines = ''
+
+        """
+        TODO:
+        - take station_info['line'] and modify it to include only stations in a certain group
+        - check if this new list matches a list of all stations on a group
+        - if so, replace the individual line names with the group name
+        - have this be cleaner than the 5 yandere-dev ass if statmements below. using all() and list comprehensions?
+        """
 
         # The 5 if statements below check if a station is served by every line in a group, and if so removes those lines from data['unvisited'][station]
         # and instead adds the group name to station_groups_list. This reduces visual clutter for large stations like Flinders Street.
