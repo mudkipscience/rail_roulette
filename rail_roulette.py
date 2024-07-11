@@ -149,8 +149,11 @@ def check_to_visit(data):
     clear()
 
     if len(data['to_visit']) > 0:
-        print("Warning! There's a station queued up for you to visit already!\n")
-        print(print_menu(['Mark as visited & continue', 'Main menu', 'Exit']))
+        to_visit = data['to_visit']
+        print(
+            f'Attention! {to_visit} Station has already been chosen as your next station to visit. What would you like to do?\n'
+        )
+        print(print_menu(['Mark as visited', 'Get a new station', 'Main menu']))
 
         while True:
             choice = input('> ')
@@ -161,21 +164,27 @@ def check_to_visit(data):
                 )
                 # Add on the date the station was visited to the station dict
                 data['visited'][data['to_visit']].update(
-                    {'date_visited': assign_date(data, data['to_visit'])}
+                    {'date_visited': assign_date(data['to_visit'])}
                 )
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop()
                 data['unvisited'].pop(data['to_visit'])
-                # Reset to_visit to be an empty string again
+                # Reset to_visit to be an empty string again. We do this for option 2 below as well.
                 data['to_visit'] = ''
                 # Write changes to datastore.json so the program remembers them when reopened
                 write(data)
 
                 roll_station(data)
+
                 break
             elif choice == '2':
+                data['to_visit'] = ''
+                write(data)
+
+                roll_station(data)
+
                 break
             elif choice == '3':
-                exit()
+                break
             else:
                 print(
                     '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
@@ -185,12 +194,12 @@ def check_to_visit(data):
 
 
 # Asks for a date from the user, checks to make sure it is valid and formatted as DD/MM/YYYY then returns it
-def assign_date(data, stn_name) -> str:
+def assign_date(stn_name) -> str:
     # Regular expression that checks for a valid DD/MM/YYYY format (I don't think I need to worry about MM/DD/YYYY freaks given this is a Melbourne-specific program)
     regex = '(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0,1,2])\\/(20)\\d{2}'
 
     print(
-        '\nType in the date you visited this station in the format of DD/MM/YYYY below.\n'
+        f'\nType in the date you visited {stn_name} Station in the format of DD/MM/YYYY below.\n'
     )
 
     while True:
@@ -567,7 +576,7 @@ def mark_visited(data):
                 data['visited'].update({stn_name: station})
                 # Add on the date the station was visited to the station dict
                 data['visited'][stn_name].update(
-                    {'date_visited': assign_date(data, stn_name)}
+                    {'date_visited': assign_date(stn_name)}
                 )
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
                 data['unvisited'].pop(stn_name)
@@ -661,7 +670,7 @@ def reset_stations(data):
             data['unvisited'].update({name: visited[name]})
             data['visited'].pop(name)
 
-            write(data)
+        write(data)
 
         input(
             '\nOperation succeeded - all visited stations have been reset. Press enter to return to the main menu.'
