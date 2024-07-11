@@ -10,6 +10,29 @@ from rich.console import Console
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
+# dictionary of arrays that lists what group a line is apart of
+line_groups = {
+    'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
+    'Caufield': ['Cranbourne', 'Pakenham'],
+    'Clifton Hill': ['Hurstbridge', 'Mernda'],
+    'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
+    'Cross City': ['Frankston', 'Werribee', 'Williamstown']
+}
+# Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
+# check out roll_station() in rail_roulette.py to see this in action.
+int_to_timerange = {
+    0: 'under 10',
+    1: '11 to 20',
+    2: '21 to 30',
+    3: '31 to 40',
+    4: '41 to 50',
+    5: '51 to 60',
+    6: '61 to 70',
+    7: '71 to 80',
+    8: '81 to 90',
+    9: '91 to 100',
+    10: '101 to 110',
+}
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
 colour_store = {
     'enhanced': {
@@ -134,8 +157,11 @@ def check_to_visit(data):
     clear()
 
     if len(data['to_visit']) > 0:
-        print("Warning! There's a station queued up for you to visit already!\n")
-        print(print_menu(['Mark as visited & continue', 'Main menu', 'Exit']))
+        to_visit = data['to_visit']
+        print(
+            f'Attention! {to_visit} Station has already been chosen as your next station to visit. What would you like to do?\n'
+        )
+        print(print_menu(['Mark as visited', 'Get a new station', 'Main menu']))
 
         while True:
             choice = input('> ')
@@ -146,21 +172,27 @@ def check_to_visit(data):
                 )
                 # Add on the date the station was visited to the station dict
                 data['visited'][data['to_visit']].update(
-                    {'date_visited': assign_date(data, data['to_visit'])}
+                    {'date_visited': assign_date(data['to_visit'])}
                 )
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop()
                 data['unvisited'].pop(data['to_visit'])
-                # Reset to_visit to be an empty string again
+                # Reset to_visit to be an empty string again. We do this for option 2 below as well.
                 data['to_visit'] = ''
                 # Write changes to datastore.json so the program remembers them when reopened
                 write(data)
 
                 roll_station(data)
+
                 break
             elif choice == '2':
+                data['to_visit'] = ''
+                write(data)
+
+                roll_station(data)
+
                 break
             elif choice == '3':
-                exit()
+                break
             else:
                 print(
                     '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
@@ -170,12 +202,12 @@ def check_to_visit(data):
 
 
 # Asks for a date from the user, checks to make sure it is valid and formatted as DD/MM/YYYY then returns it
-def assign_date(data, stn_name) -> str:
+def assign_date(stn_name) -> str:
     # Regular expression that checks for a valid DD/MM/YYYY format (I don't think I need to worry about MM/DD/YYYY freaks given this is a Melbourne-specific program)
     regex = '(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0,1,2])\\/(20)\\d{2}'
 
     print(
-        '\nType in the date you visited this station in the format of DD/MM/YYYY below.\n'
+        f'\nType in the date you visited {stn_name} Station in the format of DD/MM/YYYY below.\n'
     )
 
     while True:
@@ -205,20 +237,6 @@ def roll_station(data):
 
     # Get the name's of all stations by converting the dictionary keys (the names) into a list
     stations = list(data['unvisited'].keys())
-    # I stored times as an int like this in datastore.json to save myself retyping stuff. This dict just contains what each number correlates to.
-    time_conversion = {
-        0: 'under 10',
-        1: '11 to 20',
-        2: '21 to 30',
-        3: '31 to 40',
-        4: '41 to 50',
-        5: '51 to 60',
-        6: '61 to 70',
-        7: '71 to 80',
-        8: '81 to 90',
-        9: '91 to 100',
-        10: '101 to 110',
-    }
 
     while True:
         clear()
@@ -231,6 +249,14 @@ def roll_station(data):
         station_info = copy.deepcopy(data)['unvisited'][station]
         station_groups_list = []
         station_lines = ''
+
+        """
+        TODO:
+        - take station_info['line'] and modify it to include only stations in a certain group
+        - check if this new list matches a list of all stations on a group
+        - if so, replace the individual line names with the group name
+        - have this be cleaner than the 5 yandere-dev ass if statmements below. using all() and list comprehensions?
+        """
 
         # The 5 if statements below check if a station is served by every line in a group, and if so removes those lines from data['unvisited'][station]
         # and instead adds the group name to station_groups_list. This reduces visual clutter for large stations like Flinders Street.
@@ -335,7 +361,7 @@ def roll_station(data):
             f'- [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
         )
         console.print(
-            f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info["time"]]} minutes on average.\n'
+            f'- Journeys to [bold]{station}[/bold] take {int_to_timerange[station_info["time"]]} minutes on average.\n'
         )
         print(print_menu(['Reroll', 'Accept']))
 
@@ -480,18 +506,30 @@ def ops_menu(data):
     clear()
 
     print('\n -+ Options +-\n')
-    print(print_menu(['Station status edit', 'Colour mode', 'Main menu']))
+    print(
+        print_menu(
+            [
+                'Colour mode',
+                'Mark station as visited',
+                'Reset visited stations',
+                'Main menu',
+            ]
+        )
+    )
 
     while True:
         choice = input('> ')
 
         if choice == '1':
-            mark_visited(data)
-            break
-        elif choice == '2':
             colour_mode(data)
             break
+        elif choice == '2':
+            mark_visited(data)
+            break
         elif choice == '3':
+            reset_stations(data)
+            break
+        elif choice == '4':
             break
         else:
             print(
@@ -554,7 +592,7 @@ def mark_visited(data):
                 data['visited'].update({stn_name: station})
                 # Add on the date the station was visited to the station dict
                 data['visited'][stn_name].update(
-                    {'date_visited': assign_date(data, stn_name)}
+                    {'date_visited': assign_date(stn_name)}
                 )
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
                 data['unvisited'].pop(stn_name)
@@ -618,6 +656,43 @@ def colour_mode(data):
             print(
                 '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
             )
+
+
+def reset_stations(data):
+    clear()
+
+    console.print(
+        'Warning! you are about to reset [bold underline]ALL VISITED STATIONS![/bold underline] Data that will be lost includes which stations have been visited and on what date you visited them. Type "I know what I\'m doing!" to reset all visited stations, or type anything else to return to the main menu.\n'
+    )
+
+    user_input = input('> ')
+
+    if user_input == "I know what I'm doing!":
+        visited = data['visited']
+        # Get all keys (station names) in data['visited'] and turn it into a list so we know which stations we need to reset
+        station_names = list(visited.keys())
+
+        # reset data['to_visit'] if it contains a value
+        if len(data['to_visit']) > 0:
+            data['to_visit'] = ''
+
+        # Iterate over every key we got from data['visited'], remove any data that needs to be reset (like visited dates) then move the entire dict back to data['unvisited]
+        for name in station_names:
+            date_visited = visited[name].get('date_visited')
+
+            if date_visited:
+                visited[name].pop('date_visited')
+
+            data['unvisited'].update({name: visited[name]})
+            data['visited'].pop(name)
+
+        write(data)
+
+        input(
+            '\nOperation succeeded - all visited stations have been reset. Press enter to return to the main menu.'
+        )
+    else:
+        input('\nOperation cancelled. Press enter to return to the main menu.')
 
 
 # Main program
