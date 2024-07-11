@@ -1,7 +1,6 @@
 import json
 import os
 import random
-import copy
 import re
 
 # Library to do fancy text formatting and stuff, including colours. I could just implement colours with ASCII escape characters buuut this is better.
