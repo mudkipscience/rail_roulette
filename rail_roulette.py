@@ -16,7 +16,7 @@ line_groups = {
     'Caufield': ['Cranbourne', 'Pakenham'],
     'Clifton Hill': ['Hurstbridge', 'Mernda'],
     'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
-    'Cross City': ['Frankston', 'Werribee', 'Williamstown']
+    'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
 }
 # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
 # check out roll_station() in rail_roulette.py to see this in action.
@@ -36,7 +36,7 @@ int_to_timerange = {
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
 colour_store = {
     'enhanced': {
-        # Line colours
+        # Group/line colours
         'Alamein': '#F2F2F2 on #094c8d',
         'Belgrave': '#F2F2F2 on #094c8d',
         'Glen Waverley': '#F2F2F2 on #094c8d',
@@ -240,122 +240,71 @@ def roll_station(data):
 
     while True:
         clear()
+
+        def prettify_list(items):
+            for i in range(len(items) - 1):
+                colour = colours.get(items[i]) or colours.get(line_groups[items[i]][0])
+                items[i] = f'[{colour}] {items[i]} [/{colour}]'
+
+            if len(items) == 3:
+                items.insert(1, ' and ')
+
+            elif len(items) > 3:
+                items.insert(-2, ' and ')
+                for i, stn in enumerate(items.copy()):
+                    # There is a weird bug that I couldn't fix where a comma gets inserted before and for lines if in tbe below line "stn != items[-2]", but if I change it to "stn != items[-1]" it does the same stupid thing with groups :/
+                    if items[i] == ' and ':
+                        break
+                    if i % 2 != 0 and stn != items[-1]:
+                        items.insert(i, ', ')
+
+        """
+        TODO: COMMENTS FOR THIS NEW SECTION
+        """
+
         # Pick a random station name from our list made above
         station = random.choice(stations)
-        # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time (and maybe more.)
-        # As we are going to be modifying this dict and because it contains nested lists, we use deepcopy() to make a copy of this info. deepcopy()
-        # creates unlinked variables for both top level and nested structures. copy() only copies the top level stuff, and nested items will still  be
-        # linked to the original variable, and we don't want temporary changes being written to disk.
-        station_info = copy.deepcopy(data)['unvisited'][station]
+        station_info = data['unvisited'][station]
         station_groups_list = []
-        station_lines = ''
+        station_lines_list = station_info['line'].copy()
 
-        """
-        TODO:
-        - take station_info['line'] and modify it to include only stations in a certain group
-        - check if this new list matches a list of all stations on a group
-        - if so, replace the individual line names with the group name
-        - have this be cleaner than the 5 yandere-dev ass if statmements below. using all() and list comprehensions?
-        """
+        for group in line_groups:
+            group_lines = line_groups[group]
+            matched_lines = []
 
-        # The 5 if statements below check if a station is served by every line in a group, and if so removes those lines from data['unvisited'][station]
-        # and instead adds the group name to station_groups_list. This reduces visual clutter for large stations like Flinders Street.
-        if (
-            'Alamein' in station_info['line']
-            and 'Belgrave' in station_info['line']
-            and 'Glen Waverley' in station_info['line']
-            and 'Lilydale' in station_info['line']
-        ):
-            for stn in ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale']:
-                station_info['line'].remove(stn)
+            for line in group_lines:
+                if line in data['unvisited'][station]['line']:
+                    matched_lines.append(line)
 
-            station_groups_list.append(
-                f'[{colours["Alamein"]}] Burnley [/{colours["Alamein"]}]'
-            )
+            if matched_lines == group_lines:
+                station_groups_list.append(group)
 
-        if 'Cranbourne' in station_info['line'] and 'Pakenham' in station_info['line']:
-            for stn in ['Cranbourne', 'Pakenham']:
-                station_info['line'].remove(stn)
+                for line in station_lines_list.copy():
+                    if line in matched_lines:
+                        station_lines_list.remove(line)
 
-            station_groups_list.append(
-                f'[{colours["Cranbourne"]}] Caufield [/{colours["Cranbourne"]}]'
-            )
-
-        if 'Hurstbridge' in station_info['line'] and 'Mernda' in station_info['line']:
-            for stn in ['Hurstbridge', 'Mernda']:
-                station_info['line'].remove(stn)
-
-            station_groups_list.append(
-                f'[{colours["Hurstbridge"]}] Clifton Hill [/{colours["Hurstbridge"]}]'
-            )
-
-        if (
-            'Craigieburn' in station_info['line']
-            and 'Sunbury' in station_info['line']
-            and 'Upfield' in station_info['line']
-        ):
-            for stn in ['Craigieburn', 'Sunbury', 'Upfield']:
-                station_info['line'].remove(stn)
-
-            station_groups_list.append(
-                f'[{colours["Craigieburn"]}] Northern [/{colours["Craigieburn"]}]'
-            )
-
-        if (
-            'Frankston' in station_info['line']
-            and 'Werribee' in station_info['line']
-            and 'Williamstown' in station_info['line']
-        ):
-            for stn in ['Frankston', 'Werribee', 'Williamstown']:
-                station_info['line'].remove(stn)
-
-            station_groups_list.append(
-                f'[{colours["Frankston"]}] Cross City [/{colours["Frankston"]}]'
-            )
-
-        # Adds all the lines that were not removed above to station_lines to be displayed to the user
-        for line in station_info['line']:
-            colour = colours[line]
-            station_lines += f'[{colour}] {line} [/{colour}]'
-
-            # Adds a ',' separator between lines, except for between the second last and last item, in which case 'and' will be added.
-            if len(station_info['line']) > 1 and line == station_info['line'][-2]:
-                station_lines += ' and '
-            elif line != station_info['line'][-1]:
-                station_lines += ', '
-
-        station_groups = ''
-        # Add each group to station_groups to be displayed to the user, adding ',' and 'and' when applicable to make it easy to read.
-        for grp in station_groups_list:
-            station_groups += grp
-            if len(station_groups_list) > 1 and grp == station_groups_list[-2]:
-                station_groups += ' and '
-            elif grp != station_groups_list[-1]:
-                station_groups += ', '
-
-        # Adds group/groups line/lines depending on whether we have singular groups/lines serving the station or multiple. If both a group
-        # and an individual line serves this station, adds ', and by the ' between the list of groups and lines.
-        if len(station_groups_list) > 0:
+        if len(station_groups_list) != 0:
             if len(station_groups_list) == 1:
-                station_groups += ' group'
+                station_groups_list.append(' group')
             else:
-                station_groups += ' groups'
+                station_groups_list.append(' groups')
 
-            if len(station_info['line']) > 0:
-                if len(station_info['line']) == 1:
-                    station_lines += ' line'
-                else:
-                    station_lines += ' lines'
-                station_groups += ', and by the '
-        elif len(station_info['line']) > 0:
-            if len(station_info['line']) == 1:
-                station_lines += ' line'
+            prettify_list(station_groups_list)
+
+        if len(station_lines_list) != 0:
+            if len(station_lines_list) == 1:
+                station_lines_list.append(' line')
             else:
-                station_lines += ' lines'
+                station_lines_list.append(' lines')
+
+            prettify_list(station_lines_list)
+
+        if len(station_groups_list) > 0 and len(station_lines_list) > 0:
+            station_groups_list.append(', and by the ')
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
         console.print(
-            f'- [bold]{station}[/bold] is served by the {station_groups}{station_lines}.'
+            f'- [bold]{station}[/bold] is served by the {''.join(station_groups_list)}{''.join(station_lines_list)}.'
         )
         console.print(
             f'- [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
@@ -727,4 +676,5 @@ def main():
             )
 
 
-main()
+if __name__ == '__main__':
+    main()
