@@ -10,6 +10,21 @@ from rich.console import Console
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
+# Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
+# check out roll_station() in rail_roulette.py to see this in action.
+int_to_timerange = {
+    0: 'under 10',
+    1: '11 to 20',
+    2: '21 to 30',
+    3: '31 to 40',
+    4: '41 to 50',
+    5: '51 to 60',
+    6: '61 to 70',
+    7: '71 to 80',
+    8: '81 to 90',
+    9: '91 to 100',
+    10: '101 to 110',
+}
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
 colour_store = {
     'enhanced': {
@@ -205,20 +220,6 @@ def roll_station(data):
 
     # Get the name's of all stations by converting the dictionary keys (the names) into a list
     stations = list(data['unvisited'].keys())
-    # I stored times as an int like this in datastore.json to save myself retyping stuff. This dict just contains what each number correlates to.
-    time_conversion = {
-        0: 'under 10',
-        1: '11 to 20',
-        2: '21 to 30',
-        3: '31 to 40',
-        4: '41 to 50',
-        5: '51 to 60',
-        6: '61 to 70',
-        7: '71 to 80',
-        8: '81 to 90',
-        9: '91 to 100',
-        10: '101 to 110',
-    }
 
     while True:
         clear()
@@ -335,7 +336,7 @@ def roll_station(data):
             f'- [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
         )
         console.print(
-            f'- Journeys to [bold]{station}[/bold] take {time_conversion[station_info["time"]]} minutes on average.\n'
+            f'- Journeys to [bold]{station}[/bold] take {int_to_timerange[station_info["time"]]} minutes on average.\n'
         )
         print(print_menu(['Reroll', 'Accept']))
 
@@ -480,18 +481,30 @@ def ops_menu(data):
     clear()
 
     print('\n -+ Options +-\n')
-    print(print_menu(['Station status edit', 'Colour mode', 'Main menu']))
+    print(
+        print_menu(
+            [
+                'Colour mode',
+                'Mark station as visited',
+                'Reset visited stations',
+                'Main menu',
+            ]
+        )
+    )
 
     while True:
         choice = input('> ')
 
         if choice == '1':
-            mark_visited(data)
-            break
-        elif choice == '2':
             colour_mode(data)
             break
+        elif choice == '2':
+            mark_visited(data)
+            break
         elif choice == '3':
+            reset_stations(data)
+            break
+        elif choice == '4':
             break
         else:
             print(
@@ -618,6 +631,43 @@ def colour_mode(data):
             print(
                 '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
             )
+
+
+def reset_stations(data):
+    clear()
+
+    console.print(
+        'Warning! you are about to reset [bold underline]ALL VISITED STATIONS![/bold underline] Data that will be lost includes which stations have been visited and on what date you visited them. Type "I know what I\'m doing!" to reset all visited stations, or type anything else to return to the main menu.\n'
+    )
+
+    user_input = input('> ')
+
+    if user_input == "I know what I'm doing!":
+        visited = data['visited']
+        # Get all keys (station names) in data['visited'] and turn it into a list so we know which stations we need to reset
+        station_names = list(visited.keys())
+
+        # reset data['to_visit'] if it contains a value
+        if len(data['to_visit']) > 0:
+            data['to_visit'] = ''
+
+        # Iterate over every key we got from data['visited'], remove any data that needs to be reset (like visited dates) then move the entire dict back to data['unvisited]
+        for name in station_names:
+            date_visited = visited[name].get('date_visited')
+
+            if date_visited:
+                visited[name].pop('date_visited')
+
+            data['unvisited'].update({name: visited[name]})
+            data['visited'].pop(name)
+
+            write(data)
+
+        input(
+            '\nOperation succeeded - all visited stations have been reset. Press enter to return to the main menu.'
+        )
+    else:
+        input('\nOperation cancelled. Press enter to return to the main menu.')
 
 
 # Main program
