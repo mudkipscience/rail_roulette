@@ -655,7 +655,19 @@ def reset_stations(data):
 
 # Main program
 def main():
-    data = read()
+    data = {}
+
+    # Check for
+    try:
+        data = read()
+    except FileNotFoundError:
+        print(
+            'Could not find datastore.json. This file is required for Railway Roulette to run and must be in the same folder as the program.\n\nIf you need a new copy of this file, you can download it here: https://github.com/mudkipscience/rail_roulette/blob/main/datastore.json\n'
+        )
+        input('Press enter to exit.')
+
+        exit()
+
     use_enhanced_colours = data['config']['use_enhanced_colours']
 
     if use_enhanced_colours is False:
