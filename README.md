@@ -17,7 +17,8 @@ This program is now functional, but I plan on sprucing it up a lot and there may
 - ~~Option to change between accurate and default terminal colours~~ **done!**
 - ~~Log date a station was visited (can take user input for this)~~ **done!**
 - ~~Option to reset visited station data to default~~ **done!**
-- Display which station was queued to be visited in the screen that shows if to_visit contains a value
+- ~~Display which station was queued to be visited in the screen that shows if to_visit contains a value~~ **done!**
+- Fix stats screen as it currently displays wonky numbers due to lines sharing stations
 - Add more info to stations (PT connections, nearby stations, whether station is connected to loop and what direction travel is in, average peak/off-peak frequency, opening date, misc info and other fun facts, whether its a junction, etc.)
 - Look up info on stations
 - fancy TUI using Rich
