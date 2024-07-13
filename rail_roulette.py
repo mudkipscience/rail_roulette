@@ -2,36 +2,10 @@ import json
 import os
 import random
 import re
-
-# Library to do fancy text formatting and stuff, including colours. I could just implement colours with ASCII escape characters buuut this is better.
 from rich.console import Console
-
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
-# dictionary of arrays that lists what group a line is apart of
-line_groups = {
-    'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
-    'Caufield': ['Cranbourne', 'Pakenham'],
-    'Clifton Hill': ['Hurstbridge', 'Mernda'],
-    'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
-    'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
-}
-# Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
-# check out roll_station() in rail_roulette.py to see this in action.
-int_to_timerange = {
-    0: 'under 10',
-    1: '11 to 20',
-    2: '21 to 30',
-    3: '31 to 40',
-    4: '41 to 50',
-    5: '51 to 60',
-    6: '61 to 70',
-    7: '71 to 80',
-    8: '81 to 90',
-    9: '91 to 100',
-    10: '101 to 110',
-}
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
 colour_store = {
     'enhanced': {
@@ -234,70 +208,106 @@ def roll_station(data):
         no_unvisited()
         return
 
-    # Get the name's of all stations by converting the dictionary keys (the names) into a list
+    # Get the name's of all stations by converting the dictionary keys (the names) into a list. I know I don't need to include keys() but it makes it more readable for me.
     stations = list(data['unvisited'].keys())
+
+    # dictionary of arrays that lists what group a line is apart of
+    line_groups = {
+        'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
+        'Caufield': ['Cranbourne', 'Pakenham'],
+        'Clifton Hill': ['Hurstbridge', 'Mernda'],
+        'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
+        'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
+    }
+
+    # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
+    int_to_timerange = {
+        0: 'under 10',
+        1: '11 to 20',
+        2: '21 to 30',
+        3: '31 to 40',
+        4: '41 to 50',
+        5: '51 to 60',
+        6: '61 to 70',
+        7: '71 to 80',
+        8: '81 to 90',
+        9: '91 to 100',
+        10: '101 to 110',
+    }
 
     while True:
         clear()
 
+        # Takes a list and mutates it to add colour to each line/group, as well as adding commas and ' and ' to make nicer and readable when we join it into a string later on.
         def prettify_list(items):
-            for i in range(len(items) - 1):
-                colour = colours.get(items[i]) or colours.get(line_groups[items[i]][0])
-                items[i] = f'[{colour}] {items[i]} [/{colour}]'
+            # Adds rich styling (colours here) to each group/station. Found using this syntax was easier over using enumerate() as I need the index of the item anyway.
+            for i, item in enumerate(items):
+                colour = colours.get(item) or colours.get(line_groups[item][0])
+                items[i] = f'[{colour}] {item} [/{colour}]'
 
-            if len(items) == 3:
-                items.insert(1, ' and ')
+            # Inserts ' and ' into the second last place in the list.
+            if len(items) > 1:
+                items.insert(-1, ' and ')
 
-            elif len(items) > 3:
-                items.insert(-2, ' and ')
-                for i, stn in enumerate(items.copy()):
-                    # There is a weird bug that I couldn't fix where a comma gets inserted before and for lines if in tbe below line "stn != items[-2]", but if I change it to "stn != items[-1]" it does the same stupid thing with groups :/
-                    if items[i] == ' and ':
+            # Loop to add commas into each odd index. Checking to see if len > 3 instead of > 2 because we inserted ' and ' above.
+            if len(items) > 3:
+                for i, stn in enumerate(items):
+                    # Break if we encounter ' and ' in the list - if we do we do not need any more commas
+                    if stn == ' and ':
                         break
-                    if i % 2 != 0 and stn != items[-1]:
-                        items.insert(i, ', ')
 
-        """
-        TODO: COMMENTS FOR THIS NEW SECTION
-        """
+                    # Only add a comma if the index is odd
+                    if i % 2:
+                        items.insert(i, ', ')
 
         # Pick a random station name from our list made above
         station = random.choice(stations)
         station_info = data['unvisited'][station]
         station_groups_list = []
+        # Make a copy of the line info because if we mutated it we would end up writing those changes to datastore.json
         station_lines_list = station_info['line'].copy()
 
+        # This codeblock checks if all lines in a group serve the station, and if so removes the individual lines and adds the group to reduce clutter.
+        # Loop through each group
         for group in line_groups:
             group_lines = line_groups[group]
             matched_lines = []
 
+            # Loop through each line in the group
             for line in group_lines:
+                # Check if the station is served by the group line. If yes append to matched_lines
                 if line in data['unvisited'][station]['line']:
                     matched_lines.append(line)
 
-            if matched_lines == group_lines:
+            # Convert the lists to sets (sets are unordered so this makes the order not matter for comparision) and check if the two sets contain identical items
+            if set(matched_lines) == set(group_lines):
+                # If they do, append the group name to be displayed later
                 station_groups_list.append(group)
 
+                # And then remove each line that is apart of that group
                 for line in station_lines_list.copy():
                     if line in matched_lines:
                         station_lines_list.remove(line)
 
         if len(station_groups_list) != 0:
+            # prettify_list() adds colour to each line/group + adds commas and 'and' between list items. Check above to see the full function.
+            prettify_list(station_groups_list)
+
             if len(station_groups_list) == 1:
                 station_groups_list.append(' group')
             else:
                 station_groups_list.append(' groups')
 
-            prettify_list(station_groups_list)
-
         if len(station_lines_list) != 0:
+            # Explained this a few lines up
+            prettify_list(station_lines_list)
+
             if len(station_lines_list) == 1:
                 station_lines_list.append(' line')
             else:
                 station_lines_list.append(' lines')
 
-            prettify_list(station_lines_list)
-
+        # If the station is served by both lines and groups, put ', and by the ' between the list of groups and lines to make it more readable
         if len(station_groups_list) > 0 and len(station_lines_list) > 0:
             station_groups_list.append(', and by the ')
 
