@@ -6,6 +6,14 @@ from rich.console import Console
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
+# dictionary of arrays that lists what group a line is apart of
+line_groups = {
+    'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
+    'Caufield': ['Cranbourne', 'Pakenham'],
+    'Clifton Hill': ['Hurstbridge', 'Mernda'],
+    'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
+    'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
+}
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
 colour_store = {
     'enhanced': {
@@ -220,15 +228,6 @@ def roll_station(data):
     # Get the name's of all stations by converting the dictionary keys (the names) into a list. I know I don't need to include keys() but it makes it more readable for me.
     stations = list(data['unvisited'].keys())
 
-    # dictionary of arrays that lists what group a line is apart of
-    line_groups = {
-        'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
-        'Caufield': ['Cranbourne', 'Pakenham'],
-        'Clifton Hill': ['Hurstbridge', 'Mernda'],
-        'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
-        'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
-    }
-
     # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
     int_to_timerange = {
         0: 'under 10',
@@ -322,13 +321,13 @@ def roll_station(data):
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
         console.print(
-            f'- [bold]{station}[/bold] is served by the {"".join(station_groups_list)}{"".join(station_lines_list)}.'
+            f'• [bold]{station}[/bold] is served by the {"".join(station_groups_list)}{"".join(station_lines_list)}.'
         )
         console.print(
-            f'- [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
+            f'• [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
         )
         console.print(
-            f'- Journeys to [bold]{station}[/bold] take {int_to_timerange[station_info["time"]]} minutes on average.\n'
+            f'• Journeys to [bold]{station}[/bold] take {int_to_timerange[station_info["time"]]} minutes on average.\n'
         )
         print(print_menu(['Reroll', 'Accept']))
 
@@ -352,108 +351,101 @@ def roll_station(data):
 
 # Statistics page. Currently contains info on how many stations have been visited in total and for each group/line.
 def stats(data):
+    # Returns the count of unvisited and total unique stations in a group in a list [visited, total]
+    def count_unique_stns(group) -> list[int]:
+        # Get lines associated with a group from line_groups dict defined near the top of the file
+        group_lines = line_groups[group]
+        # Create two sets. Sets cannot contain duplicate values so it's an easy way of removing duplicate stations and returning more accurate numbers
+        unvisited_set = set()
+        visited_set = set()
+
+        # Loop through each line in the provided group
+        for line in group_lines:
+            # Two list comprehensions that create lists containing visited/unvisited stations if they are served by the line we are currently looping through
+            unvisited_list = [
+                stn
+                for stn in data['unvisited']
+                if line in data['unvisited'][stn]['line']
+            ]
+            visited_list = [
+                stn for stn in data['visited'] if line in data['visited'][stn]['line']
+            ]
+
+            # Combine the newly created lists above with the sets we defined at the start of this func by converting the lists to sets and using union()
+            unvisited_set = unvisited_set.union(set(unvisited_list))
+            visited_set = visited_set.union(set(visited_list))
+
+        total = len(unvisited_set) + len(visited_set)
+
+        # Return the amount of unique stations visited in the group at index 0 and total unique stations in the group
+        return [len(visited_set), total]
+
+    # Return the count of visited and total stations on a line
+    def count_stations(line):
+        unvisited_stns = [
+            stn for stn in data['unvisited'] if line in data['unvisited'][stn]['line']
+        ]
+        visited_stns = [
+            stn for stn in data['visited'] if line in data['visited'][stn]['line']
+        ]
+
+        total = len(unvisited_stns) + len(visited_stns)
+
+        return [len(visited_stns), total]
+
+    def group_summary(group):
+        group_visited_total = count_unique_stns(group)
+        group_lines = line_groups[group]
+        colour = colours.get(group_lines[0])
+
+        summary_list = [
+            f"• You've visited {group_visited_total[0]} out of {group_visited_total[1]} [{colour}] {group} [/{colour}] group stations:"
+        ]
+
+        for line in group_lines:
+            unvisited_stns = [
+                stn
+                for stn in data['unvisited']
+                if line in data['unvisited'][stn]['line']
+            ]
+
+            visited_stns = [
+                stn for stn in data['visited'] if line in data['visited'][stn]['line']
+            ]
+
+            summary_list.append(
+                f'  • {len(visited_stns)} out of {len(visited_stns) + len(unvisited_stns)} stations on the {line} line.'
+            )
+
+        return '\n'.join(summary_list)
+
     clear()
 
-    visited = {}
-    unvisited = {}
-    for line in colours:
-        visited.update({line: []})
-        unvisited.update({line: []})
+    flemington_count = count_stations('Flemington Racecourse')
+    stony_count = count_stations('Stony Point')
+    sandringham_count = count_stations('Sandringham')
 
-    for v in data['visited']:
-        for line in data['visited'][v]['line']:
-            visited[line].append(v)
+    console.print(
+        f'-+ Statistics +-\n\n[bold]You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations. Breakdown:[/bold]\n'
+    )
 
-    for unv in data['unvisited']:
-        for line in data['unvisited'][unv]['line']:
-            unvisited[line].append(unv)
+    # For each group, print out a group summary (prints out the amount visited and total unique stations in that group + same for each line in each group too)
+    for group in line_groups:
+        console.print(group_summary(group) + '\n')
 
-    burnley = {
-        'visited': len(visited['Alamein'])
-        + len(visited['Belgrave'])
-        + len(visited['Glen Waverley'])
-        + len(visited['Lilydale']),
-        'total': (
-            len(visited['Alamein'])
-            + len(visited['Belgrave'])
-            + len(visited['Glen Waverley'])
-            + len(visited['Lilydale'])
-        )
-        + (
-            len(unvisited['Alamein'])
-            + len(unvisited['Belgrave'])
-            + len(unvisited['Glen Waverley'])
-            + len(unvisited['Lilydale'])
-        ),
-    }
-    caufield = {
-        'visited': len(visited['Cranbourne']) + len(visited['Pakenham']),
-        'total': len(visited['Cranbourne'])
-        + len(visited['Pakenham'])
-        + len(unvisited['Cranbourne'])
-        + len(unvisited['Pakenham']),
-    }
-    clifton = {
-        'visited': len(visited['Mernda']) + len(visited['Hurstbridge']),
-        'total': (len(visited['Mernda']) + len(visited['Hurstbridge']))
-        + (len(unvisited['Mernda']) + len(unvisited['Hurstbridge'])),
-    }
-    northern = {
-        'visited': len(visited['Craigieburn'])
-        + len(visited['Sunbury'])
-        + len(visited['Upfield']),
-        'total': len(visited['Craigieburn'])
-        + len(visited['Sunbury'])
-        + len(visited['Upfield'])
-        + len(unvisited['Craigieburn'])
-        + len(unvisited['Sunbury'])
-        + len(unvisited['Upfield']),
-    }
-    cross_city = {
-        'visited': len(visited['Frankston'])
-        + len(visited['Werribee'])
-        + len(visited['Williamstown']),
-        'total': len(visited['Frankston'])
-        + len(visited['Werribee'])
-        + len(visited['Williamstown'])
-        + len(unvisited['Frankston'])
-        + len(unvisited['Werribee'])
-        + len(unvisited['Williamstown']),
-    }
+    console.print(
+        f'• You\'ve visited {flemington_count[0]} out of {flemington_count[1]} stations on the [{colours["Flemington Racecourse"]}] Flemington Racecourse [/{colours["Flemington Racecourse"]}] line.'
+    )
+    console.print(
+        f'• You\'ve visited {stony_count[0]} out of {stony_count[1]} stations on the [{colours["Stony Point"]}] Stony Point [/{colours["Stony Point"]}] line.'
+    )
+    console.print(
+        f'• You\'ve visited {sandringham_count[0]} out of {sandringham_count[1]} stations on the [{colours["Sandringham"]}] Sandringham [/{colours["Sandringham"]}] line.'
+    )
+    console.print(
+        '\n[bright_black italic]Note: Individual line totals will not add up to the group total as duplicate stations are removed when calculating the group total.[/bright_black italic]\n'
+    )
 
-    console.print(f"""
-    -+ Statistics +-
-
-    [bold]You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations. Breakdown:[/bold]
-
-    - You\'ve visited {burnley["visited"]} out of {burnley["total"]} [{colours["Alamein"]}] Burnley [/{colours["Alamein"]}] group stations:
-      - {len(visited["Alamein"])} out of {len(visited["Alamein"]) + len(unvisited["Alamein"])} stations on the Alamein line.
-      - {len(visited["Belgrave"])} out of {len(visited["Belgrave"]) + len(unvisited["Belgrave"])} stations on the Belgrave line.
-      - {len(visited["Glen Waverley"])} out of {len(visited["Glen Waverley"]) + len(unvisited["Glen Waverley"])} stations on the Glen Waverley line.
-      - {len(visited["Lilydale"])} out of {len(visited["Lilydale"]) + len(unvisited["Lilydale"])} stations on the Lilydale line.
-
-    - You\'ve visited {caufield["visited"]} out of {caufield["total"]} [{colours["Cranbourne"]}] Caufield [/{colours["Cranbourne"]}] group stations:
-      - {len(visited["Cranbourne"])} out of {len(visited["Cranbourne"]) + len(unvisited["Cranbourne"])} stations on the Cranbourne line.
-      - {len(visited["Pakenham"])} out of {len(visited["Pakenham"]) + len(unvisited["Pakenham"])} stations on the Pakenham line.
-
-    - You\'ve visited {clifton["visited"]} out of {clifton["total"]} [{colours["Mernda"]}] Clifton Hill [/{colours["Mernda"]}] group stations.
-      - {len(visited["Hurstbridge"])} out of {len(visited["Hurstbridge"]) + len(unvisited["Hurstbridge"])} stations on the Hurstbridge line.
-      - {len(visited["Mernda"])} out of {len(visited["Mernda"]) + len(unvisited["Mernda"])} stations on the Mernda line.
-
-    - You\'ve visited {northern["visited"]} out of {northern["total"]} [{colours["Sunbury"]}] Northern [/{colours["Sunbury"]}] group stations:
-      - {len(visited["Craigieburn"])} out of {len(visited["Craigieburn"]) + len(unvisited["Craigieburn"])} stations on the Craigieburn line.
-      - {len(visited["Sunbury"])} out of {len(visited["Sunbury"]) + len(unvisited["Sunbury"])} stations on the Sunbury line.
-      - {len(visited["Upfield"])} out of {len(visited["Upfield"]) + len(unvisited["Upfield"])} stations on the Upfield line.
-
-    - You\'ve visited {cross_city["visited"]} out of {cross_city["total"]} [{colours["Frankston"]}] Cross City [/{colours["Frankston"]}] group stations:
-      - {len(visited["Frankston"])} out of {len(visited["Frankston"]) + len(unvisited["Frankston"])} stations on the Frankston line.
-      - {len(visited["Werribee"])} out of {len(visited["Werribee"]) + len(unvisited["Werribee"])} stations on the Werribee line.
-      - {len(visited["Williamstown"])} out of {len(visited["Williamstown"]) + len(unvisited["Williamstown"])} stations on the Williamstown line.
-
-    - You\'ve visited {len(visited["Flemington Racecourse"])} out of {len(visited["Flemington Racecourse"]) + len(unvisited["Flemington Racecourse"])} stations on the [{colours["Flemington Racecourse"]}] Flemington Racecourse [/{colours["Flemington Racecourse"]}] line.
-    - You\'ve visited {len(visited["Stony Point"])} out of {len(visited["Stony Point"]) + len(unvisited["Stony Point"])} stations on the [{colours["Stony Point"]}] Stony Point [/{colours["Stony Point"]}] line.
-    - You\'ve visited {len(visited["Sandringham"])} out of {len(visited["Sandringham"]) + len(unvisited["Sandringham"])} stations on the [{colours["Sandringham"]}] Sandringham [/{colours["Sandringham"]}] line.
-    """)
     print(print_menu(['Main menu', 'Exit']))
 
     while True:
@@ -669,7 +661,7 @@ def reset_stations(data):
 def main():
     data = {}
 
-    # Check for
+    # Displays an error if datastore.json is not found in the current working directory rather than crashing outright
     try:
         data = read()
     except FileNotFoundError:
