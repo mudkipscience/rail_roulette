@@ -16,7 +16,7 @@ line_groups = {
     'Caufield': ['Cranbourne', 'Pakenham'],
     'Clifton Hill': ['Hurstbridge', 'Mernda'],
     'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
-    'Cross City': ['Frankston', 'Werribee', 'Williamstown']
+    'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
 }
 # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
 # check out roll_station() in rail_roulette.py to see this in action.
@@ -88,7 +88,7 @@ def clear():
         os.system('clear')
 
 
-# Load saved, visited and unvisited stations from datastore.json, which should be in the same directory. Not bothering with error handling.
+# Load saved, visited and unvisited stations from datastore.json, which should be in the same directory.
 def read():
     # I kind of understand how this works? Basically with is shorthand for a try/except/finally statement and I think there are some benefits beyond that too? I dunno.
     #  Either way I'm opening a file! - Update 10/07/2024: Apparently what I said is NOT how it works. Guess I'll have to look into it further...
@@ -170,10 +170,13 @@ def check_to_visit(data):
                 data['visited'].update(
                     {data['to_visit']: data['unvisited'].get(data['to_visit'])}
                 )
-                # Add on the date the station was visited to the station dict
-                data['visited'][data['to_visit']].update(
-                    {'date_visited': assign_date(data['to_visit'])}
-                )
+
+                # If the user provides a date, add on the date the station was visited to the station dict
+                date = assign_date(data['to_visit'])
+
+                if date:
+                    data['visited'][data['to_visit']].update({'date_visited': date})
+
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop()
                 data['unvisited'].pop(data['to_visit'])
                 # Reset to_visit to be an empty string again. We do this for option 2 below as well.
@@ -202,26 +205,32 @@ def check_to_visit(data):
 
 
 # Asks for a date from the user, checks to make sure it is valid and formatted as DD/MM/YYYY then returns it
-def assign_date(stn_name) -> str:
+def assign_date(stn_name) -> str | None:
     # Regular expression that checks for a valid DD/MM/YYYY format (I don't think I need to worry about MM/DD/YYYY freaks given this is a Melbourne-specific program)
     regex = '(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0,1,2])\\/(20)\\d{2}'
 
     print(
-        f'\nType in the date you visited {stn_name} Station in the format of DD/MM/YYYY below.\n'
+        f'\nType in the date you visited {stn_name} Station in the format of DD/MM/YYYY below, or type "skip" to skip.\n'
     )
 
     while True:
-        raw_date = input('> ')
+        user_input = input('> ')
+
+        if user_input == 'skip':
+            break
 
         # Check to make sure the length is valid before running regex checks
-        if len(raw_date) != 10:
-            print('\nInvalid date. Please enter a date in the format of DD/MM/YYYY.\n')
+        elif len(user_input) != 10:
+            print(
+                '\nInvalid choice. Please either enter a date in the format of DD/MM/YYYY or type "skip".\n'
+            )
+
         else:
             # Use regex to validate the user input
-            date = re.search(regex, raw_date)
+            date = re.search(regex, user_input)
 
             if date:
-                return raw_date
+                return user_input
             else:
                 print(
                     '\nInvalid date. Please enter a date in the format of DD/MM/YYYY. Year must be between 2000 and 2099.\n'
@@ -590,10 +599,13 @@ def mark_visited(data):
             if visited is False:
                 # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
                 data['visited'].update({stn_name: station})
-                # Add on the date the station was visited to the station dict
-                data['visited'][stn_name].update(
-                    {'date_visited': assign_date(stn_name)}
-                )
+
+                # If the user provides a date, add on the date the station was visited to the station dict
+                date = assign_date(stn_name)
+
+                if date:
+                    data['visited'][stn_name].update({'date_visited': date})
+
                 # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
                 data['unvisited'].pop(stn_name)
             else:
