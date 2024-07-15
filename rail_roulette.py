@@ -321,13 +321,13 @@ def roll_station(data):
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
         console.print(
-            f'- [bold]{station}[/bold] is served by the {"".join(station_groups_list)}{"".join(station_lines_list)}.'
+            f'• [bold]{station}[/bold] is served by the {"".join(station_groups_list)}{"".join(station_lines_list)}.'
         )
         console.print(
-            f'- [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
+            f'• [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
         )
         console.print(
-            f'- Journeys to [bold]{station}[/bold] take {int_to_timerange[station_info["time"]]} minutes on average.\n'
+            f'• Journeys to [bold]{station}[/bold] take {int_to_timerange[station_info["time"]]} minutes on average.\n'
         )
         print(print_menu(['Reroll', 'Accept']))
 
@@ -399,7 +399,7 @@ def stats(data):
         colour = colours.get(group_lines[0])
 
         summary_list = [
-            f"- You've visited {group_visited_total[0]} out of {group_visited_total[1]} [{colour}] {group} [/{colour}] group stations:"
+            f"• You've visited {group_visited_total[0]} out of {group_visited_total[1]} [{colour}] {group} [/{colour}] group stations:"
         ]
 
         for line in group_lines:
@@ -414,7 +414,7 @@ def stats(data):
             ]
 
             summary_list.append(
-                f'  - {len(visited_stns)} out of {len(visited_stns) + len(unvisited_stns)} stations on the {line} line.'
+                f'  • {len(visited_stns)} out of {len(visited_stns) + len(unvisited_stns)} stations on the {line} line.'
             )
 
         return '\n'.join(summary_list)
@@ -434,13 +434,13 @@ def stats(data):
         console.print(group_summary(group) + '\n')
 
     console.print(
-        f'- You\'ve visited {flemington_count[0]} out of {flemington_count[1]} stations on the [{colours["Flemington Racecourse"]}] Flemington Racecourse [/{colours["Flemington Racecourse"]}] line.'
+        f'• You\'ve visited {flemington_count[0]} out of {flemington_count[1]} stations on the [{colours["Flemington Racecourse"]}] Flemington Racecourse [/{colours["Flemington Racecourse"]}] line.'
     )
     console.print(
-        f'- You\'ve visited {stony_count[0]} out of {stony_count[1]} stations on the [{colours["Stony Point"]}] Stony Point [/{colours["Stony Point"]}] line.'
+        f'• You\'ve visited {stony_count[0]} out of {stony_count[1]} stations on the [{colours["Stony Point"]}] Stony Point [/{colours["Stony Point"]}] line.'
     )
     console.print(
-        f'- You\'ve visited {sandringham_count[0]} out of {sandringham_count[1]} stations on the [{colours["Sandringham"]}] Sandringham [/{colours["Sandringham"]}] line.'
+        f'• You\'ve visited {sandringham_count[0]} out of {sandringham_count[1]} stations on the [{colours["Sandringham"]}] Sandringham [/{colours["Sandringham"]}] line.'
     )
     console.print(
         '\n[italic]Note: Individual line totals will not add up to the group total as duplicate stations are removed when calculating the group total.[/italic]\n'
