@@ -443,7 +443,7 @@ def stats(data):
         f'• You\'ve visited {sandringham_count[0]} out of {sandringham_count[1]} stations on the [{colours["Sandringham"]}] Sandringham [/{colours["Sandringham"]}] line.'
     )
     console.print(
-        '\n[italic]Note: Individual line totals will not add up to the group total as duplicate stations are removed when calculating the group total.[/italic]\n'
+        '\n[bright_black italic]Note: Individual line totals will not add up to the group total as duplicate stations are removed when calculating the group total.[/bright_black italic]\n'
     )
 
     print(print_menu(['Main menu', 'Exit']))
@@ -661,7 +661,7 @@ def reset_stations(data):
 def main():
     data = {}
 
-    # Check for
+    # Displays an error if datastore.json is not found in the current working directory rather than crashing outright
     try:
         data = read()
     except FileNotFoundError:
