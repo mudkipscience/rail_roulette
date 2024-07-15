@@ -84,7 +84,7 @@ def write(data):
 
 
 # Generates a string of options the user can select from. ops is an array of names we want to give to each option.
-def print_menu(ops):
+def print_menu(ops) -> str:
     index = 1
     menu = ''
 
@@ -96,7 +96,7 @@ def print_menu(ops):
 
 
 # Prints a rail-styled title like seen in the main menu. args: txt (title text: str) txr_clr (colour to print txt as) rail_clr (colour to print the "rails" as)
-def print_title(txt, txt_clr='default', rail_clr='bright_black'):
+def print_title(txt, txt_clr='default', rail_clr='bright_black') -> str:
     title_txt = list(txt)
 
     for i in range(len(title_txt)):
@@ -109,6 +109,52 @@ def print_title(txt, txt_clr='default', rail_clr='bright_black'):
     )
 
     return f'{title_rails}\n{title_txt}\n{title_rails}\n'
+
+
+# (for now) this function only searches stations based on a partial string (e.g. "fli" will return Flinders Street, "fern" will return Ferntree Gully and Upper Ferntree Gully, "so cro" will return Southern Cross)
+def search_stations(data, query, include_visited=False) -> list[str]:
+    query = query.lower()
+    # Use a set to prevent duplicates
+    results = set()
+
+    # Use a nested function to save me writing almost the same code twice
+    def find_results(stations):
+        for stn in stations:
+            # Basic stuff, if the query (substring) is found to be in the station name, add that station name to the results set
+            if query in stn.lower():
+                results.add(stn)
+
+        # Does the same thing as above but only if include_visited is True
+        if include_visited is True:
+            visited_stns = data['visited'].keys()
+            for stn in visited_stns:
+                if query in stn.lower():
+                    results.add(stn)
+
+        # Split the words in the query at whitespace (fli st becomes ['fli', st'])
+        split_query = query.split()
+
+        if len(split_query) > 1:
+            for stn in stations:
+                matches_found = 0
+
+                # Try and match each split query against a station name
+                for substr in split_query:
+                    if substr in stn.lower():
+                        matches_found += 1
+
+                # if matches_found == the length of the split_query list, a match must have been found
+                if matches_found == len(split_query):
+                    results.add(stn)
+
+    find_results(data['unvisited'].keys())
+
+    if include_visited is True:
+        find_results(data['visited'].keys())
+
+    result_list = list(results)
+
+    return sorted(result_list)
 
 
 # We call this when data['unvisited'] has a length of 0 (meaning it contains nothing)
@@ -500,83 +546,116 @@ def mark_visited(data):
     clear()
 
     print(
-        "To mark a station as visited, type in it's full name below. Type nothing to return to the main menu.\n"
+        'To mark a station as visited, type in its name below. Type nothing to return to the main menu.\n'
     )
 
     station = None
     visited = False
 
+    """
+    CURRENT ISSUES:
+    error where if you are given a choice of stations the input correlates wrongly to input + 1
+    need to make error msgs not ass
+    otehr things too probs
+    i like dragon women
+    """
+
     while True:
         user_input = input('> ')
-        stn_name = user_input.title()
         if len(user_input) == 0:
             break
         else:
-            station = data['unvisited'].get(stn_name)
+            search = search_stations(data, user_input, True)
 
-            if not station:
-                station = data['visited'].get(stn_name)
-
-                if station:
-                    visited = True
-                else:
-                    print('\nStation not found, recheck spelling.\n')
-
-        if station:
-            if visited is True:
-                print(
-                    '\nThis station is already marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
-                )
-                while True:
-                    user_input = input('> ')
-                    user_input = user_input.lower()
-
-                    if user_input == 'n':
-                        print(
-                            '\nOperation aborted. Press enter to return to the main menu.'
-                        )
-                        input()
-                        return
-
-                    elif user_input == 'y':
-                        break
-
-                    else:
-                        print(
-                            '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
-                        )
-
-            if visited is False:
-                # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
-                data['visited'].update({stn_name: station})
-
-                # If the user provides a date, add on the date the station was visited to the station dict
-                date = assign_date(stn_name)
-
-                if date:
-                    data['visited'][stn_name].update({'date_visited': date})
-
-                # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
-                data['unvisited'].pop(stn_name)
+            if len(search) == 0:
+                print('\nStation not found, recheck spelling.\n')
+            elif len(search) > 5:
+                print('\nToo many results, try another query.\n')
             else:
-                data['unvisited'].update({stn_name: station})
-                # Remove the date_visited key from the station dict
-                data['unvisited'][stn_name].pop('date_visited')
-                data['visited'].pop(stn_name)
+                if len(search) > 1:
+                    pretty_search = [f'[italic]{stn}[/italic]' for stn in search]
 
-            # If the station provided by the user was queued in to_visit, clear to_visit
-            if data['to_visit'] == stn_name:
-                data['to_visit'] = ''
+                    console.print(
+                        f'Multiple stations found: {', '.join(pretty_search)}'
+                    )
 
-            # Write changes to datastore.json so the program remembers them when reopened
-            write(data)
+                    print(print_menu(search + ['Return to main menu']))
+                    while True:
+                        choice = input('> ')
 
-            print(
-                '\nOperation completed successfully. Press enter to return to the main menu.'
-            )
-            input()
+                        if not choice.isdigit():
+                            print('Invalid input')
+                        else:
+                            choice = int(choice)
 
-            break
+                            if choice == 0 or choice > len(search) + 1:
+                                print('Invalid input')
+                            elif choice == len(search) + 1:
+                                return
+                            else:
+                                station = search[choice]
+                                break
+                else:
+                    station = search[0]
+
+            if station:
+                stn_data = data['visited'].get(station) or data['unvisited'].get(
+                    station
+                )
+                if data['visited'].get(station):
+                    print(
+                        '\nThis station is already marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
+                    )
+                    while True:
+                        user_input = input('> ')
+                        user_input = user_input.lower()
+
+                        if user_input == 'n':
+                            print(
+                                '\nOperation aborted. Press enter to return to the main menu.'
+                            )
+                            input()
+                            return
+
+                        elif user_input == 'y':
+                            break
+
+                        else:
+                            print(
+                                '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+                            )
+
+                if visited is False:
+                    # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
+                    data['visited'].update({station: stn_data})
+
+                    # If the user provides a date, add on the date the station was visited to the station dict
+                    date = assign_date(station)
+
+                    if date:
+                        data['visited'][station].update({'date_visited': date})
+
+                    # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
+                    data['unvisited'].pop(station)
+                else:
+                    data['unvisited'].update({station: stn_data})
+                    # Remove the date_visited key from the station dict
+                    data['unvisited'][station].pop('date_visited')
+                    data['visited'].pop(station)
+
+                # If the station provided by the user was queued in to_visit, clear to_visit
+                if data['to_visit'] == station:
+                    data['to_visit'] = ''
+
+                # Write changes to datastore.json so the program remembers them when reopened
+                write(data)
+
+                print(
+                    '\nOperation completed successfully. Press enter to return to the main menu.'
+                )
+                input()
+
+                break
 
 
 def colour_mode(data):
