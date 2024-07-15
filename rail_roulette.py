@@ -1,42 +1,15 @@
 import json
 import os
 import random
-import copy
 import re
-
-# Library to do fancy text formatting and stuff, including colours. I could just implement colours with ASCII escape characters buuut this is better.
 from rich.console import Console
-
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
-# dictionary of arrays that lists what group a line is apart of
-line_groups = {
-    'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
-    'Caufield': ['Cranbourne', 'Pakenham'],
-    'Clifton Hill': ['Hurstbridge', 'Mernda'],
-    'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
-    'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
-}
-# Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
-# check out roll_station() in rail_roulette.py to see this in action.
-int_to_timerange = {
-    0: 'under 10',
-    1: '11 to 20',
-    2: '21 to 30',
-    3: '31 to 40',
-    4: '41 to 50',
-    5: '51 to 60',
-    6: '61 to 70',
-    7: '71 to 80',
-    8: '81 to 90',
-    9: '91 to 100',
-    10: '101 to 110',
-}
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
 colour_store = {
     'enhanced': {
-        # Line colours
+        # Group/line colours
         'Alamein': '#F2F2F2 on #094c8d',
         'Belgrave': '#F2F2F2 on #094c8d',
         'Glen Waverley': '#F2F2F2 on #094c8d',
@@ -244,127 +217,112 @@ def roll_station(data):
         no_unvisited()
         return
 
-    # Get the name's of all stations by converting the dictionary keys (the names) into a list
+    # Get the name's of all stations by converting the dictionary keys (the names) into a list. I know I don't need to include keys() but it makes it more readable for me.
     stations = list(data['unvisited'].keys())
+
+    # dictionary of arrays that lists what group a line is apart of
+    line_groups = {
+        'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
+        'Caufield': ['Cranbourne', 'Pakenham'],
+        'Clifton Hill': ['Hurstbridge', 'Mernda'],
+        'Northern': ['Craigieburn', 'Sunbury', 'Upfield'],
+        'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
+    }
+
+    # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
+    int_to_timerange = {
+        0: 'under 10',
+        1: '11 to 20',
+        2: '21 to 30',
+        3: '31 to 40',
+        4: '41 to 50',
+        5: '51 to 60',
+        6: '61 to 70',
+        7: '71 to 80',
+        8: '81 to 90',
+        9: '91 to 100',
+        10: '101 to 110',
+    }
 
     while True:
         clear()
+
+        # Takes a list and mutates it to add colour to each line/group, as well as adding commas and ' and ' to make nicer and readable when we join it into a string later on.
+        def prettify_list(items):
+            # Adds rich styling (colours here) to each group/station. Found using this syntax was easier over using enumerate() as I need the index of the item anyway.
+            for i, item in enumerate(items):
+                colour = colours.get(item) or colours.get(line_groups[item][0])
+                items[i] = f'[{colour}] {item} [/{colour}]'
+
+            # Inserts ' and ' into the second last place in the list.
+            if len(items) > 1:
+                items.insert(-1, ' and ')
+
+            # Loop to add commas into each odd index. Checking to see if len > 3 instead of > 2 because we inserted ' and ' above.
+            if len(items) > 3:
+                for i, stn in enumerate(items):
+                    # Break if we encounter ' and ' in the list - if we do we do not need any more commas
+                    if stn == ' and ':
+                        break
+
+                    # Only add a comma if the index is odd
+                    if i % 2:
+                        items.insert(i, ', ')
+
         # Pick a random station name from our list made above
         station = random.choice(stations)
-        # Now that we have a station name/key, grab info on the station from data['unvisited'] including line, distance, travel time (and maybe more.)
-        # As we are going to be modifying this dict and because it contains nested lists, we use deepcopy() to make a copy of this info. deepcopy()
-        # creates unlinked variables for both top level and nested structures. copy() only copies the top level stuff, and nested items will still  be
-        # linked to the original variable, and we don't want temporary changes being written to disk.
-        station_info = copy.deepcopy(data)['unvisited'][station]
+        station_info = data['unvisited'][station]
         station_groups_list = []
-        station_lines = ''
+        # Make a copy of the line info because if we mutated it we would end up writing those changes to datastore.json
+        station_lines_list = station_info['line'].copy()
 
-        """
-        TODO:
-        - take station_info['line'] and modify it to include only stations in a certain group
-        - check if this new list matches a list of all stations on a group
-        - if so, replace the individual line names with the group name
-        - have this be cleaner than the 5 yandere-dev ass if statmements below. using all() and list comprehensions?
-        """
+        # This codeblock checks if all lines in a group serve the station, and if so removes the individual lines and adds the group to reduce clutter.
+        # Loop through each group
+        for group in line_groups:
+            group_lines = line_groups[group]
+            matched_lines = []
 
-        # The 5 if statements below check if a station is served by every line in a group, and if so removes those lines from data['unvisited'][station]
-        # and instead adds the group name to station_groups_list. This reduces visual clutter for large stations like Flinders Street.
-        if (
-            'Alamein' in station_info['line']
-            and 'Belgrave' in station_info['line']
-            and 'Glen Waverley' in station_info['line']
-            and 'Lilydale' in station_info['line']
-        ):
-            for stn in ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale']:
-                station_info['line'].remove(stn)
+            # Loop through each line in the group
+            for line in group_lines:
+                # Check if the station is served by the group line. If yes append to matched_lines
+                if line in data['unvisited'][station]['line']:
+                    matched_lines.append(line)
 
-            station_groups_list.append(
-                f'[{colours["Alamein"]}] Burnley [/{colours["Alamein"]}]'
-            )
+            # Convert the lists to sets (sets are unordered so this makes the order not matter for comparision) and check if the two sets contain identical items
+            if set(matched_lines) == set(group_lines):
+                # If they do, append the group name to be displayed later
+                station_groups_list.append(group)
 
-        if 'Cranbourne' in station_info['line'] and 'Pakenham' in station_info['line']:
-            for stn in ['Cranbourne', 'Pakenham']:
-                station_info['line'].remove(stn)
+                # And then remove each line that is apart of that group
+                for line in station_lines_list.copy():
+                    if line in matched_lines:
+                        station_lines_list.remove(line)
 
-            station_groups_list.append(
-                f'[{colours["Cranbourne"]}] Caufield [/{colours["Cranbourne"]}]'
-            )
+        if len(station_groups_list) != 0:
+            # prettify_list() adds colour to each line/group + adds commas and 'and' between list items. Check above to see the full function.
+            prettify_list(station_groups_list)
 
-        if 'Hurstbridge' in station_info['line'] and 'Mernda' in station_info['line']:
-            for stn in ['Hurstbridge', 'Mernda']:
-                station_info['line'].remove(stn)
-
-            station_groups_list.append(
-                f'[{colours["Hurstbridge"]}] Clifton Hill [/{colours["Hurstbridge"]}]'
-            )
-
-        if (
-            'Craigieburn' in station_info['line']
-            and 'Sunbury' in station_info['line']
-            and 'Upfield' in station_info['line']
-        ):
-            for stn in ['Craigieburn', 'Sunbury', 'Upfield']:
-                station_info['line'].remove(stn)
-
-            station_groups_list.append(
-                f'[{colours["Craigieburn"]}] Northern [/{colours["Craigieburn"]}]'
-            )
-
-        if (
-            'Frankston' in station_info['line']
-            and 'Werribee' in station_info['line']
-            and 'Williamstown' in station_info['line']
-        ):
-            for stn in ['Frankston', 'Werribee', 'Williamstown']:
-                station_info['line'].remove(stn)
-
-            station_groups_list.append(
-                f'[{colours["Frankston"]}] Cross City [/{colours["Frankston"]}]'
-            )
-
-        # Adds all the lines that were not removed above to station_lines to be displayed to the user
-        for line in station_info['line']:
-            colour = colours[line]
-            station_lines += f'[{colour}] {line} [/{colour}]'
-
-            # Adds a ',' separator between lines, except for between the second last and last item, in which case 'and' will be added.
-            if len(station_info['line']) > 1 and line == station_info['line'][-2]:
-                station_lines += ' and '
-            elif line != station_info['line'][-1]:
-                station_lines += ', '
-
-        station_groups = ''
-        # Add each group to station_groups to be displayed to the user, adding ',' and 'and' when applicable to make it easy to read.
-        for grp in station_groups_list:
-            station_groups += grp
-            if len(station_groups_list) > 1 and grp == station_groups_list[-2]:
-                station_groups += ' and '
-            elif grp != station_groups_list[-1]:
-                station_groups += ', '
-
-        # Adds group/groups line/lines depending on whether we have singular groups/lines serving the station or multiple. If both a group
-        # and an individual line serves this station, adds ', and by the ' between the list of groups and lines.
-        if len(station_groups_list) > 0:
             if len(station_groups_list) == 1:
-                station_groups += ' group'
+                station_groups_list.append(' group')
             else:
-                station_groups += ' groups'
+                station_groups_list.append(' groups')
 
-            if len(station_info['line']) > 0:
-                if len(station_info['line']) == 1:
-                    station_lines += ' line'
-                else:
-                    station_lines += ' lines'
-                station_groups += ', and by the '
-        elif len(station_info['line']) > 0:
-            if len(station_info['line']) == 1:
-                station_lines += ' line'
+        if len(station_lines_list) != 0:
+            # Explained this a few lines up
+            prettify_list(station_lines_list)
+
+            if len(station_lines_list) == 1:
+                station_lines_list.append(' line')
             else:
-                station_lines += ' lines'
+                station_lines_list.append(' lines')
+
+        # If the station is served by both lines and groups, put ', and by the ' between the list of groups and lines to make it more readable
+        if len(station_groups_list) > 0 and len(station_lines_list) > 0:
+            station_groups_list.append(', and by the ')
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
         console.print(
-            f'- [bold]{station}[/bold] is served by the {station_groups}{station_lines}.'
+            f'- [bold]{station}[/bold] is served by the {"".join(station_groups_list)}{"".join(station_lines_list)}.'
         )
         console.print(
             f'- [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
@@ -709,7 +667,19 @@ def reset_stations(data):
 
 # Main program
 def main():
-    data = read()
+    data = {}
+
+    # Check for
+    try:
+        data = read()
+    except FileNotFoundError:
+        print(
+            'Could not find datastore.json. This file is required for Railway Roulette to run and must be in the same folder as the program.\n\nIf you need a new copy of this file, you can download it here: https://github.com/mudkipscience/rail_roulette/blob/main/datastore.json\n'
+        )
+        input('Press enter to exit.')
+
+        exit()
+
     use_enhanced_colours = data['config']['use_enhanced_colours']
 
     if use_enhanced_colours is False:
@@ -739,4 +709,5 @@ def main():
             )
 
 
-main()
+if __name__ == '__main__':
+    main()
