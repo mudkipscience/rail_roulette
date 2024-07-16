@@ -410,7 +410,7 @@ def roll_station(data: dict[str, Any]) -> None:
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
         console.print(
-            f'• [bold]{station}[/bold] is served by the {"".join(station_groups_list)}{"".join(station_lines_list)}.'
+            f'• [bold]{station}[/bold] is served by the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}.'
         )
         console.print(
             f'• [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
