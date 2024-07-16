@@ -19,8 +19,8 @@ This program is now functional, but I plan on sprucing it up a lot and there may
 - ~~Option to reset visited station data to default~~ **done!**
 - ~~Display which station was queued to be visited in the screen that shows if to_visit contains a value~~ **done!**
 - ~~Fix stats screen as it currently displays wonky numbers due to lines sharing stations~~ **done!**
+- ~~Look up info on stations~~ **done!**
 - Add more info to stations (PT connections, nearby stations, whether station is connected to loop and what direction travel is in, average peak/off-peak frequency, opening date, misc info and other fun facts, whether its a junction, etc.)
-- Look up info on stations
 - fancy TUI using Rich (or Blessing? or Textual?)
 - Maybe a GUI eventually?
 - More?
@@ -28,7 +28,7 @@ This program is now functional, but I plan on sprucing it up a lot and there may
 Please keep in the mind I will most likely forget to keep the above up-to-date. Check the code yourself if it's been a few commits since I messed with this README. If anyone except me is even reading this. I wanna be thrown into a wall by chimera Falin ouuuhghbbghghhh
 
 ### Releases:
-Standalone .exe releases are generated using the following pyinstaller command: `pyinstaller --noconfirm --onedir --console --name "Railway Roulette"  "rail_roulette.py"`
+Standalone .exe releases are generated using the following pyinstaller command: `pyinstaller --noconfirm --onedir --console --name "Rail Roulette"  "main.py"`
 
 
 ### Screenshots:
