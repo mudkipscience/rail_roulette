@@ -5,10 +5,10 @@ import re
 from typing import Any
 from rich.console import Console
 
-# Enhanced console output functionality provided by Rich
-console = Console(highlight=False)
+WORKING_DIR = os.getcwd()
+
 # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
-int_to_timerange: dict[int, str] = {
+INT_TO_TIMERANGE: dict[int, str] = {
     0: 'under 10',
     1: '11 to 20',
     2: '21 to 30',
@@ -22,7 +22,7 @@ int_to_timerange: dict[int, str] = {
     10: '101 to 110',
 }
 # dictionary of arrays that lists what group a line is apart of
-line_groups: dict[str, list[str]] = {
+LINE_GROUPS: dict[str, list[str]] = {
     'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
     'Caufield': ['Cranbourne', 'Pakenham'],
     'Clifton Hill': ['Hurstbridge', 'Mernda'],
@@ -30,7 +30,7 @@ line_groups: dict[str, list[str]] = {
     'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
 }
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
-colour_store: dict[str, dict[str, str]] = {
+COLOUR_STORE: dict[str, dict[str, str]] = {
     'enhanced': {
         # Group/line colours
         'Alamein': '#F2F2F2 on #094c8d',
@@ -73,7 +73,10 @@ colour_store: dict[str, dict[str, str]] = {
     },
 }
 # What the program actually reads. Just an un-nested version of whatever is set in datastore.json config
-colours: dict[str, str] = colour_store['enhanced']
+colours: dict[str, str] = COLOUR_STORE['enhanced']
+
+# Enhanced console output functionality provided by Rich
+console = Console(highlight=False)
 
 
 # Runs OS-specific shell command to clear console
@@ -131,7 +134,7 @@ def fmt_lines_groups(data: dict[str, Any], station: str) -> list[list[str]]:
     def prettify_list(items: list[str]) -> None:
         # Adds rich styling (colours here) to each group/station. Found using this syntax was easier over using enumerate() as I need the index of the item anyway.
         for i, item in enumerate(items):
-            colour: str | None = colours.get(item) or colours.get(line_groups[item][0])
+            colour: str | None = colours.get(item) or colours.get(LINE_GROUPS[item][0])
             items[i] = f'[{colour}] {item} [/{colour}]'
 
         # Inserts ' and ' into the second last place in the list.
@@ -158,8 +161,8 @@ def fmt_lines_groups(data: dict[str, Any], station: str) -> list[list[str]]:
 
     # This codeblock checks if all lines in a group serve the station, and if so removes the individual lines and adds the group to reduce clutter.
     # Loop through each group
-    for group in line_groups:
-        group_lines = line_groups[group]
+    for group in LINE_GROUPS:
+        group_lines = LINE_GROUPS[group]
         matched_lines: list[str] = []
 
         # Loop through each line in the group
@@ -259,7 +262,7 @@ def fuzzy_search(data: dict[str, Any], include_visited: bool = False) -> str | N
         else:
             if len(search) > 1:
                 console.print(
-                    'Found multiple stations, please select one from the options below:\n'
+                    '\nFound multiple stations, please select one from the options below:\n'
                 )
 
                 print(print_menu(search + ['Return to main menu']))
@@ -416,7 +419,7 @@ def roll_station(data: dict[str, Any]) -> None:
             f'• [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
         )
         console.print(
-            f'• Journeys to [bold]{station}[/bold] take {int_to_timerange[station_info["time"]]} minutes on average.\n'
+            f'• Journeys to [bold]{station}[/bold] take {INT_TO_TIMERANGE[station_info["time"]]} minutes on average.\n'
         )
         print(print_menu(['Reroll', 'Accept']))
 
@@ -443,7 +446,7 @@ def stats(data: dict[str, Any]) -> None:
     # Returns the count of unvisited and total unique stations in a group in a list [visited, total]
     def count_unique_stns(group: str) -> list[int]:
         # Get lines associated with a group from line_groups dict defined near the top of the file
-        group_lines: list[str] = line_groups[group]
+        group_lines: list[str] = LINE_GROUPS[group]
         # Create two sets. Sets cannot contain duplicate values so it's an easy way of removing duplicate stations and returning more accurate numbers
         unvisited_set: set[str] = set()
         visited_set: set[str] = set()
@@ -484,7 +487,7 @@ def stats(data: dict[str, Any]) -> None:
 
     def group_summary(group: str) -> str:
         group_visited_total: list[int] = count_unique_stns(group)
-        group_lines: list[str] = line_groups[group]
+        group_lines: list[str] = LINE_GROUPS[group]
         colour: str | None = colours.get(group_lines[0])
 
         summary_list = [
@@ -519,7 +522,7 @@ def stats(data: dict[str, Any]) -> None:
     )
 
     # For each group, print out a group summary (prints out the amount visited and total unique stations in that group + same for each line in each group too)
-    for group in line_groups:
+    for group in LINE_GROUPS:
         console.print(group_summary(group) + '\n')
 
     console.print(
@@ -575,7 +578,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 f'• [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
             )
             console.print(
-                f'• Journeys to [bold]{station}[/bold] take {int_to_timerange[station_info["time"]]} minutes on average.'
+                f'• Journeys to [bold]{station}[/bold] take {INT_TO_TIMERANGE[station_info["time"]]} minutes on average.'
             )
             if data['visited'].get(station):
                 if data['visited'][station].get('date_visited'):
@@ -606,7 +609,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
 def ops_menu(data: dict[str, Any]) -> None:
     clear()
 
-    print('\n -+ Options +-\n')
+    print('\n-+ Options +-\n')
     print(
         print_menu(
             [
@@ -658,14 +661,14 @@ def colour_mode(data: dict[str, Any]) -> None:
     while True:
         choice: str = input('> ')
         if choice == '1':
-            colours = colour_store['enhanced']
+            colours = COLOUR_STORE['enhanced']
 
             data['config']['use_enhanced_colours'] = True
             write(data)
 
             break
         elif choice == '2':
-            colours = colour_store['native']
+            colours = COLOUR_STORE['native']
 
             data['config']['use_enhanced_colours'] = False
             write(data)
@@ -805,7 +808,7 @@ def main() -> None:
 
     if use_enhanced_colours is False:
         global colours
-        colours = colour_store['native']
+        colours = COLOUR_STORE['native']
 
     while True:
         clear()
