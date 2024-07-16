@@ -1,0 +1,20 @@
+[project]
+dependencies = [
+    "markdown-it-py==3.0.0",
+    "mdurl==0.1.2",
+    "Pygments==2.18.0",
+    "rich==13.7.1",
+]
+name = "rail_roulette"
+version = "1.0"
+requires-python = "> 3.10"
+
+[tool.pyright]
+pythonVersion = "3.10"
+typeCheckingMode = "strict"
+
+[tool.ruff]
+target-version = "py310"
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
