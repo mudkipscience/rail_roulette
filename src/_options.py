@@ -47,11 +47,16 @@ def menu(data: dict[str, Any]) -> None:
 def change_clr_mode(data: dict[str, Any]) -> None:
     clear()
 
+    current_mode: str = 'Enhanced'
+
+    if data['config']['use_enhanced_colours'] is False:
+        current_mode = 'Native'
+
     print(
         'Configure how line colours are displayed by selecting one of the two modes. Accurate will use colours similar to the actual line colours; Native will use the colours defined by your terminal emulator.\n'
     )
 
-    print(f'Current mode: {data["config"]["use_enhanced_colours"]}\n')
+    print(f'Current mode: {current_mode}\n')
 
     print(print_menu(['Use accurate colours', 'Use native colours', 'Main menu']))
 
