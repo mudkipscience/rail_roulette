@@ -7,6 +7,20 @@ from rich.console import Console
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
+# Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
+int_to_timerange: dict[int, str] = {
+    0: 'under 10',
+    1: '11 to 20',
+    2: '21 to 30',
+    3: '31 to 40',
+    4: '41 to 50',
+    5: '51 to 60',
+    6: '61 to 70',
+    7: '71 to 80',
+    8: '81 to 90',
+    9: '91 to 100',
+    10: '101 to 110',
+}
 # dictionary of arrays that lists what group a line is apart of
 line_groups: dict[str, list[str]] = {
     'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
@@ -151,7 +165,7 @@ def fmt_lines_groups(data: dict[str, Any], station: str) -> list[list[str]]:
         # Loop through each line in the group
         for line in group_lines:
             # Check if the station is served by the group line. If yes append to matched_lines
-            if line in data['unvisited'][station]['line']:
+            if line in station_info['line']:
                 matched_lines.append(line)
 
         # Convert the lists to sets (sets are unordered so this makes the order not matter for comparision) and check if the two sets contain identical items
@@ -241,6 +255,7 @@ def fuzzy_search(data: dict[str, Any], include_visited: bool = False) -> str | N
             print('\nStation not found, recheck spelling.\n')
         elif len(search) > 5:
             print('\nToo many results, try another query.\n')
+            results.clear()
         else:
             if len(search) > 1:
                 console.print(
@@ -385,21 +400,6 @@ def roll_station(data: dict[str, Any]) -> None:
     # Get the name's of all stations by converting the dictionary keys (the names) into a list.
     stations: list[str] = list(data['unvisited'].keys())
 
-    # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
-    int_to_timerange: dict[int, str] = {
-        0: 'under 10',
-        1: '11 to 20',
-        2: '21 to 30',
-        3: '31 to 40',
-        4: '41 to 50',
-        5: '51 to 60',
-        6: '61 to 70',
-        7: '71 to 80',
-        8: '81 to 90',
-        9: '91 to 100',
-        10: '101 to 110',
-    }
-
     while True:
         clear()
 
@@ -423,7 +423,6 @@ def roll_station(data: dict[str, Any]) -> None:
         while True:
             choice: str = input('> ')
             if choice == '1':
-                roll_station(data)
                 break
             elif choice == '2':
                 # Writes the key/station name to to_visit, a string value in datastore.json. This is so we can retrieve info on this station later. For now, we can leave it in unvisited.
@@ -435,7 +434,8 @@ def roll_station(data: dict[str, Any]) -> None:
                     '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
                 )
 
-        break
+        if choice != '1':
+            break
 
 
 # Statistics page. Currently contains info on how many stations have been visited in total and for each group/line.
@@ -550,14 +550,57 @@ def stats(data: dict[str, Any]) -> None:
             )
 
 
-def info_view(data: dict[str, Any]):
-    clear()
+def lookup_stn(data: dict[str, Any]) -> None:
+    while True:
+        clear()
 
-    print('To look up information on a station, type in its name below:\n')
+        print('To look up information on a station, type in its name below:\n')
 
-    user_input: str = input('> ')
+        station: str | None = fuzzy_search(data, True)
 
-    print(user_input)
+        clear()
+
+        if station:
+            station_info: dict[str, Any] = data['unvisited'].get(station) or data[
+                'visited'
+            ].get(station)
+
+            groups_and_lines: list[list[str]] = fmt_lines_groups(data, station)
+
+            console.print(f'-+ {station} +-\n')
+            console.print(
+                f'• [bold]{station}[/bold] is served by the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}.'
+            )
+            console.print(
+                f'• [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
+            )
+            console.print(
+                f'• Journeys to [bold]{station}[/bold] take {int_to_timerange[station_info["time"]]} minutes on average.'
+            )
+            if data['visited'].get(station):
+                if data['visited'][station].get('date_visited'):
+                    console.print(
+                        f'• You visited [bold]{station}[/bold] on {data["visited"][station].get("date_visited")}.'
+                    )
+                else:
+                    console.print(f'• You have visited {station} before.')
+
+            # Print blank line
+            console.print()
+
+            print(print_menu(['Lookup another station', 'Main menu']))
+
+            while True:
+                choice: str = input('> ')
+
+                if choice == '1':
+                    break
+                elif choice == '2':
+                    return
+                else:
+                    print(
+                        '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+                    )
 
 
 def ops_menu(data: dict[str, Any]) -> None:
@@ -780,7 +823,7 @@ def main() -> None:
         elif choice == '2':
             stats(data)
         elif choice == '3':
-            info_view(data)
+            lookup_stn(data)
         elif choice == '4':
             ops_menu(data)
         elif choice == '5':
