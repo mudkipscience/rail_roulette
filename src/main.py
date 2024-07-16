@@ -401,18 +401,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
 
 # Main program
 def main() -> None:
-    data: dict[str, Any] = {}
-
-    # Displays an error if datastore.json is not found in the current working directory rather than crashing outright
-    try:
-        data = read()
-    except FileNotFoundError:
-        print(
-            'Could not find datastore.json. This file is required for Railway Roulette to run and must be in the same folder as the program.\n\nIf you need a new copy of this file, you can download it here: https://github.com/mudkipscience/rail_roulette/blob/main/datastore.json\n'
-        )
-        input('Press enter to exit.')
-
-        exit()
+    data = read()
 
     while True:
         clear()

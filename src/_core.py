@@ -83,15 +83,22 @@ def clear() -> None:
 
 # Load saved, visited and unvisited stations from datastore.json, which should be in the same directory.
 def read() -> dict[str, Any]:
-    # I kind of understand how this works? Basically with is shorthand for a try/except/finally statement and I think there are some benefits beyond that too? I dunno.
-    #  Either way I'm opening a file! - Update 10/07/2024: Apparently what I said is NOT how it works. Guess I'll have to look into it further...
-    with open('../datastore.json', 'r') as file:
-        return json.load(file)
+    # Displays an error if datastore.json is not found in the current working directory rather than crashing outright
+    try:
+        with open('./datastore.json', 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        print(
+            'Could not find datastore.json. This file is required for Railway Roulette to run and must be in the same folder as the program.\n\nIf you need a new copy of this file, you can download it here: https://github.com/mudkipscience/rail_roulette/blob/main/src/datastore.json\n'
+        )
+        input('Press enter to exit.')
+
+        exit()
 
 
 # Write modified .json to datastore.json
 def write(data: dict[str, Any]) -> None:
-    with open('../datastore.json', 'w') as file:
+    with open('./datastore.json', 'w') as file:
         json.dump(data, file, indent=4, sort_keys=True)
 
 
