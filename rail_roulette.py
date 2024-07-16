@@ -112,6 +112,83 @@ def print_title(
     return f'{title_rails}\n{formatted_txt}\n{title_rails}\n'
 
 
+def fmt_lines_groups(data: dict[str, Any], station: str) -> list[list[str]]:
+    # Takes a list and mutates it to add colour to each line/group, as well as adding commas and ' and ' to make nicer and readable when we join it into a string later on.
+    def prettify_list(items: list[str]) -> None:
+        # Adds rich styling (colours here) to each group/station. Found using this syntax was easier over using enumerate() as I need the index of the item anyway.
+        for i, item in enumerate(items):
+            colour: str | None = colours.get(item) or colours.get(line_groups[item][0])
+            items[i] = f'[{colour}] {item} [/{colour}]'
+
+        # Inserts ' and ' into the second last place in the list.
+        if len(items) > 1:
+            items.insert(-1, ' and ')
+
+        # Loop to add commas into each odd index. Checking to see if len > 3 instead of > 2 because we inserted ' and ' above.
+        if len(items) > 3:
+            for i, stn in enumerate(items):
+                # Break if we encounter ' and ' in the list - if we do we do not need any more commas
+                if stn == ' and ':
+                    break
+
+                # Only add a comma if the index is odd
+                if i % 2:
+                    items.insert(i, ', ')
+
+    station_groups_list: list[str] = []
+    station_info: dict[str, Any] = data['unvisited'].get(station) or data[
+        'visited'
+    ].get(station)
+    # Make a copy of the line info because if we mutated it we would end up writing those changes to datastore.json
+    station_lines_list: list[str] = station_info['line'].copy()
+
+    # This codeblock checks if all lines in a group serve the station, and if so removes the individual lines and adds the group to reduce clutter.
+    # Loop through each group
+    for group in line_groups:
+        group_lines = line_groups[group]
+        matched_lines: list[str] = []
+
+        # Loop through each line in the group
+        for line in group_lines:
+            # Check if the station is served by the group line. If yes append to matched_lines
+            if line in data['unvisited'][station]['line']:
+                matched_lines.append(line)
+
+        # Convert the lists to sets (sets are unordered so this makes the order not matter for comparision) and check if the two sets contain identical items
+        if set(matched_lines) == set(group_lines):
+            # If they do, append the group name to be displayed later
+            station_groups_list.append(group)
+
+            # And then remove each line that is apart of that group
+            for line in station_lines_list.copy():
+                if line in matched_lines:
+                    station_lines_list.remove(line)
+
+    if len(station_groups_list) != 0:
+        # prettify_list() adds colour to each line/group + adds commas and 'and' between list items. Check above to see the full function.
+        prettify_list(station_groups_list)
+
+        if len(station_groups_list) == 1:
+            station_groups_list.append(' group')
+        else:
+            station_groups_list.append(' groups')
+
+    if len(station_lines_list) != 0:
+        # Explained this a few lines up
+        prettify_list(station_lines_list)
+
+        if len(station_lines_list) == 1:
+            station_lines_list.append(' line')
+        else:
+            station_lines_list.append(' lines')
+
+    # If the station is served by both lines and groups, put ', and by the ' between the list of groups and lines to make it more readable
+    if len(station_groups_list) > 0 and len(station_lines_list) > 0:
+        station_groups_list.append(', and by the ')
+
+    return [station_groups_list, station_lines_list]
+
+
 # (for now) this function only searches stations based on a partial string (e.g. "fli" will return Flinders Street, "fern" will return Ferntree Gully and Upper Ferntree Gully, "so cro" will return Southern Cross)
 def fuzzy_search(data: dict[str, Any], include_visited: bool = False) -> str | None:
     # Use a set to prevent duplicates
@@ -326,80 +403,10 @@ def roll_station(data: dict[str, Any]) -> None:
     while True:
         clear()
 
-        # Takes a list and mutates it to add colour to each line/group, as well as adding commas and ' and ' to make nicer and readable when we join it into a string later on.
-        def prettify_list(items: list[str]) -> None:
-            # Adds rich styling (colours here) to each group/station. Found using this syntax was easier over using enumerate() as I need the index of the item anyway.
-            for i, item in enumerate(items):
-                colour: str | None = colours.get(item) or colours.get(
-                    line_groups[item][0]
-                )
-                items[i] = f'[{colour}] {item} [/{colour}]'
-
-            # Inserts ' and ' into the second last place in the list.
-            if len(items) > 1:
-                items.insert(-1, ' and ')
-
-            # Loop to add commas into each odd index. Checking to see if len > 3 instead of > 2 because we inserted ' and ' above.
-            if len(items) > 3:
-                for i, stn in enumerate(items):
-                    # Break if we encounter ' and ' in the list - if we do we do not need any more commas
-                    if stn == ' and ':
-                        break
-
-                    # Only add a comma if the index is odd
-                    if i % 2:
-                        items.insert(i, ', ')
-
         # Pick a random station name from our list made above
         station: str = random.choice(stations)
         station_info: dict[str, Any] = data['unvisited'][station]
-        station_groups_list: list[str] = []
-        # Make a copy of the line info because if we mutated it we would end up writing those changes to datastore.json
-        station_lines_list: list[str] = station_info['line'].copy()
-
-        # This codeblock checks if all lines in a group serve the station, and if so removes the individual lines and adds the group to reduce clutter.
-        # Loop through each group
-        for group in line_groups:
-            group_lines = line_groups[group]
-            matched_lines: list[str] = []
-
-            # Loop through each line in the group
-            for line in group_lines:
-                # Check if the station is served by the group line. If yes append to matched_lines
-                if line in data['unvisited'][station]['line']:
-                    matched_lines.append(line)
-
-            # Convert the lists to sets (sets are unordered so this makes the order not matter for comparision) and check if the two sets contain identical items
-            if set(matched_lines) == set(group_lines):
-                # If they do, append the group name to be displayed later
-                station_groups_list.append(group)
-
-                # And then remove each line that is apart of that group
-                for line in station_lines_list.copy():
-                    if line in matched_lines:
-                        station_lines_list.remove(line)
-
-        if len(station_groups_list) != 0:
-            # prettify_list() adds colour to each line/group + adds commas and 'and' between list items. Check above to see the full function.
-            prettify_list(station_groups_list)
-
-            if len(station_groups_list) == 1:
-                station_groups_list.append(' group')
-            else:
-                station_groups_list.append(' groups')
-
-        if len(station_lines_list) != 0:
-            # Explained this a few lines up
-            prettify_list(station_lines_list)
-
-            if len(station_lines_list) == 1:
-                station_lines_list.append(' line')
-            else:
-                station_lines_list.append(' lines')
-
-        # If the station is served by both lines and groups, put ', and by the ' between the list of groups and lines to make it more readable
-        if len(station_groups_list) > 0 and len(station_lines_list) > 0:
-            station_groups_list.append(', and by the ')
+        groups_and_lines: list[list[str]] = fmt_lines_groups(data, station)
 
         console.print(f"Looks like you're heading to... [bold]{station}!\n")
         console.print(
