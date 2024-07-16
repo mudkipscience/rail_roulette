@@ -5,8 +5,6 @@ import re
 from typing import Any
 from rich.console import Console
 
-WORKING_DIR = os.getcwd()
-
 # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
 INT_TO_TIMERANGE: dict[int, str] = {
     0: 'under 10',
@@ -91,13 +89,13 @@ def clear() -> None:
 def read() -> dict[str, Any]:
     # I kind of understand how this works? Basically with is shorthand for a try/except/finally statement and I think there are some benefits beyond that too? I dunno.
     #  Either way I'm opening a file! - Update 10/07/2024: Apparently what I said is NOT how it works. Guess I'll have to look into it further...
-    with open('datastore.json', 'r') as file:
+    with open('../datastore.json', 'r') as file:
         return json.load(file)
 
 
 # Write modified .json to datastore.json
 def write(data: dict[str, Any]) -> None:
-    with open('datastore.json', 'w') as file:
+    with open('../datastore.json', 'w') as file:
         json.dump(data, file, indent=4, sort_keys=True)
 
 
