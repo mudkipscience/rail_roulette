@@ -644,7 +644,7 @@ def mark_visited(data: dict[str, Any]) -> None:
                     'unvisited'
                 ].get(station)
 
-                visited: str | None = data['visited'].get(station)
+                visited: dict[str, Any] = data['visited'].get(station)
 
                 if visited:
                     print(
