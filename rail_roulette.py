@@ -113,10 +113,7 @@ def print_title(
 
 
 # (for now) this function only searches stations based on a partial string (e.g. "fli" will return Flinders Street, "fern" will return Ferntree Gully and Upper Ferntree Gully, "so cro" will return Southern Cross)
-def search_stations(
-    data: dict[str, Any], query: str, include_visited: bool = False
-) -> list[str]:
-    query = query.lower()
+def fuzzy_search(data: dict[str, Any], include_visited: bool = False) -> str | None:
     # Use a set to prevent duplicates
     results: set[str] = set()
 
@@ -150,14 +147,48 @@ def search_stations(
                 if matches_found == len(split_query):
                     results.add(stn)
 
-    find_results(list(data['unvisited'].keys()))
+    while True:
+        query: str = input('> ').lower()
 
-    if include_visited is True:
-        find_results(list(data['visited'].keys()))
+        if len(query) == 0:
+            break
 
-    result_list: list[str] = list(results)
+        find_results(list(data['unvisited'].keys()))
 
-    return sorted(result_list)
+        if include_visited is True:
+            find_results(list(data['visited'].keys()))
+
+        search: list[str] = sorted(list(results))
+
+        if len(search) == 0:
+            print('\nStation not found, recheck spelling.\n')
+        elif len(search) > 5:
+            print('\nToo many results, try another query.\n')
+        else:
+            if len(search) > 1:
+                console.print(
+                    'Found multiple stations, please select one from the options below:\n'
+                )
+
+                print(print_menu(search + ['Return to main menu']))
+                while True:
+                    choice: str | int = input('> ')
+
+                    if not choice.isdigit():
+                        print('\nError: Input must be a valid whole number.\n')
+                    else:
+                        choice = int(choice) - 1
+
+                        if choice < 0 or choice > len(search):
+                            print(
+                                f'\nError: Input must be between 1 and {len(search) + 1}\n'
+                            )
+                        elif choice == len(search):
+                            return
+                        else:
+                            return search[choice]
+            else:
+                return search[0]
 
 
 # We call this when data['unvisited'] has a length of 0 (meaning it contains nothing)
@@ -513,7 +544,13 @@ def stats(data: dict[str, Any]) -> None:
 
 
 def info_view(data: dict[str, Any]):
-    pass
+    clear()
+
+    print('To look up information on a station, type in its name below:\n')
+
+    user_input: str = input('> ')
+
+    print(user_input)
 
 
 def ops_menu(data: dict[str, Any]) -> None:
@@ -599,107 +636,67 @@ def mark_visited(data: dict[str, Any]) -> None:
         'To mark a station as visited, type in its name below. Type nothing to return to the main menu.\n'
     )
 
-    station: str | None = None
+    station = fuzzy_search(data, True)
 
-    while True:
-        user_input: str = input('> ')
-        if len(user_input) == 0:
-            break
-        else:
-            search: list[str] = search_stations(data, user_input, True)
+    if station:
+        stn_data: dict[str, Any] = data['visited'].get(station) or data[
+            'unvisited'
+        ].get(station)
 
-            if len(search) == 0:
-                print('\nStation not found, recheck spelling.\n')
-            elif len(search) > 5:
-                print('\nToo many results, try another query.\n')
-            else:
-                if len(search) > 1:
-                    console.print(
-                        'Found multiple stations, please select one from the options below:\n'
+        visited: dict[str, Any] = data['visited'].get(station)
+
+        if visited:
+            print(
+                f'\n{station} has already been marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
+            )
+            while True:
+                user_input: str = input('> ')
+                user_input = user_input.lower()
+
+                if user_input == 'n':
+                    input(
+                        '\nOperation aborted. Press enter to return to the main menu.'
                     )
+                    return
 
-                    print(print_menu(search + ['Return to main menu']))
-                    while True:
-                        choice: str | int = input('> ')
+                elif user_input == 'y':
+                    break
 
-                        if not choice.isdigit():
-                            print('\nError: Input must be a valid whole number.\n')
-                        else:
-                            choice = int(choice) - 1
-
-                            if choice < 0 or choice > len(search):
-                                print(
-                                    f'\nError: Input must be between 1 and {len(search) + 1}\n'
-                                )
-                            elif choice == len(search):
-                                return
-                            else:
-                                station = search[choice]
-                                break
                 else:
-                    station = search[0]
-
-            if station:
-                stn_data: dict[str, Any] = data['visited'].get(station) or data[
-                    'unvisited'
-                ].get(station)
-
-                visited: dict[str, Any] = data['visited'].get(station)
-
-                if visited:
                     print(
-                        f'\n{station} has already been marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
+                        '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
                     )
-                    while True:
-                        user_input: str = input('> ')
-                        user_input = user_input.lower()
 
-                        if user_input == 'n':
-                            input(
-                                '\nOperation aborted. Press enter to return to the main menu.'
-                            )
-                            return
+        if not visited:
+            # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
+            data['visited'].update({station: stn_data})
 
-                        elif user_input == 'y':
-                            break
+            # If the user provides a date, add on the date the station was visited to the station dict
+            date: str | None = assign_date(station)
 
-                        else:
-                            print(
-                                '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
-                            )
+            if date:
+                data['visited'][station].update({'date_visited': date})
 
-                if not visited:
-                    # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
-                    data['visited'].update({station: stn_data})
+            # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
+            data['unvisited'].pop(station)
+        else:
+            data['unvisited'].update({station: stn_data})
+            # Remove the date_visited key from the station dict
+            if data['unvisited'][station].get('date_visited'):
+                data['unvisited'][station].pop('date_visited')
 
-                    # If the user provides a date, add on the date the station was visited to the station dict
-                    date: str | None = assign_date(station)
+            data['visited'].pop(station)
 
-                    if date:
-                        data['visited'][station].update({'date_visited': date})
+        # If the station provided by the user was queued in to_visit, clear to_visit
+        if data['to_visit'] == station:
+            data['to_visit'] = ''
 
-                    # Now that we've copied over the station dict into visited, we can remove it from unvisited with pop(). Vice versa for the else statement.
-                    data['unvisited'].pop(station)
-                else:
-                    data['unvisited'].update({station: stn_data})
-                    # Remove the date_visited key from the station dict
-                    if data['unvisited'][station].get('date_visited'):
-                        data['unvisited'][station].pop('date_visited')
+        # Write changes to datastore.json so the program remembers them when reopened
+        write(data)
 
-                    data['visited'].pop(station)
-
-                # If the station provided by the user was queued in to_visit, clear to_visit
-                if data['to_visit'] == station:
-                    data['to_visit'] = ''
-
-                # Write changes to datastore.json so the program remembers them when reopened
-                write(data)
-
-                input(
-                    '\nOperation completed successfully. Press enter to return to the main menu.'
-                )
-
-                break
+        input(
+            '\nOperation completed successfully. Press enter to return to the main menu.'
+        )
 
 
 def reset_stations(data: dict[str, Any]) -> None:
