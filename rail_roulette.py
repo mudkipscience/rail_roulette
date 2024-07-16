@@ -237,7 +237,7 @@ def assign_date(stn_name) -> str | None:
     regex = '(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0,1,2])\\/(20)\\d{2}'
 
     print(
-        f'\nType in the date you visited {stn_name} Station in the format of DD/MM/YYYY below, or type "skip" to skip.\n'
+        f'\nType in the date you visited {stn_name} in the format of DD/MM/YYYY below, or type "skip" to skip.\n'
     )
 
     while True:
@@ -550,15 +550,6 @@ def mark_visited(data):
     )
 
     station = None
-    visited = False
-
-    """
-    CURRENT ISSUES:
-    error where if you are given a choice of stations the input correlates wrongly to input + 1
-    need to make error msgs not ass
-    otehr things too probs
-    i like dragon women
-    """
 
     while True:
         user_input = input('> ')
@@ -573,10 +564,8 @@ def mark_visited(data):
                 print('\nToo many results, try another query.\n')
             else:
                 if len(search) > 1:
-                    pretty_search = [f'[italic]{stn}[/italic]' for stn in search]
-
                     console.print(
-                        f'Multiple stations found: {', '.join(pretty_search)}'
+                        'Found multiple stations, please select one from the options below:\n'
                     )
 
                     print(print_menu(search + ['Return to main menu']))
@@ -584,13 +573,15 @@ def mark_visited(data):
                         choice = input('> ')
 
                         if not choice.isdigit():
-                            print('Invalid input')
+                            print('\nError: Input must be a valid whole number.\n')
                         else:
-                            choice = int(choice)
+                            choice = int(choice) - 1
 
-                            if choice == 0 or choice > len(search) + 1:
-                                print('Invalid input')
-                            elif choice == len(search) + 1:
+                            if choice < 0 or choice > len(search):
+                                print(
+                                    f'\nError: Input must be between 1 and {len(search) + 1}\n'
+                                )
+                            elif choice == len(search):
                                 return
                             else:
                                 station = search[choice]
@@ -602,19 +593,21 @@ def mark_visited(data):
                 stn_data = data['visited'].get(station) or data['unvisited'].get(
                     station
                 )
-                if data['visited'].get(station):
+
+                visited = data['visited'].get(station)
+
+                if visited:
                     print(
-                        '\nThis station is already marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
+                        f'\n{station} has already been marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
                     )
                     while True:
                         user_input = input('> ')
                         user_input = user_input.lower()
 
                         if user_input == 'n':
-                            print(
+                            input(
                                 '\nOperation aborted. Press enter to return to the main menu.'
                             )
-                            input()
                             return
 
                         elif user_input == 'y':
@@ -625,7 +618,7 @@ def mark_visited(data):
                                 '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
                             )
 
-                if visited is False:
+                if not visited:
                     # Insert the dict associated with the user provided station into visited after grabbing it from unvisited with get(). Vice versa for the else statement.
                     data['visited'].update({station: stn_data})
 
@@ -640,7 +633,9 @@ def mark_visited(data):
                 else:
                     data['unvisited'].update({station: stn_data})
                     # Remove the date_visited key from the station dict
-                    data['unvisited'][station].pop('date_visited')
+                    if data['unvisited'][station].get('date_visited'):
+                        data['unvisited'][station].pop('date_visited')
+
                     data['visited'].pop(station)
 
                 # If the station provided by the user was queued in to_visit, clear to_visit
@@ -650,10 +645,9 @@ def mark_visited(data):
                 # Write changes to datastore.json so the program remembers them when reopened
                 write(data)
 
-                print(
+                input(
                     '\nOperation completed successfully. Press enter to return to the main menu.'
                 )
-                input()
 
                 break
 
