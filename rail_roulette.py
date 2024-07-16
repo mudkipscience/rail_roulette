@@ -2,12 +2,13 @@ import json
 import os
 import random
 import re
+from typing import Any
 from rich.console import Console
 
 # Enhanced console output functionality provided by Rich
 console = Console(highlight=False)
 # dictionary of arrays that lists what group a line is apart of
-line_groups = {
+line_groups: dict[str, list[str]] = {
     'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
     'Caufield': ['Cranbourne', 'Pakenham'],
     'Clifton Hill': ['Hurstbridge', 'Mernda'],
@@ -15,7 +16,7 @@ line_groups = {
     'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
 }
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
-colour_store = {
+colour_store: dict[str, dict[str, str]] = {
     'enhanced': {
         # Group/line colours
         'Alamein': '#F2F2F2 on #094c8d',
@@ -58,11 +59,11 @@ colour_store = {
     },
 }
 # What the program actually reads. Just an un-nested version of whatever is set in datastore.json config
-colours = colour_store['enhanced']
+colours: dict[str, str] = colour_store['enhanced']
 
 
 # Runs OS-specific shell command to clear console
-def clear():
+def clear() -> None:
     if os.name == 'nt':
         os.system('cls')
     else:
@@ -70,7 +71,7 @@ def clear():
 
 
 # Load saved, visited and unvisited stations from datastore.json, which should be in the same directory.
-def read():
+def read() -> dict[str, Any]:
     # I kind of understand how this works? Basically with is shorthand for a try/except/finally statement and I think there are some benefits beyond that too? I dunno.
     #  Either way I'm opening a file! - Update 10/07/2024: Apparently what I said is NOT how it works. Guess I'll have to look into it further...
     with open('datastore.json', 'r') as file:
@@ -78,47 +79,49 @@ def read():
 
 
 # Write modified .json to datastore.json
-def write(data):
+def write(data: dict[str, Any]) -> None:
     with open('datastore.json', 'w') as file:
         json.dump(data, file, indent=4, sort_keys=True)
 
 
 # Generates a string of options the user can select from. ops is an array of names we want to give to each option.
-def print_menu(ops) -> str:
-    index = 1
-    menu = ''
+def print_menu(ops: list[str]) -> str:
+    menu: str = ''
 
-    for entry in ops:
-        menu += f'{index}) {entry}\n'
-        index += 1
+    for i, entry in enumerate(ops, 1):
+        menu += f'{i}) {entry}\n'
 
     return menu
 
 
 # Prints a rail-styled title like seen in the main menu. args: txt (title text: str) txr_clr (colour to print txt as) rail_clr (colour to print the "rails" as)
-def print_title(txt, txt_clr='default', rail_clr='bright_black') -> str:
-    title_txt = list(txt)
+def print_title(
+    txt: str, txt_clr: str = 'default', rail_clr: str = 'bright_black'
+) -> str:
+    title_txt: list[str] = list(txt)
 
     for i in range(len(title_txt)):
         if title_txt[i] != ' ':
             title_txt[i] = f'[{txt_clr}]{title_txt[i]}[/{txt_clr}]'
 
-    title_rails = f'[{rail_clr}] {"+-" * (len(title_txt) + 2)}+'
-    title_txt = (
+    title_rails: str = f'[{rail_clr}] {"+-" * (len(title_txt) + 2)}+'
+    formatted_txt: str = (
         f'[{rail_clr}] | |{"[" + rail_clr + "]" + "|".join(title_txt)}[{rail_clr}]| |'
     )
 
-    return f'{title_rails}\n{title_txt}\n{title_rails}\n'
+    return f'{title_rails}\n{formatted_txt}\n{title_rails}\n'
 
 
 # (for now) this function only searches stations based on a partial string (e.g. "fli" will return Flinders Street, "fern" will return Ferntree Gully and Upper Ferntree Gully, "so cro" will return Southern Cross)
-def search_stations(data, query, include_visited=False) -> list[str]:
+def search_stations(
+    data: dict[str, Any], query: str, include_visited: bool = False
+) -> list[str]:
     query = query.lower()
     # Use a set to prevent duplicates
-    results = set()
+    results: set[str] = set()
 
-    # Use a nested function to save me writing almost the same code twice
-    def find_results(stations):
+    # Use a nested function to save me writing almost the same code twice - returns none as this mutates the existing variable results which is accessible from this scope
+    def find_results(stations: list[str]) -> None:
         for stn in stations:
             # Basic stuff, if the query (substring) is found to be in the station name, add that station name to the results set
             if query in stn.lower():
@@ -126,17 +129,17 @@ def search_stations(data, query, include_visited=False) -> list[str]:
 
         # Does the same thing as above but only if include_visited is True
         if include_visited is True:
-            visited_stns = data['visited'].keys()
+            visited_stns = list(data['visited'].keys())
             for stn in visited_stns:
                 if query in stn.lower():
                     results.add(stn)
 
         # Split the words in the query at whitespace (fli st becomes ['fli', st'])
-        split_query = query.split()
+        split_query: list[str] = query.split()
 
         if len(split_query) > 1:
             for stn in stations:
-                matches_found = 0
+                matches_found: int = 0
 
                 # Try and match each split query against a station name
                 for substr in split_query:
@@ -147,18 +150,18 @@ def search_stations(data, query, include_visited=False) -> list[str]:
                 if matches_found == len(split_query):
                     results.add(stn)
 
-    find_results(data['unvisited'].keys())
+    find_results(list(data['unvisited'].keys()))
 
     if include_visited is True:
-        find_results(data['visited'].keys())
+        find_results(list(data['visited'].keys()))
 
-    result_list = list(results)
+    result_list: list[str] = list(results)
 
     return sorted(result_list)
 
 
 # We call this when data['unvisited'] has a length of 0 (meaning it contains nothing)
-def no_unvisited():
+def no_unvisited() -> None:
     clear()
 
     print(
@@ -167,7 +170,7 @@ def no_unvisited():
     print(print_menu(['Main menu', 'Exit']))
 
     while True:
-        choice = input('> ')
+        choice: str = input('> ')
 
         if choice == '1':
             break
@@ -180,18 +183,18 @@ def no_unvisited():
 
 
 # Check whether a station name has been written to to_visit dict. If yes, prompt the user whether they want to mark it as visited & continue or return/exit
-def check_to_visit(data):
+def check_to_visit(data: dict[str, Any]) -> None:
     clear()
 
     if len(data['to_visit']) > 0:
-        to_visit = data['to_visit']
+        to_visit: str = data['to_visit']
         print(
             f'Attention! {to_visit} Station has already been chosen as your next station to visit. What would you like to do?\n'
         )
         print(print_menu(['Mark as visited', 'Get a new station', 'Main menu']))
 
         while True:
-            choice = input('> ')
+            choice: str = input('> ')
             if choice == '1':
                 # Insert the dict associated with the randomly chosen station into visited after grabbing it from unvisited with get()
                 data['visited'].update(
@@ -199,7 +202,7 @@ def check_to_visit(data):
                 )
 
                 # If the user provides a date, add on the date the station was visited to the station dict
-                date = assign_date(data['to_visit'])
+                date: str | None = assign_date(data['to_visit'])
 
                 if date:
                     data['visited'][data['to_visit']].update({'date_visited': date})
@@ -232,16 +235,16 @@ def check_to_visit(data):
 
 
 # Asks for a date from the user, checks to make sure it is valid and formatted as DD/MM/YYYY then returns it
-def assign_date(stn_name) -> str | None:
+def assign_date(stn_name: str) -> str | None:
     # Regular expression that checks for a valid DD/MM/YYYY format (I don't think I need to worry about MM/DD/YYYY freaks given this is a Melbourne-specific program)
-    regex = '(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0,1,2])\\/(20)\\d{2}'
+    regex: str = '(0[1-9]|[12][0-9]|3[01])\\/(0[1-9]|1[0,1,2])\\/(20)\\d{2}'
 
     print(
         f'\nType in the date you visited {stn_name} in the format of DD/MM/YYYY below, or type "skip" to skip.\n'
     )
 
     while True:
-        user_input = input('> ')
+        user_input: str = input('> ')
 
         if user_input == 'skip':
             break
@@ -254,7 +257,7 @@ def assign_date(stn_name) -> str | None:
 
         else:
             # Use regex to validate the user input
-            date = re.search(regex, user_input)
+            date: re.Match[str] | None = re.search(regex, user_input)
 
             if date:
                 return user_input
@@ -265,17 +268,17 @@ def assign_date(stn_name) -> str | None:
 
 
 # Selects a random station from the data['unvisited'] dictionary/object by doing (sparkles) magic (sparkles)
-def roll_station(data):
+def roll_station(data: dict[str, Any]) -> None:
     # Check whether there are any stations left to visit (the function we call here is just a screen that congratulates the user and gives options to return to main menu or exit)
     if len(data['unvisited']) == 0:
         no_unvisited()
         return
 
-    # Get the name's of all stations by converting the dictionary keys (the names) into a list. I know I don't need to include keys() but it makes it more readable for me.
-    stations = list(data['unvisited'].keys())
+    # Get the name's of all stations by converting the dictionary keys (the names) into a list.
+    stations: list[str] = list(data['unvisited'].keys())
 
     # Used for converting the time int assigned to each station in datastore.json into something that actually makes sense when you read it.
-    int_to_timerange = {
+    int_to_timerange: dict[int, str] = {
         0: 'under 10',
         1: '11 to 20',
         2: '21 to 30',
@@ -293,10 +296,12 @@ def roll_station(data):
         clear()
 
         # Takes a list and mutates it to add colour to each line/group, as well as adding commas and ' and ' to make nicer and readable when we join it into a string later on.
-        def prettify_list(items):
+        def prettify_list(items: list[str]) -> None:
             # Adds rich styling (colours here) to each group/station. Found using this syntax was easier over using enumerate() as I need the index of the item anyway.
             for i, item in enumerate(items):
-                colour = colours.get(item) or colours.get(line_groups[item][0])
+                colour: str | None = colours.get(item) or colours.get(
+                    line_groups[item][0]
+                )
                 items[i] = f'[{colour}] {item} [/{colour}]'
 
             # Inserts ' and ' into the second last place in the list.
@@ -315,17 +320,17 @@ def roll_station(data):
                         items.insert(i, ', ')
 
         # Pick a random station name from our list made above
-        station = random.choice(stations)
-        station_info = data['unvisited'][station]
-        station_groups_list = []
+        station: str = random.choice(stations)
+        station_info: dict[str, Any] = data['unvisited'][station]
+        station_groups_list: list[str] = []
         # Make a copy of the line info because if we mutated it we would end up writing those changes to datastore.json
-        station_lines_list = station_info['line'].copy()
+        station_lines_list: list[str] = station_info['line'].copy()
 
         # This codeblock checks if all lines in a group serve the station, and if so removes the individual lines and adds the group to reduce clutter.
         # Loop through each group
         for group in line_groups:
             group_lines = line_groups[group]
-            matched_lines = []
+            matched_lines: list[str] = []
 
             # Loop through each line in the group
             for line in group_lines:
@@ -378,7 +383,7 @@ def roll_station(data):
         print(print_menu(['Reroll', 'Accept']))
 
         while True:
-            choice = input('> ')
+            choice: str = input('> ')
             if choice == '1':
                 roll_station(data)
                 break
@@ -396,14 +401,14 @@ def roll_station(data):
 
 
 # Statistics page. Currently contains info on how many stations have been visited in total and for each group/line.
-def stats(data):
+def stats(data: dict[str, Any]) -> None:
     # Returns the count of unvisited and total unique stations in a group in a list [visited, total]
-    def count_unique_stns(group) -> list[int]:
+    def count_unique_stns(group: str) -> list[int]:
         # Get lines associated with a group from line_groups dict defined near the top of the file
-        group_lines = line_groups[group]
+        group_lines: list[str] = line_groups[group]
         # Create two sets. Sets cannot contain duplicate values so it's an easy way of removing duplicate stations and returning more accurate numbers
-        unvisited_set = set()
-        visited_set = set()
+        unvisited_set: set[str] = set()
+        visited_set: set[str] = set()
 
         # Loop through each line in the provided group
         for line in group_lines:
@@ -421,13 +426,13 @@ def stats(data):
             unvisited_set = unvisited_set.union(set(unvisited_list))
             visited_set = visited_set.union(set(visited_list))
 
-        total = len(unvisited_set) + len(visited_set)
+        total: int = len(unvisited_set) + len(visited_set)
 
         # Return the amount of unique stations visited in the group at index 0 and total unique stations in the group
         return [len(visited_set), total]
 
     # Return the count of visited and total stations on a line
-    def count_stations(line):
+    def count_stations(line: str):
         unvisited_stns = [
             stn for stn in data['unvisited'] if line in data['unvisited'][stn]['line']
         ]
@@ -435,14 +440,14 @@ def stats(data):
             stn for stn in data['visited'] if line in data['visited'][stn]['line']
         ]
 
-        total = len(unvisited_stns) + len(visited_stns)
+        total: int = len(unvisited_stns) + len(visited_stns)
 
         return [len(visited_stns), total]
 
-    def group_summary(group):
-        group_visited_total = count_unique_stns(group)
-        group_lines = line_groups[group]
-        colour = colours.get(group_lines[0])
+    def group_summary(group: str) -> str:
+        group_visited_total: list[int] = count_unique_stns(group)
+        group_lines: list[str] = line_groups[group]
+        colour: str | None = colours.get(group_lines[0])
 
         summary_list = [
             f"• You've visited {group_visited_total[0]} out of {group_visited_total[1]} [{colour}] {group} [/{colour}] group stations:"
@@ -467,9 +472,9 @@ def stats(data):
 
     clear()
 
-    flemington_count = count_stations('Flemington Racecourse')
-    stony_count = count_stations('Stony Point')
-    sandringham_count = count_stations('Sandringham')
+    flemington_count: list[int] = count_stations('Flemington Racecourse')
+    stony_count: list[int] = count_stations('Stony Point')
+    sandringham_count: list[int] = count_stations('Sandringham')
 
     console.print(
         f'-+ Statistics +-\n\n[bold]You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations. Breakdown:[/bold]\n'
@@ -495,7 +500,7 @@ def stats(data):
     print(print_menu(['Main menu', 'Exit']))
 
     while True:
-        choice = input('> ')
+        choice: str = input('> ')
 
         if choice == '1':
             break
@@ -507,7 +512,11 @@ def stats(data):
             )
 
 
-def ops_menu(data):
+def info_view(data: dict[str, Any]):
+    pass
+
+
+def ops_menu(data: dict[str, Any]) -> None:
     clear()
 
     print('\n -+ Options +-\n')
@@ -523,7 +532,7 @@ def ops_menu(data):
     )
 
     while True:
-        choice = input('> ')
+        choice: str = input('> ')
 
         if choice == '1':
             colour_mode(data)
@@ -542,21 +551,62 @@ def ops_menu(data):
             )
 
 
-def mark_visited(data):
+def colour_mode(data: dict[str, Any]) -> None:
+    global colours
+    current_mode: str = 'Enhanced'
+
+    if data['config']['use_enhanced_colours'] is False:
+        current_mode = 'Native'
+
+    clear()
+
+    print(
+        'Configure how line colours are displayed by selecting one of the two modes. Accurate will use colours similar to the actual line colours; Native will use the colours defined by your terminal emulator.\n'
+    )
+
+    print(f'Current mode: {current_mode}\n')
+
+    print(print_menu(['Use accurate colours', 'Use native colours', 'Main menu']))
+
+    while True:
+        choice: str = input('> ')
+        if choice == '1':
+            colours = colour_store['enhanced']
+
+            data['config']['use_enhanced_colours'] = True
+            write(data)
+
+            break
+        elif choice == '2':
+            colours = colour_store['native']
+
+            data['config']['use_enhanced_colours'] = False
+            write(data)
+
+            break
+        elif choice == '3':
+            break
+        else:
+            print(
+                '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
+            )
+
+
+def mark_visited(data: dict[str, Any]) -> None:
     clear()
 
     print(
         'To mark a station as visited, type in its name below. Type nothing to return to the main menu.\n'
     )
 
-    station = None
+    station: str | None = None
 
     while True:
-        user_input = input('> ')
+        user_input: str = input('> ')
         if len(user_input) == 0:
             break
         else:
-            search = search_stations(data, user_input, True)
+            search: list[str] = search_stations(data, user_input, True)
 
             if len(search) == 0:
                 print('\nStation not found, recheck spelling.\n')
@@ -570,7 +620,7 @@ def mark_visited(data):
 
                     print(print_menu(search + ['Return to main menu']))
                     while True:
-                        choice = input('> ')
+                        choice: str | int = input('> ')
 
                         if not choice.isdigit():
                             print('\nError: Input must be a valid whole number.\n')
@@ -590,18 +640,18 @@ def mark_visited(data):
                     station = search[0]
 
             if station:
-                stn_data = data['visited'].get(station) or data['unvisited'].get(
-                    station
-                )
+                stn_data: dict[str, Any] = data['visited'].get(station) or data[
+                    'unvisited'
+                ].get(station)
 
-                visited = data['visited'].get(station)
+                visited: str | None = data['visited'].get(station)
 
                 if visited:
                     print(
                         f'\n{station} has already been marked as visited. Do you wish to set it back to being unvisited? (y/n)\n'
                     )
                     while True:
-                        user_input = input('> ')
+                        user_input: str = input('> ')
                         user_input = user_input.lower()
 
                         if user_input == 'n':
@@ -623,7 +673,7 @@ def mark_visited(data):
                     data['visited'].update({station: stn_data})
 
                     # If the user provides a date, add on the date the station was visited to the station dict
-                    date = assign_date(station)
+                    date: str | None = assign_date(station)
 
                     if date:
                         data['visited'][station].update({'date_visited': date})
@@ -652,60 +702,19 @@ def mark_visited(data):
                 break
 
 
-def colour_mode(data):
-    global colours
-    current_mode = 'Enhanced'
-
-    if data['config']['use_enhanced_colours'] is False:
-        current_mode = 'Native'
-
-    clear()
-
-    print(
-        'Configure how line colours are displayed by selecting one of the two modes. Accurate will use colours similar to the actual line colours; Native will use the colours defined by your terminal emulator.\n'
-    )
-
-    print(f'Current mode: {current_mode}\n')
-
-    print(print_menu(['Use accurate colours', 'Use native colours', 'Main menu']))
-
-    while True:
-        choice = input('> ')
-        if choice == '1':
-            colours = colour_store['enhanced']
-
-            data['config']['use_enhanced_colours'] = True
-            write(data)
-
-            break
-        elif choice == '2':
-            colours = colour_store['native']
-
-            data['config']['use_enhanced_colours'] = False
-            write(data)
-
-            break
-        elif choice == '3':
-            break
-        else:
-            print(
-                '\nInvalid choice. Please select one of the listed options above by typing the number next to the option.\n'
-            )
-
-
-def reset_stations(data):
+def reset_stations(data: dict[str, Any]) -> None:
     clear()
 
     console.print(
         'Warning! you are about to reset [bold underline]ALL VISITED STATIONS![/bold underline] Data that will be lost includes which stations have been visited and on what date you visited them. Type "I know what I\'m doing!" to reset all visited stations, or type anything else to return to the main menu.\n'
     )
 
-    user_input = input('> ')
+    user_input: str = input('> ')
 
     if user_input == "I know what I'm doing!":
         visited = data['visited']
         # Get all keys (station names) in data['visited'] and turn it into a list so we know which stations we need to reset
-        station_names = list(visited.keys())
+        station_names: list[str] = list(visited.keys())
 
         # reset data['to_visit'] if it contains a value
         if len(data['to_visit']) > 0:
@@ -731,8 +740,8 @@ def reset_stations(data):
 
 
 # Main program
-def main():
-    data = {}
+def main() -> None:
+    data: dict[str, Any] = {}
 
     # Displays an error if datastore.json is not found in the current working directory rather than crashing outright
     try:
@@ -745,7 +754,7 @@ def main():
 
         exit()
 
-    use_enhanced_colours = data['config']['use_enhanced_colours']
+    use_enhanced_colours: bool = data['config']['use_enhanced_colours']
 
     if use_enhanced_colours is False:
         global colours
@@ -756,17 +765,21 @@ def main():
 
         console.print(print_title('Rail Roulette', 'bright_blue'))
 
-        print(print_menu(['Get next station', 'Statistics', 'Options', 'Exit']))
+        print(
+            print_menu(['Get next station', 'Statistics', 'Lookup', 'Options', 'Exit'])
+        )
 
-        choice = input('> ')
+        choice: str = input('> ')
 
         if choice == '1':
             check_to_visit(data)
         elif choice == '2':
             stats(data)
         elif choice == '3':
-            ops_menu(data)
+            info_view(data)
         elif choice == '4':
+            ops_menu(data)
+        elif choice == '5':
             exit()
         else:
             print(
