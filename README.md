@@ -20,10 +20,21 @@ This program is now functional, but I plan on sprucing it up a lot and there may
 - ~~Display which station was queued to be visited in the screen that shows if to_visit contains a value~~ **done!**
 - ~~Fix stats screen as it currently displays wonky numbers due to lines sharing stations~~ **done!**
 - ~~Look up info on stations~~ **done!**
-- Add more info to stations (PT connections, nearby stations, whether station is connected to loop and what direction travel is in, average peak/off-peak frequency, opening date, misc info and other fun facts, whether its a junction, etc.)
+- Add more info to stations:
+    - Station zone
+    - Location (suburb)
+    - History (date opened, rebuild dates, previous names, etc.)
+    - Amount of platforms
+    - Preceding/following stations. If station has multiple having a way to display this (maybe have a special character prepending the station names to display this?)
+    - Transport links (bus/tram/vline)
+    - City loop info (could attach this to group/line instead to avoid useless repeated k:v in json)
+    - stopping patterns
+    - Station status (premium/host/unstaffed)
+    - Misc for other interesting tidbits
 - fancy TUI using Rich (or Blessing? or Textual?)
 - Maybe a GUI eventually?
 - More?
+ 
 
 Please keep in the mind I will most likely forget to keep the above up-to-date. Check the code yourself if it's been a few commits since I messed with this README. If anyone except me is even reading this. I wanna be thrown into a wall by chimera Falin ouuuhghbbghghhh
 
