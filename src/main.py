@@ -7,11 +7,12 @@ from _core import (
     fuzzy_search,
     get_colours,
     console,
-    INT_TO_TIMERANGE, 
-    LINE_GROUPS
+    INT_TO_TIMERANGE,
+    LINE_GROUPS,
 )
 import _options as ops
 from typing import Any
+from rich.table import Table
 import random
 
 
@@ -364,23 +365,61 @@ def lookup_stn(data: dict[str, Any]) -> None:
 
             groups_and_lines: list[list[str]] = fmt_lines_groups(data, station)
 
-            console.print(f'-+ {station} +-\n')
+            console.print(f'-+ {station} +-\n', justify='center')
+
             console.print(
-                f'• [bold]{station}[/bold] is served by the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}.'
+                f'[bold]{station}[/bold] is located on the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}. [bold]{station}[/bold] serves the suburb of {station_info["location"]}, and opened on the {station_info["opened"]}.'
             )
-            console.print(
-                f'• [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
+
+            if len(station_info['misc']) > 0:
+                console.print('\n• ' + '\n• '.join(station_info['misc']))
+
+            info_left: Table = Table(box=None, pad_edge=False, show_header=False)
+            info_right: Table = Table(box=None, pad_edge=False, show_header=False)
+            info_wrapper: Table = Table(box=None, pad_edge=False, expand=True)
+
+            info_left.add_column()
+            info_left.add_column()
+
+            info_left.add_row(
+                '[bold]Distance:',
+                f'{station_info["distance"]}km from Southern Cross',
             )
-            console.print(
-                f'• Journeys to [bold]{station}[/bold] take {INT_TO_TIMERANGE[station_info["time"]]} minutes on average.'
+            info_left.add_row(
+                '[bold]Travel time:',
+                f'{INT_TO_TIMERANGE[station_info["time"]]} minutes',
             )
+            info_left.add_row('[bold]Platforms:', station_info['platforms'])
+            info_left.add_row('[bold]Status:', station_info['status'])
+
+            info_right.add_column()
+            info_right.add_column()
+
+            info_right.add_row(
+                '[bold]Station/s preceding:', ' '.join(station_info['stns_preceding'])
+            )
+            info_right.add_row(
+                '[bold]Station/s following:', ' '.join(station_info['stns_following'])
+            )
+            info_right.add_row('[bold]Nearby PT:', station_info['nearby_pt'])
+            info_right.add_row('[bold]Code:', station_info['code'])
+
+            info_wrapper.add_column()
+            info_wrapper.add_column()
+
+            info_wrapper.add_row(info_left, info_right)
+
+            console.print(info_wrapper)
+
             if data['visited'].get(station):
                 if data['visited'][station].get('date_visited'):
                     console.print(
-                        f'• You visited [bold]{station}[/bold] on {data["visited"][station].get("date_visited")}.'
+                        f'\n\n[bright_black italic]You visited [bold]{station}[/bold] on {data["unvisited"][station].get("date_visited")}.'
                     )
                 else:
-                    console.print(f'• You have visited {station} before.')
+                    console.print(
+                        f'\n\n[bright_black italic]You have visited {station} before.'
+                    )
 
             # Print blank line
             console.print()

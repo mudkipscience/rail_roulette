@@ -5,11 +5,31 @@
     "to_visit": "",
     "unvisited": {
         "Aircraft": {
+            "code": "ACF",
+            "date_visited": "01/01/1970",
             "distance": 22.23,
             "line": [
                 "Werribee"
             ],
-            "time": 3
+            "location": "Laverton",
+            "misc": [
+                "It was originally named Aviation Siding, before being renamed to Aircraft Siding in 1972 and finally Aircraft in 1963.",
+                "It was built to serve the nearby RAF base. It has been renovated/rebuilt in 1932, 1964 and early 2022.",
+                "The Western standard gauge line passes close by to the North of Platform 1.",
+                "Services going towards Melbourne from Aircraft through-run with the Frankston line."
+            ],
+            "nearby_pt": "Bus",
+            "opened": "7th of March 1926",
+            "platforms": "2 (1 island)",
+            "status": "Unstaffed",
+            "stns_following": [
+                "Laverton"
+            ],
+            "stns_preceding": [
+                "Williams Landing"
+            ],
+            "time": 3,
+            "zone": "2"
         },
         "Alamein": {
             "distance": 16.12,

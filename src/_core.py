@@ -72,6 +72,20 @@ LINE_GROUPS: dict[str, list[str]] = {
     'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
 }
 
+MURL_INFO: dict[str, list[bool | str]] = {
+    'Burnley': [
+        True,
+        'anti-clockwise weekday mornings, clockwise weekday afternoons and weekends',
+        'Alamein services only operate via the Loop on weekdays',
+    ],
+    'Caufield': [True, 'anti-clockwise'],
+    'Clifton Hill': [True, 'clockwise'],
+    'Northern': [
+        True,
+        'clockwise on weekday mornings and weekends, anti-clockwise on weekday afternoons',
+    ],
+}
+
 
 # Runs OS-specific shell command to clear console
 def clear() -> None:
