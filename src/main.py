@@ -7,8 +7,9 @@ from _core import (
     fuzzy_search,
     get_colours,
     console,
+    INT_TO_TIMERANGE, 
+    LINE_GROUPS
 )
-from _core import INT_TO_TIMERANGE, LINE_GROUPS
 import _options as ops
 from typing import Any
 import random

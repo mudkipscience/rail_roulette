@@ -85,7 +85,7 @@ def clear() -> None:
 def read() -> dict[str, Any]:
     # Displays an error if datastore.json is not found in the current working directory rather than crashing outright
     try:
-        with open('./datastore.json', 'r') as file:
+        with open('./data/datastore.json', 'r') as file:
             return json.load(file)
     except FileNotFoundError:
         print(
@@ -98,7 +98,7 @@ def read() -> dict[str, Any]:
 
 # Write modified .json to datastore.json
 def write(data: dict[str, Any]) -> None:
-    with open('./datastore.json', 'w') as file:
+    with open('./data/datastore.json', 'w') as file:
         json.dump(data, file, indent=4, sort_keys=True)
 
 
