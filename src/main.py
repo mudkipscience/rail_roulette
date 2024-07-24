@@ -12,6 +12,7 @@ from _core import (
 )
 import _options as ops
 from typing import Any
+from rich import box
 from rich.table import Table
 import random
 
@@ -368,7 +369,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
             console.print(f'-+ {station} +-\n', justify='center')
 
             console.print(
-                f'[bold]{station}[/bold] is located on the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}. [bold]{station}[/bold] serves the suburb of {station_info["location"]}, and opened on the {station_info["opened"]}.'
+                f'[bold]{station}[/bold] is located on the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}. [bold]{station}[/bold] serves the suburb of {station_info["location"]}, and opened to passengers on the {station_info["opened"]}.'
             )
 
             if len(station_info['misc']) > 0:
@@ -391,25 +392,54 @@ def lookup_stn(data: dict[str, Any]) -> None:
             )
             info_left.add_row('[bold]Platforms:', station_info['platforms'])
             info_left.add_row('[bold]Status:', station_info['status'])
+            info_left.add_row(
+                '[bold]Facilities:', ', '.join(station_info['facilities'])
+            )
 
             info_right.add_column()
             info_right.add_column()
 
             info_right.add_row(
-                '[bold]Station/s preceding:', ' '.join(station_info['stns_preceding'])
+                '[bold]Station/s preceding:', ', '.join(station_info['stns_preceding'])
             )
             info_right.add_row(
-                '[bold]Station/s following:', ' '.join(station_info['stns_following'])
+                '[bold]Station/s following:', ', '.join(station_info['stns_following'])
             )
-            info_right.add_row('[bold]Nearby PT:', station_info['nearby_pt'])
+            info_right.add_row('[bold]Ticketing Zone:', station_info['zone'])
             info_right.add_row('[bold]Code:', station_info['code'])
+            info_right.add_row(
+                '[bold]Accessibility:', ', '.join(station_info['accessibility'])
+            )
 
             info_wrapper.add_column()
             info_wrapper.add_column()
 
             info_wrapper.add_row(info_left, info_right)
 
+            pt_table: Table = Table(
+                title='Public Transport Connections:',
+                title_style='bold',
+                title_justify='full',
+                box=box.ROUNDED,
+                expand=True,
+            )
+
+            pt_table.add_column('Type')
+            pt_table.add_column('Route')
+
+            for pt_type in station_info['nearby_pt']:
+                for route in station_info['nearby_pt'][pt_type]:
+                    pt_table.add_row(
+                        pt_type,
+                        f'{route}: {station_info["nearby_pt"][pt_type][route]}',
+                    )
+
             console.print(info_wrapper)
+
+            if len(station_info['nearby_pt']) > 0:
+                # Print blank line
+                console.print()
+                console.print(pt_table)
 
             if data['visited'].get(station):
                 if data['visited'][station].get('date_visited'):
@@ -421,7 +451,6 @@ def lookup_stn(data: dict[str, Any]) -> None:
                         f'\n\n[bright_black italic]You have visited {station} before.'
                     )
 
-            # Print blank line
             console.print()
 
             print(print_menu(['Lookup another station', 'Main menu']))
