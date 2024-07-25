@@ -32,14 +32,14 @@
                     "420": "Humbert Station - Humburt Station loop service via Northcote",
                     "499": "Humburt Station - Brunswick"
                 },
+                "Train": {
+                    "NSW XPT": "Southern Cross - Orange",
+                    "V/Line": "Southern Cross - Ouyen Station"
+                },
                 "Tram": {
                     "20": "Brunswick - Port Melbourne",
                     "44": "Maribynong - St Kilda Beach",
                     "66": "Humburt Station - Melbourne University"
-                },
-                "Train": {
-                    "NSW XPT": "Southern Cross - Orange",
-                    "V/Line": "Southern Cross - Ouyen Station"
                 }
             },
             "opened": "1st of January 1970",
@@ -98,491 +98,1220 @@
             "zone": "2"
         },
         "Alamein": {
+            "accessibility": [],
+            "code": "",
             "distance": 16.12,
+            "facilities": [],
             "line": [
                 "Alamein"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Albion": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.65,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Alphington": {
+            "accessibility": [],
+            "code": "",
             "distance": 10.46,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Altona": {
+            "accessibility": [],
+            "code": "",
             "distance": 17.15,
+            "facilities": [],
             "line": [
                 "Werribee"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Anstey": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.04,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Armadale": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.67,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Ascot Vale": {
+            "accessibility": [],
+            "code": "",
             "distance": 5.81,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Ashburton": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.39,
+            "facilities": [],
             "line": [
                 "Alamein"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Aspendale": {
+            "accessibility": [],
+            "code": "",
             "distance": 30.31,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Auburn": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.96,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Balaclava": {
+            "accessibility": [],
+            "code": "",
             "distance": 9.08,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Batman": {
+            "accessibility": [],
+            "code": "",
             "distance": 11.23,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Baxter": {
+            "accessibility": [],
+            "code": "",
             "distance": 51.97,
+            "facilities": [],
             "line": [
                 "Stony Point"
             ],
-            "time": 7
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 7,
+            "zone": ""
         },
         "Bayswater": {
+            "accessibility": [],
+            "code": "",
             "distance": 30.76,
+            "facilities": [],
             "line": [
                 "Belgrave"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Beaconsfield": {
+            "accessibility": [],
+            "code": "",
             "distance": 46.99,
+            "facilities": [],
             "line": [
                 "Pakenham"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Belgrave": {
+            "accessibility": [],
+            "code": "",
             "distance": 42.53,
+            "facilities": [],
             "line": [
                 "Belgrave"
             ],
-            "time": 8
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 8,
+            "zone": ""
         },
         "Bell": {
+            "accessibility": [],
+            "code": "",
             "distance": 11.7,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Bentleigh": {
+            "accessibility": [],
+            "code": "",
             "distance": 16.47,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Berwick": {
+            "accessibility": [],
+            "code": "",
             "distance": 44.58,
+            "facilities": [],
             "line": [
                 "Pakenham"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Bittern": {
+            "accessibility": [],
+            "code": "",
             "distance": 68.67,
+            "facilities": [],
             "line": [
                 "Stony Point"
             ],
-            "time": 9
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 9,
+            "zone": ""
         },
         "Blackburn": {
+            "accessibility": [],
+            "code": "",
             "distance": 18.67,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Bonbeach": {
+            "accessibility": [],
+            "code": "",
             "distance": 34.61,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Boronia": {
+            "accessibility": [],
+            "code": "",
             "distance": 33.38,
+            "facilities": [],
             "line": [
                 "Belgrave"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Box Hill": {
+            "accessibility": [],
+            "code": "",
             "distance": 16.16,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Brighton Beach": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.97,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Broadmeadows": {
+            "accessibility": [],
+            "code": "",
             "distance": 16.85,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Brunswick": {
+            "accessibility": [],
+            "code": "",
             "distance": 7.31,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Burnley": {
+            "accessibility": [],
+            "code": "",
             "distance": 5.33,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
                 "Glen Waverley",
                 "Lilydale"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Burwood": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.17,
+            "facilities": [],
             "line": [
                 "Alamein"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Camberwell": {
+            "accessibility": [],
+            "code": "",
             "distance": 10.21,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Canterbury": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.19,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Cardinia Road": {
+            "accessibility": [],
+            "code": "",
             "distance": 53.8,
+            "facilities": [],
             "line": [
                 "Pakenham"
             ],
-            "time": 7
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 7,
+            "zone": ""
         },
         "Carnegie": {
+            "accessibility": [],
+            "code": "",
             "distance": 13.54,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Carrum": {
+            "accessibility": [],
+            "code": "",
             "distance": 36.1,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Caufield": {
+            "accessibility": [],
+            "code": "",
             "distance": 11.79,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Frankston",
                 "Pakenham"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Chatham": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.95,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Chelsea": {
+            "accessibility": [],
+            "code": "",
             "distance": 33.37,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Cheltenham": {
+            "accessibility": [],
+            "code": "",
             "distance": 20.51,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Clifton Hill": {
+            "accessibility": [],
+            "code": "",
             "distance": 6.6,
+            "facilities": [],
             "line": [
                 "Hurstbridge",
                 "Mernda"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Coburg": {
+            "accessibility": [],
+            "code": "",
             "distance": 10.12,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Collingwood": {
+            "accessibility": [],
+            "code": "",
             "distance": 4.83,
+            "facilities": [],
             "line": [
                 "Hurstbridge",
                 "Mernda"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Coolaroo": {
+            "accessibility": [],
+            "code": "",
             "distance": 19.31,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Craigieburn": {
+            "accessibility": [],
+            "code": "",
             "distance": 26.1,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Cranbourne": {
+            "accessibility": [],
+            "code": "",
             "distance": 45.12,
+            "facilities": [],
             "line": [
                 "Cranbourne"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Crib Point": {
+            "accessibility": [],
+            "code": "",
             "distance": 72.83,
+            "facilities": [],
             "line": [
                 "Stony Point"
             ],
-            "time": 10
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 10,
+            "zone": ""
         },
         "Croxton": {
+            "accessibility": [],
+            "code": "",
             "distance": 9.61,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Croydon": {
+            "accessibility": [],
+            "code": "",
             "distance": 31.03,
+            "facilities": [],
             "line": [
                 "Lilydale"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Dandenong": {
+            "accessibility": [],
+            "code": "",
             "distance": 31.19,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Darebin": {
+            "accessibility": [],
+            "code": "",
             "distance": 11.22,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Darling": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.68,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Dennis": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.4,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Diamond Creek": {
+            "accessibility": [],
+            "code": "",
             "distance": 32.63,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Diggers Rest": {
+            "accessibility": [],
+            "code": "",
             "distance": 32.69,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Eaglemont": {
+            "accessibility": [],
+            "code": "",
             "distance": 13.09,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "East Camberwell": {
+            "accessibility": [],
+            "code": "",
             "distance": 11.08,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "East Malvern": {
+            "accessibility": [],
+            "code": "",
             "distance": 13.75,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "East Pakenham": {
+            "accessibility": [],
+            "code": "",
             "distance": 60.04,
+            "facilities": [],
             "line": [
                 "Pakenham"
             ],
-            "time": 8
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 8,
+            "zone": ""
         },
         "East Richmond": {
+            "accessibility": [],
+            "code": "",
             "distance": 4.37,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
                 "Glen Waverley",
                 "Lilydale"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Edithvale": {
+            "accessibility": [],
+            "code": "",
             "distance": 31.67,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Elsternwick": {
+            "accessibility": [],
+            "code": "",
             "distance": 10.95,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Eltham": {
+            "accessibility": [],
+            "code": "",
             "distance": 27.39,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Epping": {
+            "accessibility": [],
+            "code": "",
             "distance": 22.82,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Essendon": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.01,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Fairfield": {
+            "accessibility": [],
+            "code": "",
             "distance": 9.15,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Fawkner": {
+            "accessibility": [],
+            "code": "",
             "distance": 13.23,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Ferntree Gully": {
+            "accessibility": [],
+            "code": "",
             "distance": 35.89,
+            "facilities": [],
             "line": [
                 "Belgrave"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Flagstaff": {
+            "accessibility": [],
+            "code": "",
             "distance": 1.24,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
@@ -596,24 +1325,57 @@
                 "Sunbury",
                 "Upfield"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Flemington Bridge": {
+            "accessibility": [],
+            "code": "",
             "distance": 4.06,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Flemington Racecourse": {
+            "accessibility": [],
+            "code": "",
             "distance": 6.59,
+            "facilities": [],
             "line": [
                 "Flemington Racecourse"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Flinders Street": {
+            "accessibility": [],
+            "code": "",
             "distance": 1.23,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
@@ -632,374 +1394,935 @@
                 "Werribee",
                 "Williamstown"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Footscray": {
+            "accessibility": [],
+            "code": "",
             "distance": 5.62,
+            "facilities": [],
             "line": [
                 "Sunbury",
                 "Werribee",
                 "Williamstown"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Frankston": {
+            "accessibility": [],
+            "code": "",
             "distance": 43.92,
+            "facilities": [],
             "line": [
                 "Frankston",
                 "Stony Point"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Gardenvale": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.35,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Gardiner": {
+            "accessibility": [],
+            "code": "",
             "distance": 10.61,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Ginifer": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.97,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Glen Huntly": {
+            "accessibility": [],
+            "code": "",
             "distance": 13.46,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Glen Iris": {
+            "accessibility": [],
+            "code": "",
             "distance": 11.52,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Glen Waverley": {
+            "accessibility": [],
+            "code": "",
             "distance": 22.23,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Glenbervie": {
+            "accessibility": [],
+            "code": "",
             "distance": 9.13,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Glenferrie": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.12,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Glenroy": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.4,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Gowrie": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.73,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Greensborough": {
+            "accessibility": [],
+            "code": "",
             "distance": 23.07,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Hallam": {
+            "accessibility": [],
+            "code": "",
             "distance": 37.45,
+            "facilities": [],
             "line": [
                 "Pakenham"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Hampton": {
+            "accessibility": [],
+            "code": "",
             "distance": 17.7,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Hartwell": {
+            "accessibility": [],
+            "code": "",
             "distance": 13.3,
+            "facilities": [],
             "line": [
                 "Alamein"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Hastings": {
+            "accessibility": [],
+            "code": "",
             "distance": 64.99,
+            "facilities": [],
             "line": [
                 "Stony Point"
             ],
-            "time": 9
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 9,
+            "zone": ""
         },
         "Hawksburn": {
+            "accessibility": [],
+            "code": "",
             "distance": 6.63,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Hawkstowe": {
+            "accessibility": [],
+            "code": "",
             "distance": 30.73,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Hawthorn": {
+            "accessibility": [],
+            "code": "",
             "distance": 6.89,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Heatherdale": {
+            "accessibility": [],
+            "code": "",
             "distance": 24.42,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Heathmont": {
+            "accessibility": [],
+            "code": "",
             "distance": 28.82,
+            "facilities": [],
             "line": [
                 "Belgrave"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Heidelberg": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.04,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Heyington": {
+            "accessibility": [],
+            "code": "",
             "distance": 7.12,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Highett": {
+            "accessibility": [],
+            "code": "",
             "distance": 20.06,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Holmesglen": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.64,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Hoppers Crossing": {
+            "accessibility": [],
+            "code": "",
             "distance": 27.67,
+            "facilities": [],
             "line": [
                 "Werribee"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Hughesdale": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.27,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Huntingdale": {
+            "accessibility": [],
+            "code": "",
             "distance": 18.26,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Hurstbridge": {
+            "accessibility": [],
+            "code": "",
             "distance": 38.02,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Ivanhoe": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.14,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Jacana": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.43,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Jewell": {
+            "accessibility": [],
+            "code": "",
             "distance": 6.5,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Jolimont": {
+            "accessibility": [],
+            "code": "",
             "distance": 2.91,
+            "facilities": [],
             "line": [
                 "Hurstbridge",
                 "Mernda"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Jordanville": {
+            "accessibility": [],
+            "code": "",
             "distance": 17.64,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Kananook": {
+            "accessibility": [],
+            "code": "",
             "distance": 41.44,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Keilor Plains": {
+            "accessibility": [],
+            "code": "",
             "distance": 19.62,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Kensington": {
+            "accessibility": [],
+            "code": "",
             "distance": 3.58,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Keon Park": {
+            "accessibility": [],
+            "code": "",
             "distance": 17.54,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Kooyong": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.28,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Laburnum": {
+            "accessibility": [],
+            "code": "",
             "distance": 17.82,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Lalor": {
+            "accessibility": [],
+            "code": "",
             "distance": 20.81,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Laverton": {
+            "accessibility": [],
+            "code": "",
             "distance": 21.01,
+            "facilities": [],
             "line": [
                 "Werribee"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Leawarra": {
+            "accessibility": [],
+            "code": "",
             "distance": 45.77,
+            "facilities": [],
             "line": [
                 "Stony Point"
             ],
-            "time": 7
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 7,
+            "zone": ""
         },
         "Lilydale": {
+            "accessibility": [],
+            "code": "",
             "distance": 38.86,
+            "facilities": [],
             "line": [
                 "Lilydale"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Lynbrook": {
+            "accessibility": [],
+            "code": "",
             "distance": 39.59,
+            "facilities": [],
             "line": [
                 "Cranbourne"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Macaulay": {
+            "accessibility": [],
+            "code": "",
             "distance": 3.25,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Macleod": {
+            "accessibility": [],
+            "code": "",
             "distance": 17.71,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Malvern": {
+            "accessibility": [],
+            "code": "",
             "distance": 10.11,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Frankston",
                 "Pakenham"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "McKinnon": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.84,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Melbourne Central": {
+            "accessibility": [],
+            "code": "",
             "distance": 1.85,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
@@ -1013,175 +2336,439 @@
                 "Sunbury",
                 "Upfield"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Mentone": {
+            "accessibility": [],
+            "code": "",
             "distance": 24.48,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Merinda Park": {
+            "accessibility": [],
+            "code": "",
             "distance": 42.35,
+            "facilities": [],
             "line": [
                 "Cranbourne"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Merlynston": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.49,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Mernda": {
+            "accessibility": [],
+            "code": "",
             "distance": 33.07,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Merri": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.04,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Middle Brighton": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.52,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Middle Footscray": {
+            "accessibility": [],
+            "code": "",
             "distance": 6.61,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Middle Gorge": {
+            "accessibility": [],
+            "code": "",
             "distance": 28.34,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Mitcham": {
+            "accessibility": [],
+            "code": "",
             "distance": 22.47,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Montmorency": {
+            "accessibility": [],
+            "code": "",
             "distance": 24.69,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Moonee Ponds": {
+            "accessibility": [],
+            "code": "",
             "distance": 6.89,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Moorabbin": {
+            "accessibility": [],
+            "code": "",
             "distance": 18.45,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Mooroolbark": {
+            "accessibility": [],
+            "code": "",
             "distance": 34.48,
+            "facilities": [],
             "line": [
                 "Lilydale"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Mordialloc": {
+            "accessibility": [],
+            "code": "",
             "distance": 27.69,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Moreland": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.78,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Morradoo": {
+            "accessibility": [],
+            "code": "",
             "distance": 70.96,
+            "facilities": [],
             "line": [
                 "Stony Point"
             ],
-            "time": 9
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 9,
+            "zone": ""
         },
         "Mount Waverley": {
+            "accessibility": [],
+            "code": "",
             "distance": 19,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Murrambeena": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.43,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Narre Warren": {
+            "accessibility": [],
+            "code": "",
             "distance": 40.8,
+            "facilities": [],
             "line": [
                 "Pakenham"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Newmarket": {
+            "accessibility": [],
+            "code": "",
             "distance": 4.3,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Newport": {
+            "accessibility": [],
+            "code": "",
             "distance": 10.56,
+            "facilities": [],
             "line": [
                 "Werribee",
                 "Williamstown"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Noble Park": {
+            "accessibility": [],
+            "code": "",
             "distance": 27.23,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "North Brighton": {
+            "accessibility": [],
+            "code": "",
             "distance": 13.24,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "North Melbourne": {
+            "accessibility": [],
+            "code": "",
             "distance": 1.72,
+            "facilities": [],
             "line": [
                 "Craigieburn",
                 "Flemington Racecourse",
@@ -1190,83 +2777,204 @@
                 "Werribee",
                 "Williamstown"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "North Richmond": {
+            "accessibility": [],
+            "code": "",
             "distance": 4.16,
+            "facilities": [],
             "line": [
                 "Hurstbridge",
                 "Mernda"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "North Williamstown": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.27,
+            "facilities": [],
             "line": [
                 "Williamstown"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Northcote": {
+            "accessibility": [],
+            "code": "",
             "distance": 8.97,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Nunawading": {
+            "accessibility": [],
+            "code": "",
             "distance": 20.77,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Oak Park": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.88,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Oakleigh": {
+            "accessibility": [],
+            "code": "",
             "distance": 16.59,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Officer": {
+            "accessibility": [],
+            "code": "",
             "distance": 51.45,
+            "facilities": [],
             "line": [
                 "Pakenham"
             ],
-            "time": 7
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 7,
+            "zone": ""
         },
         "Ormond": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.02,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Pakenham": {
+            "accessibility": [],
+            "code": "",
             "distance": 58.19,
+            "facilities": [],
             "line": [
                 "Pakenham"
             ],
-            "time": 8
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 8,
+            "zone": ""
         },
         "Parkdale": {
+            "accessibility": [],
+            "code": "",
             "distance": 25.93,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Parliament": {
+            "accessibility": [],
+            "code": "",
             "distance": 3.08,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
@@ -1280,52 +2988,129 @@
                 "Sunbury",
                 "Upfield"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Pascoe Vale": {
+            "accessibility": [],
+            "code": "",
             "distance": 11.27,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Patterson": {
+            "accessibility": [],
+            "code": "",
             "distance": 17.39,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Prahran": {
+            "accessibility": [],
+            "code": "",
             "distance": 6.72,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Preston": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.47,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Regent": {
+            "accessibility": [],
+            "code": "",
             "distance": 13.61,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Reservoir": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.94,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Richmond": {
+            "accessibility": [],
+            "code": "",
             "distance": 3.8,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
@@ -1336,150 +3121,370 @@
                 "Pakenham",
                 "Sandringham"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Ringwood": {
+            "accessibility": [],
+            "code": "",
             "distance": 25.76,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Ringwood East": {
+            "accessibility": [],
+            "code": "",
             "distance": 27.76,
+            "facilities": [],
             "line": [
                 "Lilydale"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Ripponlea": {
+            "accessibility": [],
+            "code": "",
             "distance": 9.83,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Riversdale": {
+            "accessibility": [],
+            "code": "",
             "distance": 11.73,
+            "facilities": [],
             "line": [
                 "Alamein"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Rosanna": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.78,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Roxburgh Park": {
+            "accessibility": [],
+            "code": "",
             "distance": 22.08,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Royal Park": {
+            "accessibility": [],
+            "code": "",
             "distance": 5.46,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Rushall": {
+            "accessibility": [],
+            "code": "",
             "distance": 7.32,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Ruthven": {
+            "accessibility": [],
+            "code": "",
             "distance": 15.95,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Sandown Park": {
+            "accessibility": [],
+            "code": "",
             "distance": 25.68,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Sandringham": {
+            "accessibility": [],
+            "code": "",
             "distance": 19.16,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Seaford": {
+            "accessibility": [],
+            "code": "",
             "distance": 39.35,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Seaholme": {
+            "accessibility": [],
+            "code": "",
             "distance": 16.13,
+            "facilities": [],
             "line": [
                 "Werribee"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Seddon": {
+            "accessibility": [],
+            "code": "",
             "distance": 6.62,
+            "facilities": [],
             "line": [
                 "Werribee",
                 "Williamstown"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Showgrounds": {
+            "accessibility": [],
+            "code": "",
             "distance": 5.73,
+            "facilities": [],
             "line": [
                 "Flemington Racecourse"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Somerville": {
+            "accessibility": [],
+            "code": "",
             "distance": 55.82,
+            "facilities": [],
             "line": [
                 "Stony Point"
             ],
-            "time": 8
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 8,
+            "zone": ""
         },
         "South Kensington": {
+            "accessibility": [],
+            "code": "",
             "distance": 3.49,
+            "facilities": [],
             "line": [
                 "Werribee",
                 "Williamstown"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "South Morang": {
+            "accessibility": [],
+            "code": "",
             "distance": 25.97,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "South Yarra": {
+            "accessibility": [],
+            "code": "",
             "distance": 5.41,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Frankston",
                 "Pakenham",
                 "Sandringham"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Southern Cross": {
+            "accessibility": [],
+            "code": "",
             "distance": 0,
+            "facilities": [],
             "line": [
                 "Alamein",
                 "Belgrave",
@@ -1497,274 +3502,689 @@
                 "Werribee",
                 "Williamstown"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Southland": {
+            "accessibility": [],
+            "code": "",
             "distance": 21.44,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Spotswood": {
+            "accessibility": [],
+            "code": "",
             "distance": 9.22,
+            "facilities": [],
             "line": [
                 "Werribee",
                 "Williamstown"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Springvale": {
+            "accessibility": [],
+            "code": "",
             "distance": 24.5,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "St Albans": {
+            "accessibility": [],
+            "code": "",
             "distance": 17.81,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Stony Point": {
+            "accessibility": [],
+            "code": "",
             "distance": 74.59,
+            "facilities": [],
             "line": [
                 "Stony Point"
             ],
-            "time": 10
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 10,
+            "zone": ""
         },
         "Strathmore": {
+            "accessibility": [],
+            "code": "",
             "distance": 9.79,
+            "facilities": [],
             "line": [
                 "Craigieburn"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Sunbury": {
+            "accessibility": [],
+            "code": "",
             "distance": 38.28,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Sunshine": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.25,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Syndal": {
+            "accessibility": [],
+            "code": "",
             "distance": 20.89,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Tecoma": {
+            "accessibility": [],
+            "code": "",
             "distance": 41.34,
+            "facilities": [],
             "line": [
                 "Belgrave"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Thomastown": {
+            "accessibility": [],
+            "code": "",
             "distance": 19.14,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Thornbury": {
+            "accessibility": [],
+            "code": "",
             "distance": 10.62,
+            "facilities": [],
             "line": [
                 "Mernda"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Toorak": {
+            "accessibility": [],
+            "code": "",
             "distance": 7.91,
+            "facilities": [],
             "line": [
                 "Frankston"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Tooronga": {
+            "accessibility": [],
+            "code": "",
             "distance": 9.59,
+            "facilities": [],
             "line": [
                 "Glen Waverley"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Tottenham": {
+            "accessibility": [],
+            "code": "",
             "distance": 9.1,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Tyabb": {
+            "accessibility": [],
+            "code": "",
             "distance": 59.84,
+            "facilities": [],
             "line": [
                 "Stony Point"
             ],
-            "time": 8
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 8,
+            "zone": ""
         },
         "Union": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.14,
+            "facilities": [],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Upfield": {
+            "accessibility": [],
+            "code": "",
             "distance": 18.86,
+            "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Upper Ferntree Gully": {
+            "accessibility": [],
+            "code": "",
             "distance": 37.66,
+            "facilities": [],
             "line": [
                 "Belgrave"
             ],
-            "time": 5
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 5,
+            "zone": ""
         },
         "Upwey": {
+            "accessibility": [],
+            "code": "",
             "distance": 40.18,
+            "facilities": [],
             "line": [
                 "Belgrave"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Victoria Park": {
+            "accessibility": [],
+            "code": "",
             "distance": 5.42,
+            "facilities": [],
             "line": [
                 "Hurstbridge",
                 "Mernda"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Watergardens": {
+            "accessibility": [],
+            "code": "",
             "distance": 23.28,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Watsonia": {
+            "accessibility": [],
+            "code": "",
             "distance": 19.92,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Wattle Glen": {
+            "accessibility": [],
+            "code": "",
             "distance": 35.06,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 6
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 6,
+            "zone": ""
         },
         "Werribee": {
+            "accessibility": [],
+            "code": "",
             "distance": 31.7,
+            "facilities": [],
             "line": [
                 "Werribee"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "West Footscray": {
+            "accessibility": [],
+            "code": "",
             "distance": 7.33,
+            "facilities": [],
             "line": [
                 "Sunbury"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "West Richmond": {
+            "accessibility": [],
+            "code": "",
             "distance": 3.66,
+            "facilities": [],
             "line": [
                 "Hurstbridge",
                 "Mernda"
             ],
-            "time": 0
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 0,
+            "zone": ""
         },
         "Westall": {
+            "accessibility": [],
+            "code": "",
             "distance": 22.64,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Westgarth": {
+            "accessibility": [],
+            "code": "",
             "distance": 7.55,
+            "facilities": [],
             "line": [
                 "Hurstbridge"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Westona": {
+            "accessibility": [],
+            "code": "",
             "distance": 18.53,
+            "facilities": [],
             "line": [
                 "Werribee"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Williams Landing": {
+            "accessibility": [],
+            "code": "",
             "distance": 23.48,
+            "facilities": [],
             "line": [
                 "Werribee"
             ],
-            "time": 3
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 3,
+            "zone": ""
         },
         "Williamstown": {
+            "accessibility": [],
+            "code": "",
             "distance": 14.2,
+            "facilities": [],
             "line": [
                 "Williamstown"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Williamstown Beach": {
+            "accessibility": [],
+            "code": "",
             "distance": 13.18,
+            "facilities": [],
             "line": [
                 "Williamstown"
             ],
-            "time": 2
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 2,
+            "zone": ""
         },
         "Willison": {
+            "accessibility": [],
+            "code": "",
             "distance": 12.15,
+            "facilities": [],
             "line": [
                 "Alamein"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Windsor": {
+            "accessibility": [],
+            "code": "",
             "distance": 7.49,
+            "facilities": [],
             "line": [
                 "Sandringham"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         },
         "Yarraman": {
+            "accessibility": [],
+            "code": "",
             "distance": 29.04,
+            "facilities": [],
             "line": [
                 "Cranbourne",
                 "Pakenham"
             ],
-            "time": 4
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 4,
+            "zone": ""
         },
         "Yarraville": {
+            "accessibility": [],
+            "code": "",
             "distance": 7.54,
+            "facilities": [],
             "line": [
                 "Werribee",
                 "Williamstown"
             ],
-            "time": 1
+            "misc": [],
+            "nearby_pt": {},
+            "opened": "",
+            "platforms": "",
+            "status": "",
+            "stns_following": "",
+            "stns_preceding": "",
+            "time": 1,
+            "zone": ""
         }
     },
     "visited": {}
