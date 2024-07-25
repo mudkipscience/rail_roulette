@@ -12,7 +12,6 @@ from _core import (
 )
 import _options as ops
 from typing import Any
-from rich import box
 from rich.table import Table
 import random
 
@@ -366,7 +365,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
 
             groups_and_lines: list[list[str]] = fmt_lines_groups(data, station)
 
-            console.print(f'-+ {station} +-\n', justify='center')
+            console.print(f'[bold]-+ {station} +-\n', justify='center')
 
             console.print(
                 f'[bold]{station}[/bold] is located on the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}. [bold]{station}[/bold] serves the suburb of {station_info["location"]}, and opened to passengers on the {station_info["opened"]}.'
@@ -379,9 +378,8 @@ def lookup_stn(data: dict[str, Any]) -> None:
             info_right: Table = Table(box=None, pad_edge=False, show_header=False)
             info_wrapper: Table = Table(box=None, pad_edge=False, expand=True)
 
+            info_left.add_column(max_width=12)
             info_left.add_column()
-            info_left.add_column()
-
             info_left.add_row(
                 '[bold]Distance:',
                 f'{station_info["distance"]}km from Southern Cross',
@@ -411,35 +409,48 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 '[bold]Accessibility:', ', '.join(station_info['accessibility'])
             )
 
-            info_wrapper.add_column()
-            info_wrapper.add_column()
+            pt_tables: list[Table] = []
+
+            for pt_type in station_info['nearby_pt']:
+                title: str = pt_type
+
+                if pt_type == 'Bus':
+                    title = 'Buse'
+
+                table: Table = Table(
+                    expand=True,
+                    show_header=False,
+                    show_lines=True,
+                    title=f'-+ Nearby {title}s +-',
+                    title_style='bold',
+                )
+
+                table.add_column()
+                table.add_column()
+
+                for route in station_info['nearby_pt'][pt_type]:
+                    table.add_row(
+                        route,
+                        station_info['nearby_pt'][pt_type][route],
+                    )
+
+                pt_tables.append(table)
+
+            info_wrapper.add_column(ratio=1)
+            info_wrapper.add_column(ratio=1)
 
             info_wrapper.add_row(info_left, info_right)
 
-            pt_table: Table = Table(
-                title='Public Transport Connections:',
-                title_style='bold',
-                title_justify='full',
-                box=box.ROUNDED,
-                expand=True,
-            )
-
-            pt_table.add_column('Type')
-            pt_table.add_column('Route')
-
-            for pt_type in station_info['nearby_pt']:
-                for route in station_info['nearby_pt'][pt_type]:
-                    pt_table.add_row(
-                        pt_type,
-                        f'{route}: {station_info["nearby_pt"][pt_type][route]}',
-                    )
+            if len(pt_tables) > 1:
+                info_wrapper.add_row()
+                info_wrapper.add_row(pt_tables[0], pt_tables[1])
 
             console.print(info_wrapper)
 
-            if len(station_info['nearby_pt']) > 0:
-                # Print blank line
-                console.print()
-                console.print(pt_table)
+            if len(pt_tables) == 1 or len(pt_tables) == 3:
+                if len(pt_tables) == 1:
+                    print()
+                console.print(pt_tables[len(pt_tables) - 1])
 
             if data['visited'].get(station):
                 if data['visited'][station].get('date_visited'):
