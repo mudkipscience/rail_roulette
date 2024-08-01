@@ -1,4 +1,4 @@
-from _core import (
+from core import (
     clear,
     print_menu,
     assign_date,
@@ -10,7 +10,7 @@ from _core import (
     INT_TO_TIMERANGE,
     LINE_GROUPS,
 )
-import _options as ops
+import options as ops
 from typing import Any
 from rich.table import Table
 import random

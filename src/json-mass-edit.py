@@ -1,4 +1,4 @@
-from _core import read, write
+from core import read, write
 
 data = read()
 unvisited = data['unvisited']

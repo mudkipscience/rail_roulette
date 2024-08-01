@@ -1,5 +1,5 @@
 from typing import Any
-from _core import (
+from core import (
     clear,
     print_menu,
     write,
