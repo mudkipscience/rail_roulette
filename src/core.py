@@ -72,19 +72,23 @@ LINE_GROUPS: dict[str, list[str]] = {
     'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
 }
 
-MURL_INFO: dict[str, list[bool | str]] = {
-    'Burnley': [
-        True,
-        'anti-clockwise weekday mornings, clockwise weekday afternoons and weekends',
-        'Alamein services only operate via the Loop on weekdays',
-    ],
-    'Caufield': [True, 'anti-clockwise'],
-    'Clifton Hill': [True, 'clockwise'],
-    'Northern': [
-        True,
-        'clockwise on weekday mornings and weekends, anti-clockwise on weekday afternoons',
-    ],
+CITY_LOOP_INFO: dict[str, str] = {
+    'Burnley': 'Burnley group services travel anti-clockwise through the city loop on weekday mornings, clockwise on weekday afternoons and weekends.',
+    'Caufield': 'Caufield group services travel anti-clockwise through the city loop.',
+    'Clifton Hill': 'Clifton Hill group services travel clockwise through the city loop.',
+    'Northern': 'Northern group services travel clockwise through the city loop on weekday mornings and weekends, anti-clockwise on weekday afternoons.',
 }
+
+MISC_LINE_INFO: dict[str, str] = {
+    'Alamein': 'Services on the Alamein line operate as a shuttle to Camperwell Station outside of weekday peaks.',
+    'Frankston': 'Frankston line up services may through-run with the Werribee and Williamstown lines.',
+    'Werribee': 'Werribee line up services may through-run with the Frankston line.',
+    'Williamstown': 'Williamstown line up services may through-run with the Frankston line.',
+}
+
+MISC_LINE_INFO_CONFLICTS: list[list[str]] = [
+    ['Frankston', 'Werribee', 'Williamstown'],
+]
 
 
 # Runs OS-specific shell command to clear console

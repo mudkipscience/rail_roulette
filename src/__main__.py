@@ -9,6 +9,9 @@ from core import (
     console,
     INT_TO_TIMERANGE,
     LINE_GROUPS,
+    CITY_LOOP_INFO,
+    MISC_LINE_INFO,
+    MISC_LINE_INFO_CONFLICTS,
 )
 import options as ops
 from typing import Any
@@ -363,7 +366,34 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 'visited'
             ].get(station)
 
+            # Prettify the groups and lines the station is served by, adding colour and proper punctuation
             groups_and_lines: list[list[str]] = fmt_lines_groups(data, station)
+            # List containing misc info on the lines and groups the station is served by, grabbed from constants stored in core.py
+            shared_info: list[str] = []
+            # Stations to ignore (to prevent duplicate info from appearing)
+            ignore: list[str] = []
+
+            # Check for stations that are associated with conflicting/duplicate info to each other
+            for conflict_list in MISC_LINE_INFO_CONFLICTS:
+                conflicts_found: list[str] = []
+
+                for potential in conflict_list:
+                    if potential in station_info['line']:
+                        conflicts_found.append(potential)
+
+                if len(conflicts_found) > 1:
+                    ignore += conflicts_found
+
+            # Add relevant misc info stored in constants to shared_info
+            for stn_line in station_info['line']:
+                for inf_line in MISC_LINE_INFO:
+                    if stn_line == inf_line and stn_line not in ignore:
+                        shared_info.append(MISC_LINE_INFO[inf_line])
+
+            # Add relevant city loop info stored in constants to shared_info
+            for group in CITY_LOOP_INFO:
+                if group in ''.join(groups_and_lines[0]):
+                    shared_info.append(CITY_LOOP_INFO[group])
 
             console.print(f'[bold]-+ {station} +-\n', justify='center')
 
@@ -371,8 +401,8 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 f'[bold]{station}[/bold] is located on the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}. [bold]{station}[/bold] serves the suburb of {station_info["location"]}, and opened to passengers on the {station_info["opened"]}.'
             )
 
-            if len(station_info['misc']) > 0:
-                console.print('\n• ' + '\n• '.join(station_info['misc']))
+            if len(station_info['misc'] + shared_info) > 0:
+                console.print('\n• ' + '\n• '.join(station_info['misc'] + shared_info))
 
             info_left: Table = Table(box=None, pad_edge=False, show_header=False)
             info_right: Table = Table(box=None, pad_edge=False, show_header=False)
