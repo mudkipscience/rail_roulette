@@ -1,19 +1,5 @@
-from core import (
-    clear,
-    print_menu,
-    assign_date,
-    read,
-    write,
-    fuzzy_search,
-    get_colours,
-    console,
-    INT_TO_TIMERANGE,
-    LINE_GROUPS,
-    CITY_LOOP_INFO,
-    MISC_LINE_INFO,
-    MISC_LINE_INFO_CONFLICTS,
-)
-import options as ops
+import core
+import options
 from typing import Any
 from rich.table import Table
 import random
@@ -40,10 +26,12 @@ def print_title(
 def fmt_lines_groups(data: dict[str, Any], station: str) -> list[list[str]]:
     # Takes a list and mutates it to add colour to each line/group, as well as adding commas and ' and ' to make nicer and readable when we join it into a string later on.
     def prettify_list(items: list[str]) -> None:
-        colours = get_colours(data)
+        colours = core.get_colours(data)
         # Adds rich styling (colours here) to each group/station. Found using this syntax was easier over using enumerate() as I need the index of the item anyway.
         for i, item in enumerate(items):
-            colour: str | None = colours.get(item) or colours.get(LINE_GROUPS[item][0])
+            colour: str | None = colours.get(item) or colours.get(
+                core.LINE_GROUPS[item][0]
+            )
             items[i] = f'[{colour}] {item} [/{colour}]'
 
         # Inserts ' and ' into the second last place in the list.
@@ -70,8 +58,8 @@ def fmt_lines_groups(data: dict[str, Any], station: str) -> list[list[str]]:
 
     # This codeblock checks if all lines in a group serve the station, and if so removes the individual lines and adds the group to reduce clutter.
     # Loop through each group
-    for group in LINE_GROUPS:
-        group_lines = LINE_GROUPS[group]
+    for group in core.LINE_GROUPS:
+        group_lines = core.LINE_GROUPS[group]
         matched_lines: list[str] = []
 
         # Loop through each line in the group
@@ -117,12 +105,12 @@ def fmt_lines_groups(data: dict[str, Any], station: str) -> list[list[str]]:
 
 # We call this when data['unvisited'] has a length of 0 (meaning it contains nothing)
 def no_unvisited() -> None:
-    clear()
+    core.clear()
 
     print(
         "There aren't any more stations to visit - you've been to them all! Congratulations!\n"
     )
-    print(print_menu(['Main menu', 'Exit']))
+    core.print_menu(['Main menu', 'Exit'])
 
     while True:
         choice: str = input('> ')
@@ -139,14 +127,14 @@ def no_unvisited() -> None:
 
 # Check whether a station name has been written to to_visit dict. If yes, prompt the user whether they want to mark it as visited & continue or return/exit
 def check_to_visit(data: dict[str, Any]) -> None:
-    clear()
+    core.clear()
 
     if len(data['to_visit']) > 0:
         to_visit: str = data['to_visit']
         print(
             f'Attention! {to_visit} Station has already been chosen as your next station to visit. What would you like to do?\n'
         )
-        print(print_menu(['Mark as visited', 'Get a new station', 'Main menu']))
+        core.print_menu(['Mark as visited', 'Get a new station', 'Main menu'])
 
         while True:
             choice: str = input('> ')
@@ -157,7 +145,7 @@ def check_to_visit(data: dict[str, Any]) -> None:
                 )
 
                 # If the user provides a date, add on the date the station was visited to the station dict
-                date: str | None = assign_date(data['to_visit'])
+                date: str | None = core.assign_date(data['to_visit'])
 
                 if date:
                     data['visited'][data['to_visit']].update({'date_visited': date})
@@ -167,14 +155,14 @@ def check_to_visit(data: dict[str, Any]) -> None:
                 # Reset to_visit to be an empty string again. We do this for option 2 below as well.
                 data['to_visit'] = ''
                 # Write changes to datastore.json so the program remembers them when reopened
-                write(data)
+                core.write(data)
 
                 roll_station(data)
 
                 break
             elif choice == '2':
                 data['to_visit'] = ''
-                write(data)
+                core.write(data)
 
                 roll_station(data)
 
@@ -200,24 +188,24 @@ def roll_station(data: dict[str, Any]) -> None:
     stations: list[str] = list(data['unvisited'].keys())
 
     while True:
-        clear()
+        core.clear()
 
         # Pick a random station name from our list made above
         station: str = random.choice(stations)
         station_info: dict[str, Any] = data['unvisited'][station]
         groups_and_lines: list[list[str]] = fmt_lines_groups(data, station)
 
-        console.print(f"Looks like you're heading to... [bold]{station}!\n")
-        console.print(
+        core.console.print(f"Looks like you're heading to... [bold]{station}!\n")
+        core.console.print(
             f'• [bold]{station}[/bold] is served by the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}.'
         )
-        console.print(
+        core.console.print(
             f'• [bold]{station}[/bold] is {station_info["distance"]}km from Southern Cross.'
         )
-        console.print(
-            f'• Journeys to [bold]{station}[/bold] take {INT_TO_TIMERANGE[station_info["time"]]} minutes on average.\n'
+        core.console.print(
+            f'• Journeys to [bold]{station}[/bold] take {core.INT_TO_TIMERANGE[station_info["time"]]} minutes on average.\n'
         )
-        print(print_menu(['Reroll', 'Accept']))
+        core.print_menu(['Reroll', 'Accept'])
 
         while True:
             choice: str = input('> ')
@@ -226,7 +214,7 @@ def roll_station(data: dict[str, Any]) -> None:
             elif choice == '2':
                 # Writes the key/station name to to_visit, a string value in datastore.json. This is so we can retrieve info on this station later. For now, we can leave it in unvisited.
                 data['to_visit'] = station
-                write(data)
+                core.write(data)
                 break
             else:
                 print(
@@ -239,12 +227,12 @@ def roll_station(data: dict[str, Any]) -> None:
 
 # Statistics page. Currently contains info on how many stations have been visited in total and for each group/line.
 def stats(data: dict[str, Any]) -> None:
-    colours: dict[str, str] = get_colours(data)
+    colours: dict[str, str] = core.get_colours(data)
 
     # Returns the count of unvisited and total unique stations in a group in a list [visited, total]
     def count_unique_stns(group: str) -> list[int]:
         # Get lines associated with a group from line_groups dict defined near the top of the file
-        group_lines: list[str] = LINE_GROUPS[group]
+        group_lines: list[str] = core.LINE_GROUPS[group]
         # Create two sets. Sets cannot contain duplicate values so it's an easy way of removing duplicate stations and returning more accurate numbers
         unvisited_set: set[str] = set()
         visited_set: set[str] = set()
@@ -285,7 +273,7 @@ def stats(data: dict[str, Any]) -> None:
 
     def group_summary(group: str) -> str:
         group_visited_total: list[int] = count_unique_stns(group)
-        group_lines: list[str] = LINE_GROUPS[group]
+        group_lines: list[str] = core.LINE_GROUPS[group]
         colour: str | None = colours.get(group_lines[0])
 
         summary_list = [
@@ -309,34 +297,34 @@ def stats(data: dict[str, Any]) -> None:
 
         return '\n'.join(summary_list)
 
-    clear()
+    core.clear()
 
     flemington_count: list[int] = count_stations('Flemington Racecourse')
     stony_count: list[int] = count_stations('Stony Point')
     sandringham_count: list[int] = count_stations('Sandringham')
 
-    console.print(
+    core.console.print(
         f'-+ Statistics +-\n\n[bold]You have visited {len(data["visited"])} out of {len(data["visited"]) + len(data["unvisited"])} stations. Breakdown:[/bold]\n'
     )
 
     # For each group, print out a group summary (prints out the amount visited and total unique stations in that group + same for each line in each group too)
-    for group in LINE_GROUPS:
-        console.print(group_summary(group) + '\n')
+    for group in core.LINE_GROUPS:
+        core.console.print(group_summary(group) + '\n')
 
-    console.print(
+    core.console.print(
         f'• You\'ve visited {flemington_count[0]} out of {flemington_count[1]} stations on the [{colours["Flemington Racecourse"]}] Flemington Racecourse [/{colours["Flemington Racecourse"]}] line.'
     )
-    console.print(
+    core.console.print(
         f'• You\'ve visited {stony_count[0]} out of {stony_count[1]} stations on the [{colours["Stony Point"]}] Stony Point [/{colours["Stony Point"]}] line.'
     )
-    console.print(
+    core.console.print(
         f'• You\'ve visited {sandringham_count[0]} out of {sandringham_count[1]} stations on the [{colours["Sandringham"]}] Sandringham [/{colours["Sandringham"]}] line.'
     )
-    console.print(
+    core.console.print(
         '\n[bright_black italic]Note: Individual line totals will not add up to the group total as duplicate stations are removed when calculating the group total.[/bright_black italic]\n'
     )
 
-    print(print_menu(['Main menu', 'Exit']))
+    core.print_menu(['Main menu', 'Exit'])
 
     while True:
         choice: str = input('> ')
@@ -353,13 +341,13 @@ def stats(data: dict[str, Any]) -> None:
 
 def lookup_stn(data: dict[str, Any]) -> None:
     while True:
-        clear()
+        core.clear()
 
         print('To look up information on a station, type in its name below:\n')
 
-        station: str | None = fuzzy_search(data, True)
+        station: str | None = core.fuzzy_search(data, True)
 
-        clear()
+        core.clear()
 
         if station:
             station_info: dict[str, Any] = data['unvisited'].get(station) or data[
@@ -374,7 +362,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
             ignore: list[str] = []
 
             # Check for stations that are associated with conflicting/duplicate info to each other
-            for conflict_list in MISC_LINE_INFO_CONFLICTS:
+            for conflict_list in core.MISC_LINE_INFO_CONFLICTS:
                 conflicts_found: list[str] = []
 
                 for potential in conflict_list:
@@ -386,23 +374,25 @@ def lookup_stn(data: dict[str, Any]) -> None:
 
             # Add relevant misc info stored in constants to shared_info
             for stn_line in station_info['line']:
-                for inf_line in MISC_LINE_INFO:
+                for inf_line in core.MISC_LINE_INFO:
                     if stn_line == inf_line and stn_line not in ignore:
-                        shared_info.append(MISC_LINE_INFO[inf_line])
+                        shared_info.append(core.MISC_LINE_INFO[inf_line])
 
             # Add relevant city loop info stored in constants to shared_info
-            for group in CITY_LOOP_INFO:
+            for group in core.CITY_LOOP_INFO:
                 if group in ''.join(groups_and_lines[0]):
-                    shared_info.append(CITY_LOOP_INFO[group])
+                    shared_info.append(core.CITY_LOOP_INFO[group])
 
-            console.print(f'[bold]-+ {station} +-\n', justify='center')
+            core.console.print(f'[bold]-+ {station} +-\n', justify='center')
 
-            console.print(
+            core.console.print(
                 f'[bold]{station}[/bold] is located on the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}. [bold]{station}[/bold] serves the suburb of {station_info["location"]}, and opened to passengers on the {station_info["opened"]}.'
             )
 
             if len(station_info['misc'] + shared_info) > 0:
-                console.print('\n• ' + '\n• '.join(station_info['misc'] + shared_info))
+                core.console.print(
+                    '\n• ' + '\n• '.join(station_info['misc'] + shared_info)
+                )
 
             info_left: Table = Table(box=None, pad_edge=False, show_header=False)
             info_right: Table = Table(box=None, pad_edge=False, show_header=False)
@@ -416,7 +406,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
             )
             info_left.add_row(
                 '[bold]Travel time:',
-                f'{INT_TO_TIMERANGE[station_info["time"]]} minutes',
+                f'{core.INT_TO_TIMERANGE[station_info["time"]]} minutes',
             )
             info_left.add_row('[bold]Platforms:', station_info['platforms'])
             info_left.add_row('[bold]Status:', station_info['status'])
@@ -475,26 +465,26 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 info_wrapper.add_row()
                 info_wrapper.add_row(pt_tables[0], pt_tables[1])
 
-            console.print(info_wrapper)
+            core.console.print(info_wrapper)
 
             if len(pt_tables) == 1 or len(pt_tables) == 3:
                 if len(pt_tables) == 1:
                     print()
-                console.print(pt_tables[len(pt_tables) - 1])
+                core.console.print(pt_tables[len(pt_tables) - 1])
 
             if data['visited'].get(station):
                 if data['visited'][station].get('date_visited'):
-                    console.print(
+                    core.console.print(
                         f'\n\n[bright_black italic]You visited [bold]{station}[/bold] on {data["unvisited"][station].get("date_visited")}.'
                     )
                 else:
-                    console.print(
+                    core.console.print(
                         f'\n\n[bright_black italic]You have visited {station} before.'
                     )
 
-            console.print()
+            core.console.print()
 
-            print(print_menu(['Lookup another station', 'Main menu']))
+            core.print_menu(['Lookup another station', 'Main menu'])
 
             while True:
                 choice: str = input('> ')
@@ -511,15 +501,15 @@ def lookup_stn(data: dict[str, Any]) -> None:
 
 # Main program
 def main() -> None:
-    data = read()
+    data = core.read()
 
     while True:
-        clear()
+        core.clear()
 
-        console.print(print_title('Rail Roulette', 'bright_blue'))
+        core.console.print(print_title('Rail Roulette', 'bright_blue'))
 
-        print(
-            print_menu(['Get next station', 'Statistics', 'Lookup', 'Options', 'Exit'])
+        core.print_menu(
+            ['Get next station', 'Statistics', 'Lookup', 'Options', 'Exit']
         )
 
         choice: str = input('> ')
@@ -531,7 +521,7 @@ def main() -> None:
         elif choice == '3':
             lookup_stn(data)
         elif choice == '4':
-            ops.menu(data)
+            options.menu(data)
         elif choice == '5':
             exit()
         else:

@@ -1,20 +1,13 @@
 from typing import Any
-from core import (
-    clear,
-    print_menu,
-    write,
-    fuzzy_search,
-    assign_date,
-    console,
-)
+import core
 
 
 def menu(data: dict[str, Any]) -> None:
-    clear()
+    core.clear()
 
     print('\n-+ Options +-\n')
     print(
-        print_menu(
+        core.print_menu(
             [
                 'Colour mode',
                 'Mark station as visited',
@@ -45,7 +38,7 @@ def menu(data: dict[str, Any]) -> None:
 
 
 def change_clr_mode(data: dict[str, Any]) -> None:
-    clear()
+    core.clear()
 
     current_mode: str = 'Enhanced'
 
@@ -58,18 +51,18 @@ def change_clr_mode(data: dict[str, Any]) -> None:
 
     print(f'Current mode: {current_mode}\n')
 
-    print(print_menu(['Use accurate colours', 'Use native colours', 'Main menu']))
+    core.print_menu(['Use accurate colours', 'Use native colours', 'Main menu'])
 
     while True:
         choice: str = input('> ')
         if choice == '1':
             data['config']['use_enhanced_colours'] = True
-            write(data)
+            core.write(data)
 
             break
         elif choice == '2':
             data['config']['use_enhanced_colours'] = False
-            write(data)
+            core.write(data)
 
             break
         elif choice == '3':
@@ -81,13 +74,13 @@ def change_clr_mode(data: dict[str, Any]) -> None:
 
 
 def mark_visited(data: dict[str, Any]) -> None:
-    clear()
+    core.clear()
 
     print(
         'To mark a station as visited, type in its name below. Type nothing to return to the main menu.\n'
     )
 
-    station: str | None = fuzzy_search(data, True)
+    station: str | None = core.fuzzy_search(data, True)
 
     if station:
         stn_data: dict[str, Any] = data['visited'].get(station) or data[
@@ -123,7 +116,7 @@ def mark_visited(data: dict[str, Any]) -> None:
             data['visited'].update({station: stn_data})
 
             # If the user provides a date, add on the date the station was visited to the station dict
-            date: str | None = assign_date(station)
+            date: str | None = core.assign_date(station)
 
             if date:
                 data['visited'][station].update({'date_visited': date})
@@ -143,7 +136,7 @@ def mark_visited(data: dict[str, Any]) -> None:
             data['to_visit'] = ''
 
         # Write changes to datastore.json so the program remembers them when reopened
-        write(data)
+        core.write(data)
 
         input(
             '\nOperation completed successfully. Press enter to return to the main menu.'
@@ -151,9 +144,9 @@ def mark_visited(data: dict[str, Any]) -> None:
 
 
 def reset_stations(data: dict[str, Any]) -> None:
-    clear()
+    core.clear()
 
-    console.print(
+    core.console.print(
         'Warning! you are about to reset [bold underline]ALL VISITED STATIONS![/bold underline] Data that will be lost includes which stations have been visited and on what date you visited them. Type "I know what I\'m doing!" to reset all visited stations, or type anything else to return to the main menu.\n'
     )
 
@@ -178,7 +171,7 @@ def reset_stations(data: dict[str, Any]) -> None:
             data['unvisited'].update({name: visited[name]})
             data['visited'].pop(name)
 
-        write(data)
+        core.write(data)
 
         input(
             '\nOperation succeeded - all visited stations have been reset. Press enter to return to the main menu.'

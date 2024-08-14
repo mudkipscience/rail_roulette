@@ -121,13 +121,13 @@ def write(data: dict[str, Any]) -> None:
 
 
 # Generates a string of options the user can select from. ops is an array of names we want to give to each option.
-def print_menu(ops: list[str]) -> str:
+def print_menu(ops: list[str]) -> None:
     menu: str = ''
 
     for i, entry in enumerate(ops, 1):
         menu += f'{i}) {entry}\n'
 
-    return menu
+    print(menu)
 
 
 def get_colours(data: dict[str, Any]) -> dict[str, str]:
