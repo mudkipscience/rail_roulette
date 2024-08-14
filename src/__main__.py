@@ -354,6 +354,11 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 'visited'
             ].get(station)
 
+            stations_down: str = ', '.join(station_info['stations_down'])
+
+            if len(stations_down) == 0:
+                stations_down = 'N/A'
+
             # Prettify the groups and lines the station is served by, adding colour and proper punctuation
             groups_and_lines: list[list[str]] = fmt_lines_groups(data, station)
             # List containing misc info on the lines and groups the station is served by, grabbed from constants stored in core.py
@@ -378,10 +383,17 @@ def lookup_stn(data: dict[str, Any]) -> None:
                     if stn_line == inf_line and stn_line not in ignore:
                         shared_info.append(core.MISC_LINE_INFO[inf_line])
 
+            in_groups: list[str] = []
+
+            for group in core.LINE_GROUPS:
+                if core.CITY_LOOP_INFO.get(group):
+                    for line in station_info['line']:
+                        if line in core.LINE_GROUPS[group] and group not in in_groups:
+                            in_groups.append(group)
+
             # Add relevant city loop info stored in constants to shared_info
-            for group in core.CITY_LOOP_INFO:
-                if group in ''.join(groups_and_lines[0]):
-                    shared_info.append(core.CITY_LOOP_INFO[group])
+            for group in in_groups:
+                shared_info.append(core.CITY_LOOP_INFO[group])
 
             core.console.print(f'[bold]-+ {station} +-\n', justify='center')
 
@@ -409,7 +421,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 f'{core.INT_TO_TIMERANGE[station_info["time"]]} minutes',
             )
             info_left.add_row('[bold]Platforms:', station_info['platforms'])
-            info_left.add_row('[bold]Status:', station_info['status'])
+            info_left.add_row('[bold]Staffed:', station_info['staffed'])
             info_left.add_row(
                 '[bold]Facilities:', ', '.join(station_info['facilities'])
             )
@@ -418,11 +430,9 @@ def lookup_stn(data: dict[str, Any]) -> None:
             info_right.add_column()
 
             info_right.add_row(
-                '[bold]Station/s preceding:', ', '.join(station_info['stns_preceding'])
+                '[bold]Station/s up:', ', '.join(station_info['stations_up'])
             )
-            info_right.add_row(
-                '[bold]Station/s following:', ', '.join(station_info['stns_following'])
-            )
+            info_right.add_row('[bold]Station/s down:', stations_down)
             info_right.add_row('[bold]Ticketing Zone:', station_info['zone'])
             info_right.add_row('[bold]Code:', station_info['code'])
             info_right.add_row(
@@ -508,9 +518,7 @@ def main() -> None:
 
         core.console.print(print_title('Rail Roulette', 'bright_blue'))
 
-        core.print_menu(
-            ['Get next station', 'Statistics', 'Lookup', 'Options', 'Exit']
-        )
+        core.print_menu(['Get next station', 'Statistics', 'Lookup', 'Options', 'Exit'])
 
         choice: str = input('> ')
 
