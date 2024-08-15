@@ -31,6 +31,7 @@ This program is now functional, but I plan on sprucing it up a lot and there may
     - stopping patterns
     - Station status (premium/host/unstaffed)
     - Misc for other interesting tidbits
+- A way to look up what stations have been visited (their names)
 - fancy TUI using Rich (or Blessing? or Textual?)
 - Maybe a GUI eventually?
 - More?
