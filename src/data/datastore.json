@@ -13,7 +13,7 @@
             "facilities": [
                 "Bike lockers (26)",
                 "Parking (140)",
-                "Shelter on Platform 2"
+                "Shelter on platform 2"
             ],
             "line": [
                 "Werribee"
@@ -22,13 +22,13 @@
             "misc": [
                 "It was originally named Aviation Siding, before being renamed to Aircraft Siding in 1972 and finally Aircraft in 1963.",
                 "The Western standard gauge line passes close by to the North of Platform 1.",
-                "Services going towards Melbourne may through-run with the Frankston line."
+                "It was electrified in November 1983."
             ],
             "nearby_pt": {
                 "Bus": {
-                    "415": "Laverton Station - Williamstown",
-                    "417": "Laverton Station loop service via Laverton North",
-                    "496": "Laverton Station - Sanctuary Lakes"
+                    "415": "Laverton station - Williamstown",
+                    "417": "Laverton station loop service via Laverton North",
+                    "496": "Laverton station - Sanctuary Lakes"
                 }
             },
             "opened": "7th of March 1926",
@@ -64,17 +64,16 @@
             "opened": "28th of June 1948",
             "platforms": "1 (side)",
             "staffed": "No",
-            "stations_down": [
+            "stations_down": [],
+            "stations_up": [
                 "Ashburton"
             ],
-            "stations_up": [],
             "time": 2,
             "zone": "1"
         },
         "Albion": {
             "accessibility": [
                 "Steep ramp",
-                "Path widths less than 1.2m",
                 "Independent boarding from platform 1"
             ],
             "code": "ALB",
@@ -83,7 +82,8 @@
                 "Shelter (all platforms)",
                 "Toilets",
                 "Passenger info displays",
-                "Parking (370)"
+                "Parking (370)",
+                "Bike lockers (18)"
             ],
             "line": [
                 "Sunbury"
@@ -92,7 +92,8 @@
             "misc": [
                 "It was known as Albion and Darlington until the 1st of January 1861, when the station was closed. A new station was opened to the west of the original station in 1891, which is when it became known as Albion. The station was then relocated to the site of the original 1860 station in late 1919.",
                 "The Melbourne – Sydney standard gauge line passes to the east of the station and, along with the Albion – Jacana freight line, branches off north of the station.",
-                "It is scheduled to rebuilt as part of the Airport rail link project (whenever [italic]that[/italic] happens)"
+                "It is scheduled to rebuilt as part of the Airport rail link project (whenever [italic]that[/italic] happens)",
+                "It was electrified in October 2021."
             ],
             "nearby_pt": {
                 "Bus": {
@@ -114,80 +115,163 @@
             "zone": "1 and 2"
         },
         "Alphington": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Steep ramp",
+                "Independent boarding from platform 1"
+            ],
+            "code": "ALP",
             "distance": 10.46,
-            "facilities": [],
+            "facilities": [
+                "Parking (150)",
+                "Bike lockers (5)",
+                "Passenger info displays",
+                "Shelter on platform 1"
+            ],
             "line": [
                 "Hurstbridge"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Alphington",
+            "misc": [
+                "The station and the suburb it serves are named after Alphington, located in Devon, England.",
+                "It was electrified in July 1921.",
+                "It was rebuilt in 1979."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "508": "Alphington station - Moonee Ponds Junction"
+                }
+            },
+            "opened": "8th of May 1888",
+            "platforms": "2 (side)",
+            "staffed": "No",
+            "stations_down": [
+                "Darebin"
+            ],
+            "stations_up": [
+                "Fairfield"
+            ],
             "time": 1,
-            "zone": ""
+            "zone": "1"
         },
         "Altona": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Independent boarding from platform 1"
+            ],
+            "code": "ALT",
             "distance": 17.15,
-            "facilities": [],
+            "facilities": [
+                "Shelter (all platforms)",
+                "Parking (70)",
+                "Bike lockers",
+                "Toilets",
+                "Passenger info displays"
+            ],
             "line": [
                 "Werribee"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Altona",
+            "misc": [
+                "The station was known as Altona Beach from its opening date until 1938.",
+                "It was electrified in October 1926."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "411": "Laverton station - Footscray",
+                    "412": "Laverton station - Footscray",
+                    "415": "Laverton station - Williamstown",
+                    "903": "Altona station - Mordialloc"
+                }
+            },
+            "opened": "1st of December 1917",
+            "platforms": "1 (side)",
+            "staffed": "Yes (AM peak)",
+            "stations_down": [
+                "Westona"
+            ],
+            "stations_up": [
+                "Seaholme"
+            ],
             "time": 2,
-            "zone": ""
+            "zone": "1 and 2"
         },
         "Anstey": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Independent boarding"
+            ],
+            "code": "ASY",
             "distance": 8.04,
-            "facilities": [],
+            "facilities": [
+                "Parking"
+            ],
             "line": [
                 "Upfield"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Brunswick",
+            "misc": [
+                "It was known as North Brunswick from its opening in 1926 until 1942.",
+                "It renamed in 1942 in honour of Frank Anstey, a former MP who represented the local area in the state parliament and Burke in the federal parliament between 1902 and 1934.",
+                "Anstey has been promised a rebuild, with a plan to elevate it along with Jewell and Brunswick stations as part of the Level Crossing Removal Project."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "503": "Essendon Station - Brunswick East"
+                },
+                "Tram": {
+                    "19": "North Coburg - Flinders Street station"
+                }
+            },
+            "opened": "15th of December 1926",
+            "platforms": "2 (side)",
+            "staffed": "No",
+            "stations_down": [
+                "Moreland"
+            ],
+            "stations_up": [
+                "Brunswick"
+            ],
             "time": 1,
-            "zone": ""
+            "zone": "1"
         },
         "Armadale": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Steep ramp"
+            ],
+            "code": "ARM",
             "distance": 8.67,
-            "facilities": [],
+            "facilities": [
+                "Shelter on platforms 2 and 3",
+                "Passenger info displays"
+            ],
             "line": [
                 "Frankston"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Armadale",
+            "misc": [
+                "Armadale and the suburb it serves are named after the residence of former premier and attorney-general James Munro. The house was named after Armadale in Scotland, where he was born.",
+                "Although the Cranbourne and Pakenham lines run through this station, services on these lines do not stop here due to low patronage.",
+                "It was electrified in March 1922."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "605": "Gardenvale - Melbourne CBD (Queen St)"
+                },
+                "Tram": {
+                    "6": "Melbourne University - Glen Iris"
+                }
+            },
+            "opened": "7th of May 1879",
+            "platforms": "4 (2 side, 1 island)",
+            "staffed": "Yes (AM peak)",
+            "stations_down": [
+                "Malvern"
+            ],
+            "stations_up": [
+                "Toorak"
+            ],
             "time": 1,
-            "zone": ""
+            "zone": "1"
         },
         "Ascot Vale": {
             "accessibility": [],
