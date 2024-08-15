@@ -422,9 +422,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
             )
             info_left.add_row('[bold]Platforms:', station_info['platforms'])
             info_left.add_row('[bold]Staffed:', station_info['staffed'])
-            info_left.add_row(
-                '[bold]Facilities:', ', '.join(station_info['facilities'])
-            )
+            info_left.add_row('[bold]Features:', ', '.join(station_info['facilities']))
 
             info_right.add_column()
             info_right.add_column()
