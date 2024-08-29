@@ -6,7 +6,8 @@
     "unvisited": {
         "Aircraft": {
             "accessibility": [
-                "Wheelchair accessible"
+                "Wheelchair accessible",
+                "Steep boarding (platform 2)"
             ],
             "code": "ACF",
             "distance": 22.23,
@@ -21,8 +22,7 @@
             "location": "Laverton",
             "misc": [
                 "It was originally named Aviation Siding, before being renamed to Aircraft Siding in 1972 and finally Aircraft in 1963.",
-                "The Western standard gauge line passes close by to the North of Platform 1.",
-                "It was electrified in November 1983."
+                "The Western standard gauge line passes close by to the North of Platform 1."
             ],
             "nearby_pt": {
                 "Bus": {
@@ -62,7 +62,7 @@
             ],
             "nearby_pt": {},
             "opened": "28th of June 1948",
-            "platforms": "1 (side)",
+            "platforms": "1",
             "staffed": "No",
             "stations_down": [],
             "stations_up": [
@@ -74,7 +74,7 @@
         "Albion": {
             "accessibility": [
                 "Steep ramp",
-                "Independent boarding from platform 1"
+                "Independent boarding (platform 1)"
             ],
             "code": "ALB",
             "distance": 14.65,
@@ -92,8 +92,7 @@
             "misc": [
                 "It was known as Albion and Darlington until the 1st of January 1861, when the station was closed. A new station was opened to the west of the original station in 1891, which is when it became known as Albion. The station was then relocated to the site of the original 1860 station in late 1919.",
                 "The Melbourne – Sydney standard gauge line passes to the east of the station and, along with the Albion – Jacana freight line, branches off north of the station.",
-                "It is scheduled to rebuilt as part of the Airport rail link project (whenever [italic]that[/italic] happens)",
-                "It was electrified in October 2021."
+                "It is scheduled to rebuilt as part of the Airport rail link project (whenever [italic]that[/italic] happens)"
             ],
             "nearby_pt": {
                 "Bus": {
@@ -117,7 +116,7 @@
         "Alphington": {
             "accessibility": [
                 "Steep ramp",
-                "Independent boarding from platform 1"
+                "Independent boarding (platform 1)"
             ],
             "code": "ALP",
             "distance": 10.46,
@@ -132,13 +131,11 @@
             ],
             "location": "Alphington",
             "misc": [
-                "The station and the suburb it serves are named after Alphington, located in Devon, England.",
-                "It was electrified in July 1921.",
-                "It was rebuilt in 1979."
+                "The station and the suburb it serves are named after Alphington, located in Devon, England."
             ],
             "nearby_pt": {
                 "Bus": {
-                    "508": "Alphington station - Moonee Ponds Junction"
+                    "508": "to Moonee Ponds Junction"
                 }
             },
             "opened": "8th of May 1888",
@@ -156,7 +153,8 @@
         "Altona": {
             "accessibility": [
                 "Wheelchair accessible",
-                "Independent boarding from platform 1"
+                "Independent boarding (platform 1)",
+                "Accessible toilets"
             ],
             "code": "ALT",
             "distance": 17.15,
@@ -172,8 +170,7 @@
             ],
             "location": "Altona",
             "misc": [
-                "The station was known as Altona Beach from its opening date until 1938.",
-                "It was electrified in October 1926."
+                "The station was known as Altona Beach from its opening date until 1938."
             ],
             "nearby_pt": {
                 "Bus": {
@@ -184,7 +181,7 @@
                 }
             },
             "opened": "1st of December 1917",
-            "platforms": "1 (side)",
+            "platforms": "1",
             "staffed": "Yes (AM peak)",
             "stations_down": [
                 "Westona"
@@ -219,7 +216,7 @@
                     "503": "Essendon Station - Brunswick East"
                 },
                 "Tram": {
-                    "19": "North Coburg - Flinders Street station"
+                    "19": "North Coburg - Flinders St station"
                 }
             },
             "opened": "15th of December 1926",
@@ -250,8 +247,7 @@
             "location": "Armadale",
             "misc": [
                 "Armadale and the suburb it serves are named after the residence of former premier and attorney-general James Munro. The house was named after Armadale in Scotland, where he was born.",
-                "Although the Cranbourne and Pakenham lines run through this station, services on these lines do not stop here due to low patronage.",
-                "It was electrified in March 1922."
+                "Although the Cranbourne and Pakenham lines run through this station, services on these lines do not stop here due to low patronage."
             ],
             "nearby_pt": {
                 "Bus": {
@@ -274,350 +270,776 @@
             "zone": "1"
         },
         "Ascot Vale": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Steep ramp"
+            ],
+            "code": "ASV",
             "distance": 5.81,
-            "facilities": [],
+            "facilities": [
+                "Parking",
+                "Toilets"
+            ],
             "line": [
                 "Craigieburn"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Ascot Vale",
+            "misc": [
+                "It originally opened as part of the week old railway line to Essendon owned by the private Melbourne and Essendon Railway Company",
+                "It was closed along with the line on the 1st of July 1964 before being re-opened under government ownership in 1871."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "404": "Footscray station - Moonee Ponds Junction",
+                    "472": "Williamstown - Moonee Ponds Junction"
+                },
+                "Tram": {
+                    "82": "Moonee Ponds Junction - Footscray station"
+                }
+            },
+            "opened": "1st of November 1860",
+            "platforms": "2 (side)",
+            "staffed": "Yes (AM peak)",
+            "stations_down": [
+                "Moonee Ponds"
+            ],
+            "stations_up": [
+                "Newmarket"
+            ],
             "time": 0,
-            "zone": ""
+            "zone": "1"
         },
         "Ashburton": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Independent boarding",
+                "Accessible toilets"
+            ],
+            "code": "ASH",
             "distance": 15.39,
-            "facilities": [],
+            "facilities": [
+                "Parkng (170)"
+            ],
             "line": [
                 "Alamein"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Ashburton",
+            "misc": [
+                "The station and the suburb it serves are named after Ashburton Terrace, a lookout over the city of Cork, Ireland. A former local city  councillor suggested the name.",
+                "It was originally named Norwood, before being renamed to Ashburton less than a year after opening on the 12th of December 1890."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "734": "Glen Iris Station - Glen Waverley Station"
+                }
+            },
+            "opened": "30th of May 1890",
+            "platforms": "1",
+            "staffed": "Yes",
+            "stations_down": [
+                "Alamein"
+            ],
+            "stations_up": [
+                "Burwood"
+            ],
             "time": 2,
-            "zone": ""
+            "zone": "1"
         },
         "Aspendale": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible"
+            ],
+            "code": "ASP",
             "distance": 30.31,
-            "facilities": [],
+            "facilities": [
+                "Parking (100)"
+            ],
             "line": [
                 "Frankston"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Aspendale",
+            "misc": [
+                "It was originally named Aspendale Park Racecourse, recieving its current name on the 1st of August 1905.",
+                "The station and the suburb it serves are named after Aspen, a race-winning mare owned by James Crooke. Crooke purchased land east of the present-day station to build the former Aspendale Racecourse.",
+                "The station is due to be rebuilt by 2029 as part of the Level Crossing Removal Project."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "706": "Mordialloc - Chelsea station"
+                }
+            },
+            "opened": "14th of April 1891",
+            "platforms": "2 (side)",
+            "staffed": "No",
+            "stations_down": [
+                "Edithvale"
+            ],
+            "stations_up": [
+                "Mordialloc"
+            ],
             "time": 4,
-            "zone": ""
+            "zone": "1"
         },
         "Auburn": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Steep ramp",
+                "No tactile edges"
+            ],
+            "code": "AUB",
             "distance": 8.96,
-            "facilities": [],
+            "facilities": [
+                "Toilets",
+                "Parking"
+            ],
             "line": [
                 "Alamein",
                 "Belgrave",
                 "Lilydale"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Hawthorn East",
+            "misc": [
+                "It opened as Auburn Road, before being renamed to Auburn a few months later on the 1st of September 1882.",
+                "It was named after two nearby residences that were built in the 1850s: Auburn Lodge amd Auburn House.",
+                "It was originally built with 2 side platforms. A new platform (platform 1) when a third line was constructed between Hawthorn and Campberwell in 1963, resulting in platforms 1 and 2 becoming an island platform. "
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "624": "Kew - Oakleigh station"
+                }
+            },
+            "opened": "3rd of April 1882",
+            "platforms": "3 (1 island, 1 side)",
+            "staffed": "Yes (AM peak)",
+            "stations_down": [
+                "Camberwell"
+            ],
+            "stations_up": [
+                "Glenferrie"
+            ],
             "time": 1,
-            "zone": ""
+            "zone": "1"
         },
         "Balaclava": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Accessible toilets"
+            ],
+            "code": "BCV",
             "distance": 9.08,
-            "facilities": [],
+            "facilities": [
+                "Parking (48)",
+                "Shelter (all platforms)",
+                "Passenger info displays",
+                "Toilets"
+            ],
             "line": [
                 "Sandringham"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Balaclava",
+            "misc": [
+                "Like the suburb it serves, the station is named after the Battle of Balaclava, which was fought by English, French and Turkish forces to capture the Russian Black Sea naval base of Sevastopol on the 25th of October 1854.",
+                "In October 2014, upgrades on the station were completed. Upgrades included the station now being staffed from first to last train eachh day, widening the platforms, improving stair and ramp access, signage, booking office facilities. waiting room, wheelchair shelters and toilets. There were also many additions: new station canopies, CCTV and space for future lifts."
+            ],
+            "nearby_pt": {
+                "Tram": {
+                    "3": "Melbourne University - Malvern East",
+                    "16": "Melbourne University - Kew"
+                }
+            },
+            "opened": "19th of December 1859",
+            "platforms": "2 side",
+            "staffed": "Yes",
+            "stations_down": [
+                "Ripponlea"
+            ],
+            "stations_up": [
+                "Windsor"
+            ],
             "time": 1,
-            "zone": ""
+            "zone": "1"
         },
         "Batman": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Steep platform (platform 1)"
+            ],
+            "code": "BAT",
             "distance": 11.23,
             "facilities": [],
             "line": [
                 "Upfield"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Coburg North",
+            "misc": [
+                "It was closed for just over a decade between the 13th of July 1903 and the 1st of October 1914.",
+                "The station was originally known as Bell Park, before being to renamed Batman (named after John Batman) upon its 1914 reopening. John Batman is known for taking advantage of and leading massacres of Aboriginal people, as well as founding modern Melbourne.",
+                "A siding was to the former Lincoln Mills knitting works on Gaffney Street was constructed in 1920. It was later abolished in 1970.",
+                "There is a disused signal box on the up end of the station, which was built in 1935. "
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "530": "Campbellfield Plaza - Coburg",
+                    "534": "Glenroy station - Coburg"
+                },
+                "Tram": {
+                    "19": "North Coburg - Flinders St Station"
+                }
+            },
+            "opened": "8th of October 1889",
+            "platforms": "2 (1 island)",
+            "staffed": "No",
+            "stations_down": [
+                "Merlynston"
+            ],
+            "stations_up": [
+                "Coburg"
+            ],
             "time": 1,
-            "zone": ""
+            "zone": "1 and 2"
         },
         "Baxter": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "No tactile edges"
+            ],
+            "code": "BXR",
             "distance": 51.97,
-            "facilities": [],
+            "facilities": [
+                "Shelter (all platforms)",
+                "Parking"
+            ],
             "line": [
                 "Stony Point"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Baxter",
+            "misc": [
+                "It was originally known as Mornington Junction. It was renamed Baxter on the 6th of May 1918 after Captain John Baxter, a local proprietor of the nearby Carrup Carrup pastoral run.",
+                "Baxter was formerly the junction for the Mornington line, which was closed in 1981. Most of the Mornington line has since reopened as a tourist railway thanks to the efforts of the Mornington Railway Preservation Society."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "776": "Frankston Station - Pearcedale"
+                }
+            },
+            "opened": "1st of October 1888",
+            "platforms": "1",
+            "staffed": "No",
+            "stations_down": [
+                "Somerville"
+            ],
+            "stations_up": [
+                "Leawarra"
+            ],
             "time": 7,
-            "zone": ""
+            "zone": "2"
         },
         "Bayswater": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Lifts",
+                "Independent boarding (all platforms)",
+                "Hearing loop",
+                "Accessible toilets"
+            ],
+            "code": "BAY",
             "distance": 30.76,
-            "facilities": [],
+            "facilities": [
+                "Parking (370)",
+                "Bike lockers (32)",
+                "Shelter (all platforms)",
+                "Passenger info displays",
+                "Toilets"
+            ],
             "line": [
                 "Belgrave"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Bayswater",
+            "misc": [
+                "It was named after Bayswater House, a property owned by bookmaker and publisher James John Miller. The property itself was named after Miller's birthplace in London.",
+                "The station was known as Macaulay (after a nearby post office) during construction, although this was changed to Bayswater by the time the station initially opened.",
+                "A train maintenance centre and stabling facilities opened adjacent to the station in April 1998, as part of the replacement of Jolimont Yard. The centre is able to carry out bogie repair/replacement, as well as under-carriage and overhead work.",
+                "In late 2015, the station was rebuilt and two level crossings on either side of the station were removed as part of the Level Crossing Removal Project."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "664": "Chirnside Park Shopping Centre - Westfield Knox",
+                    "745B": "to Boronia station",
+                    "745C": "to Wantirna Primary School",
+                    "745D": "to Wantirna Primary School",
+                    "753": "to Glen Waverley station",
+                    "755": "to Westfield Knox",
+                    "967": "Glen Waverley station - Croydon station (night bus, weekend mornings only)"
+                }
+            },
+            "opened": "4th of December 1889",
+            "platforms": "2 (1 island)",
+            "staffed": "Yes",
+            "stations_down": [
+                "Boronia"
+            ],
+            "stations_up": [
+                "Heathmont"
+            ],
             "time": 4,
-            "zone": ""
+            "zone": "2"
         },
         "Beaconsfield": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Steep ramp",
+                "Independent boarding (platform 2)"
+            ],
+            "code": "BFD",
             "distance": 46.99,
-            "facilities": [],
+            "facilities": [
+                "Parking (260)",
+                "Bike lockers (26)"
+            ],
             "line": [
                 "Pakenham"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Beaconsfield",
+            "misc": [
+                "The station is named after Benjamin Disraeli, Earl of Beaconsfield. He was Prime Minister of the UK between 1874 and 1880."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "836": "Berwick station - Eden Rise Shopping Centre",
+                    "926": "Pakenham station - Westfield Fountain Gate"
+                }
+            },
+            "opened": "1st of December 1879",
+            "platforms": "2 (1 island)",
+            "staffed": "No",
+            "stations_down": [
+                "Officer"
+            ],
+            "stations_up": [
+                "Berwick"
+            ],
             "time": 6,
-            "zone": ""
+            "zone": "2"
         },
         "Belgrave": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Steep ramp",
+                "Accessible toilets"
+            ],
+            "code": "BEG",
             "distance": 42.53,
-            "facilities": [],
+            "facilities": [
+                "Parking (140)",
+                "Bike lockers (26)",
+                "Toilets",
+                "Passenger info displays"
+            ],
             "line": [
                 "Belgrave"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
+            "location": "Belgrave",
+            "misc": [
+                "It originally opened as Monbulk, being given its current name on the 21st of November 1904.",
+                "It was originally situated on the Upper Ferntree Gully - Gembrook narrow gauge line. The station in its current configuration was built further down the line than the original station and opened on the 19th of Feburary 1962, after the line had been converted to broad gauge and electrified.",
+                "It is located about 100m south of Belgrave (Puffing Billy) station, a separate station sharing it's name which is the start of the Puffing Billy heritage railway.",
+                "It is the terminus for trains on the Belgrave line."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "663": "to Lilydale station",
+                    "693": "to Oakleigh station",
+                    "694": "to Olinda (off-peak only)",
+                    "695": "to Belgrave South",
+                    "699": "to Upwey station"
+                }
+            },
+            "opened": "18th of December 1900",
+            "platforms": "2 (island)",
+            "staffed": "Yes",
             "stations_down": [],
-            "stations_up": [],
+            "stations_up": [
+                "Tecoma"
+            ],
             "time": 8,
-            "zone": ""
+            "zone": "2"
         },
         "Bell": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Lifts",
+                "Independent boarding",
+                "Hearing loop",
+                "Accessible toilets"
+            ],
+            "code": "BEL",
             "distance": 11.7,
-            "facilities": [],
+            "facilities": [
+                "Shelter (all platforms)",
+                "Parking (75)",
+                "Bike lockers (28)",
+                "Toilets",
+                "Passenger info displays"
+            ],
             "line": [
                 "Mernda"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Preston",
+            "misc": [
+                "It was originally known as Preston-Bell Street, being given its current name on the 1st of August 1905.",
+                "Bell gets is named after the nearby Bell Street, which in turn is named after Francis Bell, a landowner in Coburg who had a property called Bell Manor.",
+                "In 2022, the station was completely rebuilt and elevated as part of the Level Crossing Removal Project. Two level crossings were also removed."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "513": "Eltham station - Glenroy station (via Lower Plenty)",
+                    "514": "Eltham station - Glenroy station (via Greensborough)",
+                    "552": "North East Reservoir - Northcote Plaza",
+                    "553": "Preston - West Preston"
+                }
+            },
+            "opened": "8th of October 1889",
+            "platforms": "2 (side)",
+            "staffed": "Yes",
+            "stations_down": [
+                "Preston"
+            ],
+            "stations_up": [
+                "Thornbury"
+            ],
             "time": 2,
-            "zone": ""
+            "zone": "1"
         },
         "Bentleigh": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Lifts",
+                "Independent boarding",
+                "Hearing loop",
+                "Accessible toilets"
+            ],
+            "code": "BEN",
             "distance": 16.47,
-            "facilities": [],
+            "facilities": [
+                "Parking (130)",
+                "Bike lockers (26)",
+                "Shelter (all platforms)",
+                "Passenger info displays",
+                "Toilets"
+            ],
             "line": [
                 "Frankston"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Bentleigh",
+            "misc": [
+                "It was originally known as East Brighton, being renamed Bentleigh after former Victorian Premier Thomas Bent on the 1st of May 1907.",
+                "The station had a pedestrian underpass installed in June 1987. It was filled in roughly 11 years later in 1998.",
+                "in 2006, VicTrack used the station's former pedestrian crossing to trial new technology designed to warn pedestrians of passing trains. This included an LED light box saying 'Another Train Coming' that would be lit if a train is approaching another train or if an express service was about to pass through.",
+                "Between the 4th of June and 28th of August 2016, the station was closed and rebuilt as part of the Level Crossing Removal Project. The nearby Centre Road level crossing was also removed."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "701": "to Oakleigh station",
+                    "703": "Middle Brighton station - Blackburn station (SmartBus)"
+                }
+            },
+            "opened": "19th of December 1881",
+            "platforms": "3 (1 side, 1 island)",
+            "staffed": "Yes",
+            "stations_down": [
+                "Patterson"
+            ],
+            "stations_up": [
+                "McKinnon"
+            ],
             "time": 2,
-            "zone": ""
+            "zone": "1 and 2"
         },
         "Berwick": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Independent boarding (platform 1)",
+                "Accessible toilets"
+            ],
+            "code": "BEW",
             "distance": 44.58,
-            "facilities": [],
+            "facilities": [
+                "Parking (775)",
+                "Bike lockers (26)",
+                "Shelter (all platforms)",
+                "Passenger info displays",
+                "Toilets"
+            ],
             "line": [
                 "Pakenham"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Berwick",
+            "misc": [
+                "It is named after Berwick-upon-Tweed in Northumberland, England."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "828": "to Hampton Station",
+                    "831": "to Kingsmere Estate (Berwick)",
+                    "834": "to Westfield Fountain Gate (via Berwick North)",
+                    "835": "to Westfield Fountain Gate (via Narre Warren)",
+                    "836": "to Eden Rise Shopping Centre",
+                    "837": "to Beaconsfield East",
+                    "838": "Emerald - Westfield Fountain Gate",
+                    "839": "to Berwick North",
+                    "846": "to Eden Rise Shopping Centre",
+                    "847": "to The Avenue Village Shopping Centre (Cranbourne North)",
+                    "888": "to Clyde",
+                    "889": "to Clyde North",
+                    "899": "to The Avenue Village Shopping Centre (Cranbourne North)"
+                },
+                "Train": {
+                    "V/Line": [
+                        "Traralgon - Southern Cross (weekday mornings, set-down only | weekday afternoons, pick-up only)"
+                    ]
+                }
+            },
+            "opened": "8th of October 1877",
+            "platforms": "2 (1 island)",
+            "staffed": "Yes",
+            "stations_down": [
+                "Beaconsfield"
+            ],
+            "stations_up": [
+                "Narre Warren"
+            ],
             "time": 6,
-            "zone": ""
+            "zone": "2"
         },
         "Bittern": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "No tactile edges"
+            ],
+            "code": "BIT",
             "distance": 68.67,
-            "facilities": [],
+            "facilities": [
+                "Shelter (all platforms)",
+                "Parking"
+            ],
             "line": [
                 "Stony Point"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Bittern",
+            "misc": [
+                "It is named after the bittern family of birds.",
+                "Between 1921 and 1953, it was the junction for the former Red Hill line."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "782": "Frankston station - Flinders (town)"
+                }
+            },
+            "opened": "17th of December 1889",
+            "platforms": "1",
+            "staffed": "No",
+            "stations_down": [
+                "Morradoo"
+            ],
+            "stations_up": [
+                "Hastings"
+            ],
             "time": 9,
-            "zone": ""
+            "zone": "2"
         },
         "Blackburn": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Lifts",
+                "Accessible toilets",
+                "Steep boarding (platform 3)"
+            ],
+            "code": "BBN",
             "distance": 18.67,
-            "facilities": [],
+            "facilities": [
+                "Parking (112)",
+                "Bike lockers (26)",
+                "Shelter (platforms 1 and 2)",
+                "Passenger info displays",
+                "Toilets"
+            ],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Blackburn",
+            "misc": [
+                "Most of the station was demolished in 1980, being rebuilt to add a third platform.",
+                "Platform 3 is connected to platforms 1 and 2 via an underground concourse. Lifts were added in 2017 to allow easier access to the concourse."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "271": "Box Hill station - Ringwood station",
+                    "279": "Box Hill station - Westfield Doncaster",
+                    "901": "Frankston station - Melbourne Airport (SmartBus)",
+                    "703": "to Middle Brighton station (SmartBus)",
+                    "736": "to Mitcham station",
+                    "765": "Mitcham station - Box Hill station"
+                }
+            },
+            "opened": "25th of December 1882",
+            "platforms": "3 (1 island, 1 side)",
+            "staffed": "Yes",
+            "stations_down": [
+                "Nunawading"
+            ],
+            "stations_up": [
+                "Laburnum"
+            ],
             "time": 3,
-            "zone": ""
+            "zone": "2"
         },
         "Bonbeach": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Lifts",
+                "Independent boarding",
+                "Hearing loop"
+            ],
+            "code": "BON",
             "distance": 34.61,
-            "facilities": [],
+            "facilities": [
+                "Parking (30)",
+                "Bike lockers (26)",
+                "Passenger info displays"
+            ],
             "line": [
                 "Frankston"
             ],
-            "location": "",
-            "misc": [],
+            "location": "Bonbeach",
+            "misc": [
+                "Its name was decided by the Victorian Railways Commissioners, following a referendum to decide on a name. Other potential names included Bondi, Heathdale, Bonheath, Baybeach and Bayside.",
+                "The station has been rebuilt twice: In 1981 when the former ground level station buildings were rebuilt, and in 2021 when the station was demolished and rebuilt in a trench as part of the level crossing removal project.",
+                "The former ground level station featured in the sitcom Kath and Kim (episode 2, series 4)."
+            ],
             "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "opened": "15th of Feburary 1926",
+            "platforms": "2 side",
+            "staffed": "No",
+            "stations_down": [
+                "Carrum"
+            ],
+            "stations_up": [
+                "Chelsea"
+            ],
             "time": 5,
-            "zone": ""
+            "zone": "2"
         },
         "Boronia": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Lifts",
+                "Independent boarding"
+            ],
+            "code": "BOR",
             "distance": 33.38,
-            "facilities": [],
+            "facilities": [
+                "Parking (470)",
+                "Bike lockers (26)",
+                "Shelter (all platforms)",
+                "Passenger info displays"
+            ],
             "line": [
                 "Belgrave"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Boronia",
+            "misc": [
+                "It is named after Boronia, a genus of roughly 160 flowering plantss. The name was suggested by local councillor Albert Chandler, who grew boronia plants in a nursery he owned nearby.",
+                "It originally opened with a single platform, with a second one being provided along with the duplication of the line between Bayswater and Ferntree Gully in 1957.",
+                "In 1998, the station was demolished and rebuilt in a trench as part of a grade separation project to remove the nearby Boronia Road level crossing. The new station opened on the 5th of November of the same year.",
+                "A $60 million upgrade was promised for Boronia by the labor government during the 2022 state election. The upgrade would consist of decking over the station to create new open space, building/platform/accessibility upgrades, CCTV and more."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "690": "to Croydon station",
+                    "691": "to Waverley Gardens Shopping Centre",
+                    "737": "Croydon station - Monash University Clayton",
+                    "754B": "to Bayswater station",
+                    "753": "Glen Waverley station - Bayswater station",
+                    "755": "Bayswater station - Westfield Knox"
+                }
+            },
+            "opened": "19th of June 1920",
+            "platforms": "2 (island)",
+            "staffed": "Yes",
+            "stations_down": [
+                "Ferntree Gully"
+            ],
+            "stations_up": [
+                "Bayswater"
+            ],
             "time": 5,
-            "zone": ""
+            "zone": "2"
         },
         "Box Hill": {
-            "accessibility": [],
-            "code": "",
+            "accessibility": [
+                "Wheelchair accessible",
+                "Escalators",
+                "Lifts",
+                "Independent boarding",
+                "Accessible toilets"
+            ],
+            "code": "BOX",
             "distance": 16.16,
-            "facilities": [],
+            "facilities": [
+                "Shelter (all platforms)",
+                "Toilets",
+                "Parking (500)",
+                "Passenger info displays"
+            ],
             "line": [
                 "Belgrave",
                 "Lilydale"
             ],
-            "location": "",
-            "misc": [],
-            "nearby_pt": {},
-            "opened": "",
-            "platforms": "",
-            "staffed": "",
-            "stations_down": [],
-            "stations_up": [],
+            "location": "Box Hill",
+            "misc": [
+                "It is named after Box Hill in Surrey, England.",
+                "When the station opened, the suburb of Box Hill was a separate town from Melbourne with only several hundred residents.",
+                "In 1983, construction of a rebuilt station below ground level commenced - this was done to to remove the Station Street level crossing located on the down end of the station. Box Hill Shopping Centre and a bus terminus were built on top of the new station, with construction being completed in 1985.",
+                "Although it has 4 platforms, platform 1 has not been in use since June 1984, lacking both track and lighting.",
+                "The triple track section of the Belgrave/Lilydale line merges into two just beyond the down end of the station."
+            ],
+            "nearby_pt": {
+                "Bus": {
+                    "903": "Altona station - Mordialloc",
+                    "271": "to Ringwood Station",
+                    "279": "to Westfield Doncaster/Templestowe",
+                    "284": "to Doncaster Park and Ride",
+                    "281": "to Templestowe",
+                    "293": "to Greensborough station",
+                    "302": "to Melbourne CBD (Lonsdale Street)",
+                    "612": "to Chadstone Shopping Centre",
+                    "270": "to Mitcham station",
+                    "735": "to Nunawading station",
+                    "765": "to Mitcham station",
+                    "766": "to Burwood",
+                    "733": "to Oakleigh station",
+                    "201": "to Deakin University Burwood",
+                    "732": "to Upper Ferntree Gully station",
+                    "767": "to Westfield Southland",
+                    "768": "to Deakin University Burwood"
+                },
+                "Tram": {
+                    "109": "Box Hill - Port Melbourne"
+                },
+                "Coach": {
+                    "V/Line": [
+                        "Southern Cross station - Mansfield"
+                    ]
+                }
+            },
+            "opened": "1st of December 1882",
+            "platforms": "4 (1 island, 2 side)",
+            "staffed": "Yes",
+            "stations_down": [
+                "Laburnum"
+            ],
+            "stations_up": [
+                "Union"
+            ],
             "time": 2,
-            "zone": ""
+            "zone": "2"
         },
         "Brighton Beach": {
             "accessibility": [],
