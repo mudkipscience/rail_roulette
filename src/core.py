@@ -6,6 +6,10 @@ from rich.console import Console
 
 console = Console(highlight=False)
 
+
+######################### CONSTANT VALUES #########################
+
+
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
 COLOUR_STORE: dict[str, dict[str, str]] = {
     'enhanced': {
@@ -50,6 +54,7 @@ COLOUR_STORE: dict[str, dict[str, str]] = {
     },
 }
 
+# Dict to convert avg travel time stored as an integer in datastore.json into a human-readable format
 INT_TO_TIMERANGE: dict[int, str] = {
     0: 'under 10',
     1: '11 to 20',
@@ -64,6 +69,7 @@ INT_TO_TIMERANGE: dict[int, str] = {
     10: '101 to 110',
 }
 
+# Dict containing each group and what lines are apart of it
 LINE_GROUPS: dict[str, list[str]] = {
     'Burnley': ['Alamein', 'Belgrave', 'Glen Waverley', 'Lilydale'],
     'Caufield': ['Cranbourne', 'Pakenham'],
@@ -72,19 +78,29 @@ LINE_GROUPS: dict[str, list[str]] = {
     'Cross City': ['Frankston', 'Werribee', 'Williamstown'],
 }
 
-MURL_INFO: dict[str, list[bool | str]] = {
-    'Burnley': [
-        True,
-        'anti-clockwise weekday mornings, clockwise weekday afternoons and weekends',
-        'Alamein services only operate via the Loop on weekdays',
-    ],
-    'Caufield': [True, 'anti-clockwise'],
-    'Clifton Hill': [True, 'clockwise'],
-    'Northern': [
-        True,
-        'clockwise on weekday mornings and weekends, anti-clockwise on weekday afternoons',
-    ],
+# Dict containing info regarding city loop operations
+CITY_LOOP_INFO: dict[str, str] = {
+    'Burnley': 'Burnley group services travel anti-clockwise through the city loop on weekday mornings, clockwise on weekday afternoons and weekends.',
+    'Caufield': 'Caufield group services travel anti-clockwise through the city loop.',
+    'Clifton Hill': 'Clifton Hill group services travel clockwise through the city loop.',
+    'Northern': 'Northern group services travel clockwise through the city loop on weekday mornings and weekends, anti-clockwise on weekday afternoons.',
 }
+
+# Dict containing info that applies to each station on a line
+MISC_LINE_INFO: dict[str, str] = {
+    'Alamein': 'Services on the Alamein line operate as a shuttle to Camperwell Station outside of weekday peaks.',
+    'Frankston': 'Frankston line up services may through-run with the Werribee and Williamstown lines.',
+    'Werribee': 'Werribee line up services may through-run with the Frankston line.',
+    'Williamstown': 'Williamstown line up services may through-run with the Frankston line.',
+}
+
+# Dict containiong lists of stations that have conflicting misc info so they can be ignored when shown to the user
+MISC_LINE_INFO_CONFLICTS: list[list[str]] = [
+    ['Frankston', 'Werribee', 'Williamstown'],
+]
+
+
+######################### CORE FUNCTIONS #########################
 
 
 # Runs OS-specific shell command to clear console
@@ -117,13 +133,13 @@ def write(data: dict[str, Any]) -> None:
 
 
 # Generates a string of options the user can select from. ops is an array of names we want to give to each option.
-def print_menu(ops: list[str]) -> str:
+def print_menu(ops: list[str]) -> None:
     menu: str = ''
 
     for i, entry in enumerate(ops, 1):
         menu += f'{i}) {entry}\n'
 
-    return menu
+    print(menu)
 
 
 def get_colours(data: dict[str, Any]) -> dict[str, str]:
