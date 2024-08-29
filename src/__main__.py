@@ -355,9 +355,13 @@ def lookup_stn(data: dict[str, Any]) -> None:
             ].get(station)
 
             stations_down: str = ', '.join(station_info['stations_down'])
+            facilities: str = ', '.join(station_info['facilities'])
 
             if len(stations_down) == 0:
                 stations_down = 'N/A'
+
+            if len(facilities) == 0:
+                facilities = 'N/A'
 
             # Prettify the groups and lines the station is served by, adding colour and proper punctuation
             groups_and_lines: list[list[str]] = fmt_lines_groups(data, station)
@@ -397,8 +401,16 @@ def lookup_stn(data: dict[str, Any]) -> None:
 
             core.console.print(f'[bold]-+ {station} +-\n', justify='center')
 
+            town_or_suburb: str = 'suburb'
+
+            if (
+                station_info['line'] == ['Stony Point']
+                and station_info['location'] != 'Frankston'
+            ):
+                town_or_suburb = 'town'
+
             core.console.print(
-                f'[bold]{station}[/bold] is located on the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}. [bold]{station}[/bold] serves the suburb of {station_info["location"]}, and opened to passengers on the {station_info["opened"]}.'
+                f'[bold]{station}[/bold] is located on the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}. [bold]{station}[/bold] serves the {town_or_suburb} of {station_info["location"]}, and opened to passengers on the {station_info["opened"]}.'
             )
 
             if len(station_info['misc'] + shared_info) > 0:
@@ -422,7 +434,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
             )
             info_left.add_row('[bold]Platforms:', station_info['platforms'])
             info_left.add_row('[bold]Staffed:', station_info['staffed'])
-            info_left.add_row('[bold]Features:', ', '.join(station_info['facilities']))
+            info_left.add_row('[bold]Facilities:', facilities)
 
             info_right.add_column()
             info_right.add_column()
@@ -437,13 +449,16 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 '[bold]Accessibility:', ', '.join(station_info['accessibility'])
             )
 
+            # Nearby PT. Please specify either Bus, Tram or Train ONLY. Bus and tram are both dictionaries containing strings where the key is the route number and value is route info,
+            # whilst train is a dictionary containing lists, where the key is the operator and lists contain strings of the routes that operator provides.
+
             pt_tables: list[Table] = []
 
             for pt_type in station_info['nearby_pt']:
                 title: str = pt_type
 
-                if pt_type == 'Bus':
-                    title = 'Buse'
+                if pt_type == 'Bus' or pt_type == 'Coach':
+                    title += 'e'
 
                 table: Table = Table(
                     expand=True,
@@ -456,11 +471,16 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 table.add_column()
                 table.add_column()
 
-                for route in station_info['nearby_pt'][pt_type]:
-                    table.add_row(
-                        route,
-                        station_info['nearby_pt'][pt_type][route],
-                    )
+                if pt_type == 'Train' or pt_type == 'Coach':
+                    for operator in station_info['nearby_pt'][pt_type]:
+                        for route in station_info['nearby_pt'][pt_type][operator]:
+                            table.add_row(operator, route)
+                else:
+                    for route in station_info['nearby_pt'][pt_type]:
+                        table.add_row(
+                            route,
+                            station_info['nearby_pt'][pt_type][route],
+                        )
 
                 pt_tables.append(table)
 
