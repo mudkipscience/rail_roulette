@@ -1,5 +1,6 @@
 import core
 import options
+import os
 from typing import Any
 from rich.table import Table
 import random
@@ -21,6 +22,29 @@ def print_title(
     )
 
     return f'{title_rails}\n{formatted_txt}\n{title_rails}\n'
+
+
+def fmt_dot_points(dot_pts: list[str]) -> str:
+    width = os.get_terminal_size().columns
+    output = ''
+
+    for item in dot_pts:
+        item = item
+        str_store = '•'
+
+        if len(item) > width:
+            words = item.split(' ')
+            for word in words:
+                if len(str_store) + len(word) < width:
+                    str_store += ' ' + word
+                else:
+                    output += str_store + '\n'
+                    str_store = '  ' + word
+            output += str_store + '\n'
+        else:
+            output += '• ' + item + '\n'
+
+    return output
 
 
 def fmt_lines_groups(data: dict[str, Any], station: str) -> list[list[str]]:
@@ -417,7 +441,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
             # Print station specific misc info + shared info we grabbed out of contexts as dot points
             if len(station_info['misc'] + shared_info) > 0:
                 core.console.print(
-                    '\n• ' + '\n• '.join(station_info['misc'] + shared_info)
+                    '\n' + fmt_dot_points(station_info['misc'] + shared_info)
                 )
 
             # Create tables to make the formatting of the output prettier. This allows us to make columns and sections of text easier. Uses the Rich library.
@@ -486,19 +510,20 @@ def lookup_stn(data: dict[str, Any]) -> None:
                         for route in station_info['nearby_pt'][pt_type][operator]:
                             pt_table.add_row(
                                 f'[{colours[pt_type]}]{pt_type}',
-                                f'{operator} - [italic]{route}',
+                                f'{operator} - {route}',
                             )
                 # Tram and bus routes are stored in a dictionary of strings. The names of the variables holding the strings is the route number.
                 else:
                     for route in station_info['nearby_pt'][pt_type]:
                         pt_table.add_row(
                             f'[{colours[pt_type]}]{pt_type}',
-                            f'{route} - [italic]{station_info["nearby_pt"][pt_type][route]}',
+                            f'{route} - {station_info["nearby_pt"][pt_type][route]}',
                         )
 
             core.console.print(info_wrapper)
 
             if len(station_info['nearby_pt']) > 0:
+                print()
                 core.console.print(pt_table)
 
             if data['visited'].get(station):
