@@ -13,7 +13,7 @@ console = Console(highlight=False)
 # Line colours. Enhanced are more accurate to official PTV branding whereas native uses the terminal's defined colours instead.
 COLOUR_STORE: dict[str, dict[str, str]] = {
     'enhanced': {
-        # Group/line colours
+        # Line colours
         'Alamein': '#F2F2F2 on #094c8d',
         'Belgrave': '#F2F2F2 on #094c8d',
         'Glen Waverley': '#F2F2F2 on #094c8d',
@@ -31,6 +31,11 @@ COLOUR_STORE: dict[str, dict[str, str]] = {
         'Werribee': '#F2F2F2 on #159943',
         'Williamstown': '#F2F2F2 on #159943',
         'Sandringham': '#0C0C0C on #fc7fbb',
+        # PT branding colours
+        'Tram': 'chartreuse2',
+        'Bus': 'orange1',
+        'Coach': 'plum2',
+        'Train': 'indian_red1',
     },
     'native': {
         # Line colours
@@ -51,6 +56,11 @@ COLOUR_STORE: dict[str, dict[str, str]] = {
         'Werribee': 'black on green',
         'Williamstown': 'black on green',
         'Sandringham': 'black on bright_magenta',
+        # PT branding colours
+        'Tram': 'bright_green',
+        'Bus': 'yellow',
+        'Coach': 'magenta',
+        'Train': 'red',
     },
 }
 

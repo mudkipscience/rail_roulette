@@ -395,7 +395,7 @@ def lookup_stn(data: dict[str, Any]) -> None:
                         if line in core.LINE_GROUPS[group] and group not in in_groups:
                             in_groups.append(group)
 
-            # Add relevant city loop info stored in constants to shared_info
+            # Add relevant city loop info stored in constants to shared_info, which will be printed in dot points along with station-specific misc info
             for group in in_groups:
                 shared_info.append(core.CITY_LOOP_INFO[group])
 
@@ -409,15 +409,19 @@ def lookup_stn(data: dict[str, Any]) -> None:
             ):
                 town_or_suburb = 'town'
 
+            # Short description of the station, including the lines/groups it is connected to, the location its in and the opening date
             core.console.print(
                 f'[bold]{station}[/bold] is located on the {"".join(groups_and_lines[0])}{"".join(groups_and_lines[1])}. [bold]{station}[/bold] serves the {town_or_suburb} of {station_info["location"]}, and opened to passengers on the {station_info["opened"]}.'
             )
 
+            # Print station specific misc info + shared info we grabbed out of contexts as dot points
             if len(station_info['misc'] + shared_info) > 0:
                 core.console.print(
                     '\n• ' + '\n• '.join(station_info['misc'] + shared_info)
                 )
 
+            # Create tables to make the formatting of the output prettier. This allows us to make columns and sections of text easier. Uses the Rich library.
+            # info_left is the left column, info_right is the right column, info_wrapper is what info_left and info_right are inserted into.
             info_left: Table = Table(box=None, pad_edge=False, show_header=False)
             info_right: Table = Table(box=None, pad_edge=False, show_header=False)
             info_wrapper: Table = Table(box=None, pad_edge=False, expand=True)
@@ -449,56 +453,53 @@ def lookup_stn(data: dict[str, Any]) -> None:
                 '[bold]Accessibility:', ', '.join(station_info['accessibility'])
             )
 
-            # Nearby PT. Please specify either Bus, Tram or Train ONLY. Bus and tram are both dictionaries containing strings where the key is the route number and value is route info,
-            # whilst train is a dictionary containing lists, where the key is the operator and lists contain strings of the routes that operator provides.
-
-            pt_tables: list[Table] = []
-
-            for pt_type in station_info['nearby_pt']:
-                title: str = pt_type
-
-                if pt_type == 'Bus' or pt_type == 'Coach':
-                    title += 'e'
-
-                table: Table = Table(
-                    expand=True,
-                    show_header=False,
-                    show_lines=True,
-                    title=f'-+ Nearby {title}s +-',
-                    title_style='bold',
-                )
-
-                table.add_column()
-                table.add_column()
-
-                if pt_type == 'Train' or pt_type == 'Coach':
-                    for operator in station_info['nearby_pt'][pt_type]:
-                        for route in station_info['nearby_pt'][pt_type][operator]:
-                            table.add_row(operator, route)
-                else:
-                    for route in station_info['nearby_pt'][pt_type]:
-                        table.add_row(
-                            route,
-                            station_info['nearby_pt'][pt_type][route],
-                        )
-
-                pt_tables.append(table)
-
+            # Create two columns in info_wrapper, ratio=1 makes sure both columns are of equal width
             info_wrapper.add_column(ratio=1)
             info_wrapper.add_column(ratio=1)
 
             info_wrapper.add_row(info_left, info_right)
 
-            if len(pt_tables) > 1:
-                info_wrapper.add_row()
-                info_wrapper.add_row(pt_tables[0], pt_tables[1])
+            # Nearby PT. Please specify either Bus, Tram or Train ONLY. Bus and tram are both dictionaries containing strings where the key is the route number and value is route info,
+            # whilst train is a dictionary containing lists, where the key is the operator and lists contain strings of the routes that operator provides.
+
+            # Create a list to hold all the tables we create for the different PT connections (bus, tram, country/intercity train, etc.)
+
+            pt_table: Table = Table(
+                expand=True,  # Expand to fill all available space
+                show_lines=True,  # Show lines between rows/columns (like a default Excel spreadsheet)
+                show_header=False,
+                title='-+ Nearby Public Transport +-',  # Set title of the table
+                title_style='bold',  # Set title to be bold
+                style='bright_black',
+            )
+
+            colours: dict[str, str] = core.get_colours(data)
+
+            pt_table.add_column()  # PT type (tram, bus, coach, train (excluding other metro services))
+            pt_table.add_column()  # route number (for tram and bus) or operator (for train and coach)
+            # route (e.g Port Melbourne - Box Hill, Southern Cross - Traralgon, etc.)
+
+            # Train (XPT, V/Line, etc.) are stored as dictionaries of lists. The names of the variables holding the lists is the operator of that service.
+            for pt_type in station_info['nearby_pt']:
+                if pt_type == 'Train' or pt_type == 'Coach':
+                    for operator in station_info['nearby_pt'][pt_type]:
+                        for route in station_info['nearby_pt'][pt_type][operator]:
+                            pt_table.add_row(
+                                f'[{colours[pt_type]}]{pt_type}',
+                                f'{operator} - [italic]{route}',
+                            )
+                # Tram and bus routes are stored in a dictionary of strings. The names of the variables holding the strings is the route number.
+                else:
+                    for route in station_info['nearby_pt'][pt_type]:
+                        pt_table.add_row(
+                            f'[{colours[pt_type]}]{pt_type}',
+                            f'{route} - [italic]{station_info["nearby_pt"][pt_type][route]}',
+                        )
 
             core.console.print(info_wrapper)
 
-            if len(pt_tables) == 1 or len(pt_tables) == 3:
-                if len(pt_tables) == 1:
-                    print()
-                core.console.print(pt_tables[len(pt_tables) - 1])
+            if len(station_info['nearby_pt']) > 0:
+                core.console.print(pt_table)
 
             if data['visited'].get(station):
                 if data['visited'][station].get('date_visited'):
