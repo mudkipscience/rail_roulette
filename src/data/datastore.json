@@ -2,7 +2,7 @@
     "config": {
         "use_enhanced_colours": true
     },
-    "to_visit": "",
+    "To_visit": "",
     "unvisited": {
         "Aircraft": {
             "accessibility": [
@@ -26,9 +26,9 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "415": "Laverton station - Williamstown",
+                    "415": "Laverton station to Williamstown",
                     "417": "Laverton station loop service via Laverton North",
-                    "496": "Laverton station - Sanctuary Lakes"
+                    "496": "Laverton station to Sanctuary Lakes"
                 }
             },
             "opened": "7th of March 1926",
@@ -91,14 +91,14 @@
             "location": "Albion",
             "misc": [
                 "It was known as Albion and Darlington until the 1st of January 1861, when the station was closed. A new station was opened to the west of the original station in 1891, which is when it became known as Albion. The station was then relocated to the site of the original 1860 station in late 1919.",
-                "The Melbourne – Sydney standard gauge line passes to the east of the station and, along with the Albion – Jacana freight line, branches off north of the station.",
+                "The Melbourne \u2013 Sydney standard gauge line passes to the east of the station and, along with the Albion \u2013 Jacana freight line, branches off north of the station.",
                 "It is scheduled to rebuilt as part of the Airport rail link project (whenever [italic]that[/italic] happens)"
             ],
             "nearby_pt": {
                 "Bus": {
-                    "215": "Caroline Springs - Highpoint Shopping Centre",
-                    "426": "Caroline Springs - Sunshine Station",
-                    "456": "Sunshine Station - Woodgrove Shopping Centre"
+                    "215": "Caroline Springs to Highpoint Shopping Centre",
+                    "426": "Caroline Springs to Sunshine Station",
+                    "456": "Sunshine Station to Woodgrove Shopping Centre"
                 }
             },
             "opened": "5th of January 1860",
@@ -135,7 +135,7 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "508": "to Moonee Ponds Junction"
+                    "508": "To Moonee Ponds Junction"
                 }
             },
             "opened": "8th of May 1888",
@@ -174,10 +174,10 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "411": "Laverton station - Footscray",
-                    "412": "Laverton station - Footscray",
-                    "415": "Laverton station - Williamstown",
-                    "903": "Altona station - Mordialloc"
+                    "411": "Laverton station to Footscray",
+                    "412": "Laverton station to Footscray",
+                    "415": "Laverton station to Williamstown",
+                    "903": "Altona station to Mordialloc"
                 }
             },
             "opened": "1st of December 1917",
@@ -213,10 +213,10 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "503": "Essendon Station - Brunswick East"
+                    "503": "Essendon Station to Brunswick East"
                 },
                 "Tram": {
-                    "19": "North Coburg - Flinders St station"
+                    "19": "North Coburg to Flinders St station"
                 }
             },
             "opened": "15th of December 1926",
@@ -251,10 +251,10 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "605": "Gardenvale - Melbourne CBD (Queen St)"
+                    "605": "Gardenvale to Melbourne CBD (Queen St)"
                 },
                 "Tram": {
-                    "6": "Melbourne University - Glen Iris"
+                    "6": "Melbourne University to Glen Iris"
                 }
             },
             "opened": "7th of May 1879",
@@ -289,11 +289,11 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "404": "Footscray station - Moonee Ponds Junction",
-                    "472": "Williamstown - Moonee Ponds Junction"
+                    "404": "Footscray station to Moonee Ponds Junction",
+                    "472": "Williamstown to Moonee Ponds Junction"
                 },
                 "Tram": {
-                    "82": "Moonee Ponds Junction - Footscray station"
+                    "82": "Moonee Ponds Junction to Footscray station"
                 }
             },
             "opened": "1st of November 1860",
@@ -329,7 +329,7 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "734": "Glen Iris Station - Glen Waverley Station"
+                    "734": "Glen Iris Station to Glen Waverley Station"
                 }
             },
             "opened": "30th of May 1890",
@@ -364,7 +364,7 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "706": "Mordialloc - Chelsea station"
+                    "706": "Mordialloc to Chelsea station"
                 }
             },
             "opened": "14th of April 1891",
@@ -403,7 +403,7 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "624": "Kew - Oakleigh station"
+                    "624": "Kew to Oakleigh station"
                 }
             },
             "opened": "3rd of April 1882",
@@ -441,8 +441,8 @@
             ],
             "nearby_pt": {
                 "Tram": {
-                    "3": "Melbourne University - Malvern East",
-                    "16": "Melbourne University - Kew"
+                    "16": "Melbourne University to Kew",
+                    "3": "Melbourne University to Malvern East"
                 }
             },
             "opened": "19th of December 1859",
@@ -477,11 +477,11 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "530": "Campbellfield Plaza - Coburg",
-                    "534": "Glenroy station - Coburg"
+                    "530": "Campbellfield Plaza to Coburg",
+                    "534": "Glenroy station to Coburg"
                 },
                 "Tram": {
-                    "19": "North Coburg - Flinders St Station"
+                    "19": "North Coburg to Flinders St Station"
                 }
             },
             "opened": "8th of October 1889",
@@ -517,7 +517,7 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "776": "Frankston Station - Pearcedale"
+                    "776": "Frankston Station to Pearcedale"
                 }
             },
             "opened": "1st of October 1888",
@@ -561,13 +561,13 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "664": "Chirnside Park Shopping Centre - Westfield Knox",
-                    "745B": "to Boronia station",
-                    "745C": "to Wantirna Primary School",
-                    "745D": "to Wantirna Primary School",
-                    "753": "to Glen Waverley station",
-                    "755": "to Westfield Knox",
-                    "967": "Glen Waverley station - Croydon station (night bus, weekend mornings only)"
+                    "664": "Chirnside Park Shopping Centre to Westfield Knox",
+                    "745B": "To Boronia station",
+                    "745C": "To Wantirna Primary School",
+                    "745D": "To Wantirna Primary School",
+                    "753": "To Glen Waverley station",
+                    "755": "To Westfield Knox",
+                    "967": "Glen Waverley station to Croydon station (night bus, weekend mornings only)"
                 }
             },
             "opened": "4th of December 1889",
@@ -602,8 +602,8 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "836": "Berwick station - Eden Rise Shopping Centre",
-                    "926": "Pakenham station - Westfield Fountain Gate"
+                    "836": "Berwick station to Eden Rise Shopping Centre",
+                    "926": "Pakenham station to Westfield Fountain Gate"
                 }
             },
             "opened": "1st of December 1879",
@@ -643,11 +643,11 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "663": "to Lilydale station",
-                    "693": "to Oakleigh station",
-                    "694": "to Olinda (off-peak only)",
-                    "695": "to Belgrave South",
-                    "699": "to Upwey station"
+                    "663": "To Lilydale station",
+                    "693": "To Oakleigh station",
+                    "694": "To Olinda (off-peak only)",
+                    "695": "To Belgrave South",
+                    "699": "To Upwey station"
                 }
             },
             "opened": "18th of December 1900",
@@ -688,10 +688,10 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "513": "Eltham station - Glenroy station (via Lower Plenty)",
-                    "514": "Eltham station - Glenroy station (via Greensborough)",
-                    "552": "North East Reservoir - Northcote Plaza",
-                    "553": "Preston - West Preston"
+                    "513": "Eltham station to Glenroy station (via Lower Plenty)",
+                    "514": "Eltham station to Glenroy station (via Greensborough)",
+                    "552": "North East Reservoir to Northcote Plaza",
+                    "553": "Preston to West Preston"
                 }
             },
             "opened": "8th of October 1889",
@@ -735,8 +735,8 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "701": "to Oakleigh station",
-                    "703": "Middle Brighton station - Blackburn station (SmartBus)"
+                    "701": "To Oakleigh station",
+                    "703": "Middle Brighton station to Blackburn station (SmartBus)"
                 }
             },
             "opened": "19th of December 1881",
@@ -775,23 +775,23 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "828": "to Hampton Station",
-                    "831": "to Kingsmere Estate (Berwick)",
-                    "834": "to Westfield Fountain Gate (via Berwick North)",
-                    "835": "to Westfield Fountain Gate (via Narre Warren)",
-                    "836": "to Eden Rise Shopping Centre",
-                    "837": "to Beaconsfield East",
-                    "838": "Emerald - Westfield Fountain Gate",
-                    "839": "to Berwick North",
-                    "846": "to Eden Rise Shopping Centre",
-                    "847": "to The Avenue Village Shopping Centre (Cranbourne North)",
-                    "888": "to Clyde",
-                    "889": "to Clyde North",
-                    "899": "to The Avenue Village Shopping Centre (Cranbourne North)"
+                    "828": "To Hampton Station",
+                    "831": "To Kingsmere Estate (Berwick)",
+                    "834": "To Westfield Fountain Gate (via Berwick North)",
+                    "835": "To Westfield Fountain Gate (via Narre Warren)",
+                    "836": "To Eden Rise Shopping Centre",
+                    "837": "To Beaconsfield East",
+                    "838": "Emerald to Westfield Fountain Gate",
+                    "839": "To Berwick North",
+                    "846": "To Eden Rise Shopping Centre",
+                    "847": "To The Avenue Village Shopping Centre (Cranbourne North)",
+                    "888": "To Clyde",
+                    "889": "To Clyde North",
+                    "899": "To The Avenue Village Shopping Centre (Cranbourne North)"
                 },
                 "Train": {
                     "V/Line": [
-                        "Traralgon - Southern Cross (weekday mornings, set-down only | weekday afternoons, pick-up only)"
+                        "Traralgon to Southern Cross (weekday mornings, set-down only | weekday afternoons, pick-up only)"
                     ]
                 }
             },
@@ -828,7 +828,7 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "782": "Frankston station - Flinders (town)"
+                    "782": "Frankston station to Flinders (town)"
                 }
             },
             "opened": "17th of December 1889",
@@ -870,12 +870,12 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "271": "Box Hill station - Ringwood station",
-                    "279": "Box Hill station - Westfield Doncaster",
-                    "901": "Frankston station - Melbourne Airport (SmartBus)",
-                    "703": "to Middle Brighton station (SmartBus)",
-                    "736": "to Mitcham station",
-                    "765": "Mitcham station - Box Hill station"
+                    "271": "Box Hill station to Ringwood station",
+                    "279": "Box Hill station to Westfield Doncaster",
+                    "703": "To Middle Brighton station (SmartBus)",
+                    "736": "To Mitcham station",
+                    "765": "Mitcham station to Box Hill station",
+                    "901": "Frankston station to Melbourne Airport (SmartBus)"
                 }
             },
             "opened": "25th of December 1882",
@@ -952,12 +952,12 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "690": "to Croydon station",
-                    "691": "to Waverley Gardens Shopping Centre",
-                    "737": "Croydon station - Monash University Clayton",
-                    "754B": "to Bayswater station",
-                    "753": "Glen Waverley station - Bayswater station",
-                    "755": "Bayswater station - Westfield Knox"
+                    "690": "To Croydon station",
+                    "691": "To Waverley Gardens Shopping Centre",
+                    "737": "Croydon station to Monash University Clayton",
+                    "753": "Glen Waverley station to Bayswater station",
+                    "754B": "To Bayswater station",
+                    "755": "Bayswater station to Westfield Knox"
                 }
             },
             "opened": "19th of June 1920",
@@ -1002,31 +1002,31 @@
             ],
             "nearby_pt": {
                 "Bus": {
-                    "903": "Altona station - Mordialloc",
-                    "271": "to Ringwood Station",
-                    "279": "to Westfield Doncaster/Templestowe",
-                    "284": "to Doncaster Park and Ride",
-                    "281": "to Templestowe",
-                    "293": "to Greensborough station",
-                    "302": "to Melbourne CBD (Lonsdale Street)",
-                    "612": "to Chadstone Shopping Centre",
-                    "270": "to Mitcham station",
-                    "735": "to Nunawading station",
-                    "765": "to Mitcham station",
-                    "766": "to Burwood",
-                    "733": "to Oakleigh station",
-                    "201": "to Deakin University Burwood",
-                    "732": "to Upper Ferntree Gully station",
-                    "767": "to Westfield Southland",
-                    "768": "to Deakin University Burwood"
-                },
-                "Tram": {
-                    "109": "Box Hill - Port Melbourne"
+                    "201": "To Deakin University Burwood",
+                    "270": "To Mitcham station",
+                    "271": "To Ringwood Station",
+                    "279": "To Westfield Doncaster/Templestowe",
+                    "281": "To Templestowe",
+                    "284": "To Doncaster Park and Ride",
+                    "293": "To Greensborough station",
+                    "302": "To Melbourne CBD (Lonsdale Street)",
+                    "612": "To Chadstone Shopping Centre",
+                    "732": "To Upper Ferntree Gully station",
+                    "733": "To Oakleigh station",
+                    "735": "To Nunawading station",
+                    "765": "To Mitcham station",
+                    "766": "To Burwood",
+                    "767": "To Westfield Southland",
+                    "768": "To Deakin University Burwood",
+                    "903": "Altona station to Mordialloc"
                 },
                 "Coach": {
                     "V/Line": [
-                        "Southern Cross station - Mansfield"
+                        "Southern Cross station to Mansfield"
                     ]
+                },
+                "Tram": {
+                    "109": "Box Hill to Port Melbourne"
                 }
             },
             "opened": "1st of December 1882",
